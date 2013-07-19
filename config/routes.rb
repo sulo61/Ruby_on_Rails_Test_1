@@ -7,8 +7,7 @@ DsTab7::Application.routes.draw do
 
   root :to => "stat#panel"
 
-  post "stat/panel" => "stat#panel"
-  post "stat/results" => "stat#results"
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

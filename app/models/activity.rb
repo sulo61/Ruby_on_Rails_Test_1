@@ -6,10 +6,10 @@ class Activity
   field :client, type: String
   field :description, type: String
   field :discipline, type: String
-  field :created_at, type: Date
+  field :created_at, type: DateTime
 
   
-  def self.showTable(dataOd=DateTime.new(2000,01,01), dataDo=Date.today )
+  def self.showResults(dataOd=DateTime.new(2000,01,01), dataDo=DateTime.now )
 	map = %Q{
 		function(){
 			var date = new Date(this.created_at);
@@ -40,7 +40,10 @@ class Activity
 	return where(:created_at => { '$gte' => dataOd, '$lte' => dataDo } ).map_reduce(map, reduce).out(inline: true)
   end
 
-
+  def self.showDay( dataOd=DateTime.new(2000,01,01), dataDo=DateTime.now   )
+	
+	return where(:created_at => { '$gte' => dataOd, '$lte' => dataDo } )
+  end 
 
 
 
