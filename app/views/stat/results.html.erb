@@ -1,0 +1,20 @@
+<h1>Results:</h1>
+
+<form method="GET" action="/stat/panel">
+<%= submit_tag 'New search'%>
+</form><br><br>
+
+<table>
+<% for activity in @activities %>
+	<tr>
+		<td><b>date:  </b><%= truncate((activity["_id"]["data"]).to_s , :length => 10, :omission => '') %></td>
+		<td><b>all: </b><%= activity["value"]["count"]["all"] %></td>
+		<td><b>web: </b><%= activity["value"]["count"]["web"] %></td>
+		<td><b>android: </b><%= activity["value"]["count"]["android"] %></td>
+		<td><b>ios: </b><%= activity["value"]["count"]["ios"] %></td>
+		<td><b>unknown: </b><%= activity["value"]["count"]["unknown"] %></td>
+	</tr>
+	
+<% end %>
+</table>
+

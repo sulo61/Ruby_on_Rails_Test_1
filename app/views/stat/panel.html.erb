@@ -1,0 +1,19 @@
+<br><h1>Search panel:</h1>
+
+
+<form method="GET" action="/stat/panel">
+<%= submit_tag 'Show all', :name => 'all' %>
+</form>
+
+<p>-----------------------------------------</p>
+
+<form method="GET" action="/stat/panel">
+<label for="last">Last: </label>
+<%= number_field_tag 'numberOfDays', 7, in: 1...366 %>
+<label for="days"> days</label><br>
+<%= submit_tag 'Show', :name => 'last' %>
+</form>
+<p>-----------------------------------------</p>
+
+
+

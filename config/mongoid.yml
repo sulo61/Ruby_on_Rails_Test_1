@@ -1,0 +1,33 @@
+production: 
+  sessions: 
+    default: 
+      uri: <%= ENV['MONGOLAB_URI'] %>
+      options:
+        safe: true
+        skip_version_check: true
+
+development:
+
+  sessions:
+
+    default:
+
+
+      database: ds_db
+      hosts:
+        - localhost:27017
+      options:
+  options:
+
+test:
+  sessions:
+    default:
+      database: ds_db
+      hosts:
+        - localhost:27017
+      options:
+        consistency: :strong
+        max_retries: 1
+        retry_interval: 0
+
+
