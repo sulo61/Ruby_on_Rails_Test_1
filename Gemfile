@@ -5,6 +5,9 @@ ruby '2.0.0'
 gem 'rails', '3.2.13'
 gem 'mongoid', '~> 3.1.4'
 
+gem 'twitter-bootstrap-rails'
+gem "therubyracer"
+gem "less-rails"
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
