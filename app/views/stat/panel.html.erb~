@@ -28,7 +28,7 @@
     <% for activity in @activities %>
       <% activity_date = truncate((activity["_id"]["data"]).to_s , :length => 10, :omission => '') %>
       <tr>
-        <td><%= activity_date %></td>
+        <td><%= truncate((activity["_id"]["data"]).to_s , :length => 10, :omission => '') %></td>
 	  <td><%= activity["value"]["count"]["all"] %></td>
 	  <td><%= activity["value"]["count"]["web"] %></td>
 	  <td><%= activity["value"]["count"]["android"] %></td>
