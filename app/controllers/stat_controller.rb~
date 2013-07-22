@@ -29,6 +29,6 @@ class StatController < ApplicationController
 	
 	data = DateTime.parse(params[:date]) 
 	@showdate = data.to_s[0,10]
-	@details = Activity.showDay()
+	@details = Activity.showDay(data, data + 23.hours + 59.minutes)
   end
 end
