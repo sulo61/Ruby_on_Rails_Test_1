@@ -27,8 +27,13 @@ class StatController < ApplicationController
 		redirect_to :action => "panel"
 	end
 	
-	data = DateTime.parse(params[:date]) 
-	@showdate = data.to_s[0,10]
-	@details = Activity.showDay(data, data + 23.hours + 59.minutes)
+	dateInput = params[:date].to_s
+	year = (dateInput[0,4]).to_i
+	month = (dateInput[5,2]).to_i
+	day = (dateInput[8,2]).to_i
+	
+	date = DateTime.new(year,month,day)
+	@showdate = dateInput
+	@details = Activity.showDay(date, date + 23.hours + 59.minutes )
   end
 end
