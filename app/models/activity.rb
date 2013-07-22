@@ -17,11 +17,12 @@ class Activity
 			var date = new Date(this.created_at);
 			var dataKey = new Date(date.getFullYear()+","+(date.getMonth()+1)+","+date.getDate()+'');
 			var key = {data: dataKey};
-			if (this.client=="web")		{ emit (key, { web: 1, android: 0, ios: 0, unknown: 0, all: 0} ); }
-			if (this.client=="Android")	{ emit (key, { web: 0, android: 1, ios: 0, unknown: 0, all: 0} ); }
-			if (this.client=="ios")		{ emit (key, { web: 0, android: 0, ios: 1, unknown: 0, all: 0} ); }
-			if (this.client=="unknown")	{ emit (key, { web: 0, android: 0, ios: 0, unknown: 1, all: 0} ); }
-								  emit (key, { web: 0, android: 0, ios: 0, unknown: 0, all: 1} );
+			var client = this.client
+			if (client=="web")		{ emit (key, { web: 1, Android: 0, ios: 0, unknown: 0, all: 0} ); }
+			if (client=="Android")		{ emit (key, { web: 0, Android: 1, ios: 0, unknown: 0, all: 0} ); }
+			if (client=="ios")		{ emit (key, { web: 0, Android: 0, ios: 1, unknown: 0, all: 0} ); }
+			if (client=="unknown")		{ emit (key, { web: 0, Android: 0, ios: 0, unknown: 1, all: 0} ); }
+								  emit (key, { web: 0, Android: 0, ios: 0, unknown: 0, all: 1} );
 		}
 	}
 	
@@ -32,17 +33,17 @@ class Activity
 	    
 	    values.forEach(function(v) {
 		cWeb += v.web;
-		cAndroid += v.android;
+		cAndroid += v.Android;
 		cIos += v.ios;
 		cUnknown += v.unknown;
 		cAll += v.all;
 	    });
 
-	    return { web: cWeb, android: cAndroid, ios: cIos, unknown: cUnknown, all: cAll };
+	    return { web: cWeb, Android: cAndroid, ios: cIos, unknown: cUnknown, all: cAll };
 	  }
 	}
 
-	return self.where(:created_at => { '$gte' => dataOd, '$lte' => dataDo } ).map_reduce(map, reduce).out(inline: true)
+	return self.where(:created_at => { '$gte' => dataOd, '$lte' => dataDo } ).map_reduce(map, reduce).out(inline: true).sort_by { "_id" }.reverse
 
   end
 

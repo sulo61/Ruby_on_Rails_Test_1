@@ -7,13 +7,13 @@ class StatController < ApplicationController
 	
 	now = DateTime.now
 	if !params[:last]
-		@activities = Activity.showResults(now-$daysBack, now).sort_by { "_id" }.reverse
+		@activities = Activity.showResults(now-$daysBack, now)
 	end
 	if params[:all]		
 		@activities = Activity.showResults()
 	end
 	if params[:last]			
-		@activities = Activity.showResults(now-params[:numberOfDays], now)
+		@activities = Activity.showResults(now-params[:numberOfDays].to_i, now)
 	end
 	
   end
