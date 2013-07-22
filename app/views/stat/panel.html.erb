@@ -29,11 +29,11 @@
       <% activity_date = truncate((activity["_id"]["data"]).to_s , :length => 10, :omission => '') %>
       <tr>
         <td><%= activity_date %></td>
-	  <td><%= activity["value"]["count"]["all"] %></td>
-	  <td><%= activity["value"]["count"]["web"] %></td>
-	  <td><%= activity["value"]["count"]["android"] %></td>
-	  <td><%= activity["value"]["count"]["ios"] %></td>
-	  <td><%= activity["value"]["count"]["unknown"] %></td>
+	  <td><%= activity["value"]["all"] %></td>
+	  <td><%= activity["value"]["web"] %></td>
+	  <td><%= activity["value"]["android"] %></td>
+	  <td><%= activity["value"]["ios"] %></td>
+	  <td><%= activity["value"]["unknown"] %></td>
 	  <td>
 		<%= form_tag("/stat/details", method: "get") do %>
 		<%= hidden_field_tag(:date, activity_date ) %>

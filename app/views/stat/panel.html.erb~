@@ -28,15 +28,15 @@
     <% for activity in @activities %>
       <% activity_date = truncate((activity["_id"]["data"]).to_s , :length => 10, :omission => '') %>
       <tr>
-        <td><%= truncate((activity["_id"]["data"]).to_s , :length => 10, :omission => '') %></td>
-	  <td><%= activity["value"]["count"]["all"] %></td>
-	  <td><%= activity["value"]["count"]["web"] %></td>
-	  <td><%= activity["value"]["count"]["android"] %></td>
-	  <td><%= activity["value"]["count"]["ios"] %></td>
-	  <td><%= activity["value"]["count"]["unknown"] %></td>
+        <td><%= activity_date %></td>
+	  <td><%= activity["value"]["all"]["cAll"] %></td>
+	  <td><%= activity["value"]["web"]["cWeb"] %></td>
+	  <td><%= activity["value"]["android"]["cAndroid"] %></td>
+	  <td><%= activity["value"]["ios"]["cIos"] %></td>
+	  <td><%= activity["value"]["unknown"]["cUnknown"] %></td>
 	  <td>
 		<%= form_tag("/stat/details", method: "get") do %>
-		<%= hidden_field_tag(:date, activity["_id"]["data"] ) %>
+		<%= hidden_field_tag(:date, activity_date ) %>
 		<%= submit_tag("Details", {:name => "", :class => 'btn btn-mini'}) %>
 		<% end %>
 	  </td>
