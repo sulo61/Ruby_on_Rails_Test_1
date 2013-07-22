@@ -36,8 +36,8 @@
 	  <td><%= activity["value"]["count"]["unknown"] %></td>
 	  <td>
 		<%= form_tag("/stat/details", method: "get") do %>
-		<%= hidden_field_tag(:date, activity_date ) %>
-		<%= submit_tag("Details", {:name => "", :class => 'btn btn-small'}) %>
+		<%= hidden_field_tag(:date, activity["_id"]["data"] ) %>
+		<%= submit_tag("Details", {:name => "", :class => 'btn btn-mini'}) %>
 		<% end %>
 	  </td>
 

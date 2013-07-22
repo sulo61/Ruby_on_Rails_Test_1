@@ -1,6 +1,7 @@
 class Activity
   include Mongoid::Document
-  include Mongoid::MultiParameterAttributes
+  include Mongoid::Timestamps
+
   
 
   field :client, type: String
@@ -12,6 +13,7 @@ class Activity
   def self.showResults(dataOd=DateTime.new(2000,01,01), dataDo=DateTime.now )
 	map = %Q{
 		function(){
+						
 			var date = new Date(this.created_at);
 			var dataKey = new Date(date.getFullYear()+","+(date.getMonth()+1)+","+date.getDate()+'');
 			var key = {data: dataKey};
@@ -36,8 +38,9 @@ class Activity
 	    return { count: sum };
 	  }
 	}
-	
-	return where(:created_at => { '$gte' => dataOd, '$lte' => dataDo } ).map_reduce(map, reduce).out(inline: true)
+
+	return self.where(:created_at => { '$gte' => dataOd, '$lte' => dataDo } ).map_reduce(map, reduce).out(inline: 1)
+
   end
 
   def self.showDay( dataOd=DateTime.new(2000,01,01), dataDo=DateTime.now   )

@@ -5,15 +5,15 @@ class StatController < ApplicationController
   def panel
 	
 	
-	
-	@activities = Activity.showResults(Date.today-$daysBack)
+	now = DateTime.now
+	if !params[:last]
+		@activities = Activity.showResults(now-$daysBack, now).sort_by { "_id" }.reverse
+	end
 	if params[:all]		
 		@activities = Activity.showResults()
 	end
 	if params[:last]			
-		@activities = Activity.showResults(Date.today-params[:numberOfDays].to_i)
-		
-		
+		@activities = Activity.showResults(now-params[:numberOfDays], now)
 	end
 	
   end
