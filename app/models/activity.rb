@@ -42,7 +42,7 @@ class Activity
 	  }
 	}
 
-	return self.where(:created_at => { '$gte' => dataOd, '$lte' => dataDo } ).map_reduce(map, reduce).out(inline: 1)
+	return self.where(:created_at => { '$gte' => dataOd, '$lte' => dataDo } ).map_reduce(map, reduce).out(inline: true)
 
   end
 

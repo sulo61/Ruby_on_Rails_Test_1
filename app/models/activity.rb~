@@ -29,6 +29,7 @@ class Activity
 	  function(key, values) {
 	    
 	    cWeb = 0, cAndroid = 0, cIos = 0, cUnknown = 0, cAll = 0;
+	    
 	    values.forEach(function(v) {
 		cWeb += v.web;
 		cAndroid += v.android;
@@ -36,6 +37,7 @@ class Activity
 		cUnknown += v.unknown;
 		cAll += v.all;
 	    });
+
 	    return { web: cWeb, android: cAndroid, ios: cIos, unknown: cUnknown, all: cAll };
 	  }
 	}
