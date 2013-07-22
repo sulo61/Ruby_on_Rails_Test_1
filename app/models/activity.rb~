@@ -43,13 +43,13 @@ class Activity
 	  }
 	}
 
-	return self.where(:created_at => { '$gte' => dataOd, '$lte' => dataDo } ).map_reduce(map, reduce).out(inline: true).sort_by { "_id" }.reverse
+	return where(:created_at => { '$gte' => dataOd, '$lte' => dataDo } ).desc(:created_at).map_reduce(map, reduce).out(inline: true)
 
   end
 
   def self.showDay( dataOd=DateTime.new(2000,01,01), dataDo=DateTime.now   )
 	
-	return where(:created_at => { '$gt' => dataOd, '$lt' => dataDo } )
+	return where(:created_at => { '$gt' => dataOd, '$lt' => dataDo } ).desc(:created_at)
   end 
 
 
