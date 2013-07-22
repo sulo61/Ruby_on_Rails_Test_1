@@ -49,7 +49,7 @@ class Activity
 
   def self.showDay( dataOd=DateTime.new(2000,01,01), dataDo=DateTime.now   )
 	
-	return where(:created_at => { '$gt' => dataOd, '$lt' => dataDo } ).sort_by{ "created_at" }.reverse
+	return where(:created_at => { '$gt' => dataOd, '$lt' => dataDo } )
   end 
 
 
