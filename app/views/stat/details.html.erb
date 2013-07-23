@@ -19,7 +19,7 @@
      
       <tr>
         
-	  <td><%= (activity.created_at.to_s)[11,5] %></td>
+	  <td><%= (activity.created_at.to_s)[11,8] %></td>
 	  <td><% link = "https://my.dropsport.com/activities/"+activity._id+"" %><a href=<%=link%>>Link</a></td>
 	  <td><%= activity.discipline %></td>
 	  <td><%= activity.author_info["name"] %></td>

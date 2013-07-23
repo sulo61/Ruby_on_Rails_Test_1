@@ -14,15 +14,26 @@ class Activity
 	map = %Q{
 		function(){
 						
-			var date = new Date(this.created_at);
-			var dataKey = new Date(date.getFullYear()+","+(date.getMonth()+1)+","+date.getDate()+'');
+			var date = (new Date(this.created_at)).toISOString();
+			var dataKey = (date.substring(0,4)+"-"+date.substring(5,7)+"-"+date.substring(8,10));
 			var key = {data: dataKey};
 			var client = this.client
-			if (client=="web")		{ emit (key, { "web": 1, "Android": 0, "ios": 0, "unknown": 0, "all": 0} ); }
-			if (client=="Android")		{ emit (key, { "web": 0, "Android": 1, "ios": 0, "unknown": 0, "all": 0} ); }
-			if (client=="ios")		{ emit (key, { "web": 0, "Android": 0, "ios": 1, "unknown": 0, "all": 0} ); }
-			if (client=="unknown")		{ emit (key, { "web": 0, "Android": 0, "ios": 0, "unknown": 1, "all": 0} ); }
-								  emit (key, { "web": 0, "Android": 0, "ios": 0, "unknown": 0, "all": 1} );
+			switch(client){
+				case "web":
+					emit (key, { "web": 1, "Android": 0, "ios": 0, "unknown": 0, "all": 1} );
+					break;
+				case "Android":
+					emit (key, { "web": 0, "Android": 1, "ios": 0, "unknown": 0, "all": 1} );
+					break;
+				case "ios":
+					emit (key, { "web": 0, "Android": 0, "ios": 1, "unknown": 0, "all": 1} );
+					break;
+				case "unknown":
+					emit (key, { "web": 0, "Android": 0, "ios": 0, "unknown": 1, "all": 1} );
+					break;
+				
+			}
+			
 		}
 	}
 	
