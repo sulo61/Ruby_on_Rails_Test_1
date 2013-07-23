@@ -12,6 +12,9 @@
 	<th>Discipline</th>
 	<th>Author</th>
 	<th>Client</th>
+	<th>Enrolled</th>
+	<th>Repeat</th>
+	<th>User</th>
     </tr>
   </thead>
   <tbody>
@@ -19,11 +22,16 @@
      
       <tr>
         
-	  <td><%= (activity.created_at.to_s) %></td>
+	  <td><%= (activity.created_at.to_s)[11,8] %></td>
 	  <td><% link = "https://my.dropsport.com/activities/"+activity._id+"" %><a href=<%=link%>>Link</a></td>
 	  <td><%= activity.discipline %></td>
 	  <td><%= activity.author_info["name"] %></td>
 	  <td><%= activity.client %></td>
+	  <td><%= activity.enrolled_users.size %></td>
+	  <td><% if activity.repeat==nil  %>	<%= false %>
+		<% else %>	<%= true %>	<% end %>
+	  </td>
+	  <td><%=  %></td>
 
       </tr>
     <% end %>

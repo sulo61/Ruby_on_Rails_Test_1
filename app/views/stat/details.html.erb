@@ -12,6 +12,9 @@
 	<th>Discipline</th>
 	<th>Author</th>
 	<th>Client</th>
+	<th>Enrolled</th>
+	<th>Repeat</th>
+	
     </tr>
   </thead>
   <tbody>
@@ -24,6 +27,11 @@
 	  <td><%= activity.discipline %></td>
 	  <td><%= activity.author_info["name"] %></td>
 	  <td><%= activity.client %></td>
+	  <td><%= activity.enrolled_users.size %></td>
+	  <td><% if activity.repeat==nil  %>	<%= false %>
+		<% else %>	<%= true %>	<% end %>
+	  </td>
+	  
 
       </tr>
     <% end %>

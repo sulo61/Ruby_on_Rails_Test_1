@@ -1,21 +1,32 @@
+class EnrolledUser
+
+  include Mongoid::Document
+  field :oid, type: String
+  embedded_in :activity
+
+end
+
 class Activity
+
   include Mongoid::Document
   include Mongoid::Timestamps
-
-  
 
   field :client, type: String
   field :description, type: String
   field :discipline, type: String
   field :created_at, type: DateTime
-
+  field :repeat, type: String
+  
+  embeds_many :enrolled_users
+  has_one :user
+  
   
   def self.showResults(dataOd=DateTime.new(2000,01,01), dataDo=DateTime.now )
 	map = %Q{
 		function(){
 						
 			var date = (new Date(this.created_at)).toISOString();
-			var dataKey = (date.substring(0,4)+"-"+date.substring(5,7)+"-");
+			var dataKey = (date.substring(0,4)+"-"+date.substring(5,7)+"-"+date.substring(8,10));
 			var key = {data: dataKey};
 			var client = this.client
 			switch(client){
@@ -61,6 +72,7 @@ class Activity
   def self.showDay( dataOd=DateTime.new(2000,01,01), dataDo=DateTime.now   )
 	
 	return where(:created_at => { '$gt' => dataOd, '$lt' => dataDo } ).desc(:created_at)
+	
   end 
 
 

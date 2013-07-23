@@ -1,14 +1,25 @@
+class EnrolledUser
+
+  include Mongoid::Document
+  field :oid, type: String
+  embedded_in :activity
+
+end
+
 class Activity
+
   include Mongoid::Document
   include Mongoid::Timestamps
-
-  
 
   field :client, type: String
   field :description, type: String
   field :discipline, type: String
   field :created_at, type: DateTime
+  field :repeat, type: String
+  
+  embeds_many :enrolled_users
 
+  
   
   def self.showResults(dataOd=DateTime.new(2000,01,01), dataDo=DateTime.now )
 	map = %Q{
@@ -61,6 +72,7 @@ class Activity
   def self.showDay( dataOd=DateTime.new(2000,01,01), dataDo=DateTime.now   )
 	
 	return where(:created_at => { '$gt' => dataOd, '$lt' => dataDo } ).desc(:created_at)
+	
   end 
 
 

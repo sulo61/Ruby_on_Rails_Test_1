@@ -35,5 +35,6 @@ class StatController < ApplicationController
 	date = DateTime.new(year,month,day)
 	@showdate = dateInput
 	@details = Activity.showDay(date, date + 23.hours + 59.minutes + 59.seconds )
+	@endroled = Activity.showDay(date, date + 23.hours + 59.minutes + 59.seconds ).enroledCount()
   end
 end
