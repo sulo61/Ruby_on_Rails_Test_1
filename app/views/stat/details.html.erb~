@@ -3,39 +3,40 @@
 <form method="GET" action="/stat/panel">
 <%= submit_tag 'Back', :name => 'back', :class => 'btn btn-small' %>
 </form>
-<%= @loga %>
+<%= @authorid %>
+<%= @logs %>
+<%= @rowne %>
 <table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Time</th>
-	<th>Link</th>
-	<th>Discipline</th>
-	<th>Author</th>
-	<th>Client</th>
-	<th>Enrolled</th>
-	<th>Repeat</th>
-	<th>User</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% for activity in @details %>
-     
-      <tr>
+	<thead>
+		<tr>
+			<th>Time</th>
+			<th>Link</th>
+			<th>Discipline</th>
+			<th>Author</th>
+			<th>Client</th>
+			<th>Enrolled</th>
+			<th>Repeat</th>
+			<th>Email</th>
+			<th>Type</th>
+
+		</tr>
+	</thead>
+  	<tbody>
+		<% @activityDetails.each do |activity| %>
+		<tr>
         
-	  <td><%= (activity.created_at.to_s)[11,8] %></td>
-	  <td><% link = "https://my.dropsport.com/activities/"+activity._id+"" %><a href=<%=link%>>Link</a></td>
-	  <td><%= activity.discipline %></td>
-	  <td><%= activity.author_info["name"] %></td>
-	  <td><%= activity.client %></td>
-	  <td><%= activity.enrolled_users.size %></td>
-	  <td><% if activity.repeat==nil  %>	<%= false %>
-		<% else %>	<%= true %>	<% end %>
-	  </td>
-	  <td><%=  %></td>
-
-      </tr>
-    <% end %>
-  </tbody>
+			<td><%= activity[0][1] %></td>
+			<td><a href=<%=activity[1][1]%>>Link</a></td>
+			<td><%= activity[2][1] %></td>
+			<td><%= activity[3][1] %></td>
+			<td><%= activity[4][1] %></td>
+			<td><%= activity[5][1] %></td>
+			<td><%= activity[6][1] %></td>
+			<td><%= activity[7][1] %></td>
+			<td><%= activity[8][1] %></td>
+	  
+	      </tr>
+		<% end %>
+ 	</tbody>
 </table>
-
 

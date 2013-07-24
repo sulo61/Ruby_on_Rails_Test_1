@@ -11,11 +11,14 @@ class Activity
   include Mongoid::Document
   include Mongoid::Timestamps
 
+ 
+  field :author_id, type: String
   field :client, type: String
   field :description, type: String
   field :discipline, type: String
   field :created_at, type: DateTime
   field :repeat, type: String
+  field :moc, type: String
   
   embeds_many :enrolled_users
 

@@ -11,14 +11,17 @@ class Activity
   include Mongoid::Document
   include Mongoid::Timestamps
 
+ 
+  field :author_id, type: String
   field :client, type: String
   field :description, type: String
   field :discipline, type: String
   field :created_at, type: DateTime
   field :repeat, type: String
+  field :chuuuuj, type: String
   
   embeds_many :enrolled_users
-  has_one :user
+
   
   
   def self.showResults(dataOd=DateTime.new(2000,01,01), dataDo=DateTime.now )
