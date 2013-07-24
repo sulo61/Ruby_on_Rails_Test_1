@@ -69,7 +69,7 @@ class StatController < ApplicationController
 					email = uam.email
 				else
 					type = "F"
-					fanPageName = uam.name
+					
 				end
 			end
 		end

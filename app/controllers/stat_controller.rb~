@@ -48,9 +48,9 @@ class StatController < ApplicationController
 		
 		# sprawdzanie danych aktywnosci
 		if (ami.repeat==nil)
-			repeat = "f"
+			repeat = "false"
 		else
-			repeat = "T"
+			repeat = "true"
 		end
 		@showdate = (ami.created_at.to_s)[0,10]
 		# -------------------------------		
