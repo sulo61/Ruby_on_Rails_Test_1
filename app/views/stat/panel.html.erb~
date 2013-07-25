@@ -31,7 +31,7 @@
         <td><%= activity_date %></td>
 	  <td><%= activity["value"]["all"] %></td>
 	  <td><%= activity["value"]["web"] %></td>
-	  <td><%= activity["value"]["android"] %></td>
+	  <td><%= activity["value"]["Android"] %></td>
 	  <td><%= activity["value"]["ios"] %></td>
 	  <td><%= activity["value"]["unknown"] %></td>
 	  <td>

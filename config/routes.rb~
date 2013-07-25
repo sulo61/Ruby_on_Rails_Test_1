@@ -5,9 +5,11 @@ DsTab7::Application.routes.draw do
 
   get "stat/details"
 
+  get "stat/usrs"
+
   root :to => "stat#panel"
 
-  post "stat/panel" => "stat#details"
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

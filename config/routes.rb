@@ -5,6 +5,8 @@ DsTab7::Application.routes.draw do
 
   get "stat/details"
 
+  get "stat/usrs"
+
   root :to => "stat#panel"
 
 

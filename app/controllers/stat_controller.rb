@@ -98,4 +98,55 @@ class StatController < ApplicationController
 
 	
   end
+
+  def usrs
+		if (!params[:find] || params[:name]=="")
+			
+			# pobranie tablicy uzytkownikow
+			usrModelInput = User.findAllUsrs()
+			# -----------------------------
+		else
+
+		#if params[:find]
+			
+			# pobranie uzytkownika
+			usrModelInput = User.findUsr(params[:name])
+			# -----------------------------
+		end
+			# tworzenie prototypow dla aktywnosci
+			usrsArray = Array.new()
+			usr = Array.new()
+			# ---------------------------
+
+
+			usrModelInput.each do |umi|
+				name = " - "
+				id = " - " 
+				email = " - "
+				type = " - " 
+				fanpages = " ???? "
+				if ( umi.name!=nil )
+					name = umi.name
+				end
+				if ( umi._type!=nil )
+					if ( umi._type=="User" )
+						type = "User"
+						email = umi.email
+					else
+						type = "Fanpage"
+					end
+				end
+				usr = Array({
+					:name => name,
+					:id => umi._id,
+					:email => email,
+					:type => type,
+					:fanpages => fanpages
+
+				})
+				usrsArray.push(usr)
+			end
+	
+  @usrs = usrsArray
+  end
 end
