@@ -49,7 +49,7 @@ class StatController < ApplicationController
 
   def details
 	
-	edirect_to :action => "login" if !session[:user_id]
+	redirect_to :action => "login" if !session[:user_id]
 
 		if params[:back]
 			redirect_to :action => "panel"

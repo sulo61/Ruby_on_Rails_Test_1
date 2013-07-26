@@ -25,8 +25,9 @@ class StatController < ApplicationController
 	if session[:user_id]
 		session[:user_id] = nil
 		redirect_to :action => "login"
-	end
+	else
 	redirect_to :action => "login"
+	end
   end
 
   def panel
