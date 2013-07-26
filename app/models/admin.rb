@@ -1,6 +1,7 @@
 class Admin
   include Mongoid::Document
-  store_in database: ENV['DATABASE_URL_STAT']
+
+  store_in session: "writeable"
   
   field :login, type: String
   field :pass, type: String

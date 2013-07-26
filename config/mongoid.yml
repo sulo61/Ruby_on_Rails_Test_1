@@ -5,24 +5,44 @@ production:
       options:
         safe: true
         skip_version_check: true
+    writeable:
+      uri: <%= ENV['MONGOLAB_URI_STAT'] %>
+      options:
+        safe: true
+        skip_version_check: true
+
+
 
 development:
-
   sessions:
-
     default:
-
-
       database: heroku_app16851511
       hosts:
         - localhost:27017
       options:
-  options:
+        consistency: :eventual
+
+    writeable:
+      database: statlogin
+      hosts:
+        -  localhost:27017
+      options:
+        consistency: strong
+
 
 test:
   sessions:
     default:
       database: heroku_app16851511
+      hosts:
+        - localhost:27017
+      options:
+        consistency: :eventual
+        max_retries: 1
+        retry_interval: 0
+
+    writeable:
+      database: statlogin
       hosts:
         - localhost:27017
       options:
