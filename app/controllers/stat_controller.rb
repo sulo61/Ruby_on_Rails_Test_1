@@ -133,7 +133,7 @@ class StatController < ApplicationController
 
   def usrs
 	
-	edirect_to :action => "login" if !session[:user_id]
+	redirect_to :action => "login" if !session[:user_id]
 
 		if (!params[:find] || params[:name]=="")
 			
