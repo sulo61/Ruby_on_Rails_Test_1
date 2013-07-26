@@ -133,7 +133,7 @@ class StatController < ApplicationController
 
   def usrs
 	
-	edirect_to :action => "login" if !session[:user_id]
+	redirect_to :action => "login" if !session[:user_id]
 
 		if (!params[:find] || params[:name]=="")
 			
@@ -179,7 +179,7 @@ class StatController < ApplicationController
 							fanpages = ""
 							fanpagesInput.each do |fi|
 								#fanpages = fi
-								fanpages += User.findById(fi).first.name+" . "
+								fanpages += User.findById(fi).first.name+" .\n "
 							end
 						end
 					end

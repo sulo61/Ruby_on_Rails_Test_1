@@ -179,7 +179,7 @@ class StatController < ApplicationController
 							fanpages = ""
 							fanpagesInput.each do |fi|
 								#fanpages = fi
-								fanpages += User.findById(fi).first.name+" . "
+								fanpages += User.findById(fi).first.name+".\n "
 							end
 						end
 					end
@@ -193,7 +193,7 @@ class StatController < ApplicationController
 							adminsInput = umi.admin_ids
 							fanpages = ""
 							adminsInput.each do |ai|
-								fanpages += User.findById(ai).first.name+" . "
+								fanpages += User.findById(ai).first.name+".\n "
 							end
 						end
 					end
