@@ -1,10 +1,11 @@
 class Admin
   include Mongoid::Document
+  store_in database: "statlogin"
   
   field :login, type: String
   field :pass, type: String
   
-  def self.login(login)
+  def self.findByLogin(login)
 	return where("login"=> login )
   end
 end
