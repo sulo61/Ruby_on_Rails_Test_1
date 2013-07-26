@@ -13,7 +13,7 @@ development:
     default:
 
 
-      database: ds_db
+      database: heroku_app16851511
       hosts:
         - localhost:27017
       options:
@@ -22,7 +22,7 @@ development:
 test:
   sessions:
     default:
-      database: ds_db
+      database: heroku_app16851511
       hosts:
         - localhost:27017
       options:

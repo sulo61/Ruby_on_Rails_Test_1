@@ -1,0 +1,9 @@
+<h1>Logowanie</h1>
+
+<%= @log %>
+<form method="POST" action="/stat/login">
+	<label for="login">Login:</label><%= text_field_tag 'login' %><br>
+	<label for="pass">Password:</label><%= text_field_tag 'pass' %><br>
+	<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+	<%= submit_tag 'Sign In', :name => 'signin', :class => 'btn btn-normal' %>
+</form>
