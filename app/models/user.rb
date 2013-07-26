@@ -5,8 +5,9 @@ class User
   field :email, type: String
   field :name, type: String
   field :_type, type: String
-  
-  
+  field :fanpage_ids, type: Array
+  field :admin_ids, type: Array
+
   
   
   def self.findById(id="")

@@ -116,6 +116,9 @@ class StatController < ApplicationController
 			# tworzenie prototypow dla aktywnosci
 			usrsArray = Array.new()
 			usr = Array.new()
+
+			fanadminArray = Array.new()
+			fanadmin = Array.new()
 			# ---------------------------
 
 
@@ -124,29 +127,57 @@ class StatController < ApplicationController
 				id = " - " 
 				email = " - "
 				type = " - " 
-				fanpages = " ???? "
+				fanpages = " - "
 				if ( umi.name!=nil )
 					name = umi.name
 				end
 				if ( umi._type!=nil )
+
+					#dla Usera					
 					if ( umi._type=="User" )
 						type = "User"
 						email = umi.email
-					else
+
+						# wyszukiwanie fanpagow
+						if (umi.fanpage_ids!=nil)
+							fanpagesInput = umi.fanpage_ids
+							fanpages = ""
+							fanpagesInput.each do |fi|
+								#fanpages = fi
+								fanpages += User.findById(fi).first.name+" . "
+							end
+						end
+					end
+
+					# dla Fanpage
+					if ( umi._type=="Fanpage" )
 						type = "Fanpage"
+						
+						#wyszukiwanie adminow
+						if (umi.admin_ids!=nil)
+							adminsInput = umi.admin_ids
+							fanpages = ""
+							adminsInput.each do |ai|
+								fanpages += User.findById(ai).first.name+" . "
+							end
+						end
 					end
 				end
+
+				# tworzenie tablicy dla widoku
 				usr = Array({
 					:name => name,
-					:id => umi._id,
+					:link => "https://my.dropsport.com/users/"+umi._id+"",
 					:email => email,
 					:type => type,
 					:fanpages => fanpages
 
 				})
+				
 				usrsArray.push(usr)
 			end
-	
+
+  # wysylanie tablicy dla widoku	
   @usrs = usrsArray
   end
 end
