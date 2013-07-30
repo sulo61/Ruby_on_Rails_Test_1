@@ -78,8 +78,9 @@ class User
 						fanpagesInput.each do |fi|
 							#fanpages = fi
 							#fanpages += User.findById(fi).first.name+".\n "
+							u = User.findById(fi).first
 							fanpages = Array({
-								User.findById(fi).first.name => webAddress+"/users/"+id
+								u.name => webAddress+"/users/"+u.id
 							})
 							fanpagesArray.push(fanpages)
 						end
@@ -97,6 +98,7 @@ class User
 						
 						adminsInput.each do |ai|
 							#fanpages += User.findById(ai).first.name+".\n "
+							id = User.findById(User.findById(ai).first._id)
 							fanpages = Array({ 
 								User.findById(ai).first.name => webAddress+"/users/"+id
 							})
@@ -159,7 +161,6 @@ class User
 	    values.forEach(function(v) {
 		cUser += v.User;
 		cFanpage += v.Fanpage;
-		cUnknown += v.unknown;
 		cAll += v.all;
 	    });
 

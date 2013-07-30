@@ -78,8 +78,9 @@ class User
 						fanpagesInput.each do |fi|
 							#fanpages = fi
 							#fanpages += User.findById(fi).first.name+".\n "
+							u = User.findById(fi).first
 							fanpages = Array({
-								User.findById(fi).first.name => webAddress+"/users/"+id
+								u.name => webAddress+"/users/"+u.id
 							})
 							fanpagesArray.push(fanpages)
 						end
@@ -97,8 +98,9 @@ class User
 						
 						adminsInput.each do |ai|
 							#fanpages += User.findById(ai).first.name+".\n "
+							u = User.findById(ai).first
 							fanpages = Array({ 
-								User.findById(ai).first.name => webAddress+"/users/"+id
+								u.name => webAddress+"/users/"+u.id
 							})
 							fanpagesArray.push(fanpages)
 						end
