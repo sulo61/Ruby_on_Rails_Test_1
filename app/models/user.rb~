@@ -16,7 +16,7 @@ class User
 
   # wyszukanie wszystkich uzytkownikow
   def self.findAllUsrs()
-	return self.desc(:created_at)
+	return self.desc(:created_at).limit(30)
   end
 
   # wyszukiwanie uzytkownika bo jego nazwie
@@ -120,7 +120,8 @@ class User
 				:type => type,
 				:fanpages => fanpagesArray,
 				:id => id,
-				:date => date
+				:date => date,
+				:cla => umi.client_last_active.to_a
 
 			})
 			
@@ -199,6 +200,7 @@ class User
 		name = " - "
 		id = " - " 
 		email = " - "
+		cla = Array(nil)
 		type = " - " 
 		fanpages = Array(nil)
 		fanpagesArray = Array(nil)
@@ -212,7 +214,7 @@ class User
 			if ( umi._type=="User" )
 				type = "User"
 				email = umi.email
-
+				cla = umi.client_last_active.to_a
 				# wyszukiwanie fanpagow
 				if (umi.fanpage_ids!=nil)
 					fanpagesInput = umi.fanpage_ids
@@ -258,7 +260,8 @@ class User
 			:link => webAddress+"/users/"+umi._id,
 			:email => email,
 			:type => umi._type,
-			:fanpages => fanpagesArray
+			:fanpages => fanpagesArray,
+			:cla => cla
 		})
 		usrsArray.push(usr)
 		# -----------------------------------

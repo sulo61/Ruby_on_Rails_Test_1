@@ -102,7 +102,7 @@ class Activity
 			else
 				repeat = "true"
 			end
-			@showdate = (ami.created_at.to_s)[0,10]
+			
 			# -------------------------------		
 		
 			# wyciaganie danych Usera

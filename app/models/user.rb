@@ -60,6 +60,7 @@ class User
 			date = umi.created_at
 			fanpages = Array(nil)
 			fanpagesArray = Array(nil)
+			cla = Array(nil)
 			id = umi._id
 			if ( umi.name!=nil )
 				name = umi.name
@@ -70,7 +71,7 @@ class User
 				if ( umi._type=="User" )
 					type = "User"
 					email = umi.email
-
+					cla = umi.client_last_active.to_a
 					# wyszukiwanie fanpagow
 					if (umi.fanpage_ids!=nil)
 						fanpagesInput = umi.fanpage_ids
@@ -120,7 +121,8 @@ class User
 				:type => type,
 				:fanpages => fanpagesArray,
 				:id => id,
-				:date => date
+				:date => date,
+				:cla => cla
 
 			})
 			
@@ -199,6 +201,7 @@ class User
 		name = " - "
 		id = " - " 
 		email = " - "
+		cla = Array(nil)
 		type = " - " 
 		fanpages = Array(nil)
 		fanpagesArray = Array(nil)
@@ -212,7 +215,7 @@ class User
 			if ( umi._type=="User" )
 				type = "User"
 				email = umi.email
-
+				cla = umi.client_last_active.to_a
 				# wyszukiwanie fanpagow
 				if (umi.fanpage_ids!=nil)
 					fanpagesInput = umi.fanpage_ids
@@ -258,7 +261,8 @@ class User
 			:link => webAddress+"/users/"+umi._id,
 			:email => email,
 			:type => umi._type,
-			:fanpages => fanpagesArray
+			:fanpages => fanpagesArray,
+			:cla => cla
 		})
 		usrsArray.push(usr)
 		# -----------------------------------

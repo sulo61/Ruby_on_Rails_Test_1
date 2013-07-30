@@ -132,7 +132,7 @@ class Activity
 				:discipline => ami.discipline,
 				:author_info => ami.author_info["name"],
 				:client => ami.client,
-				:enrolled => ami.enrolled_users.size,
+				:enrolled => ami.enrolled_users.size-1,
 				:repeat => repeat,
 				:email => email,
 				:type => type,

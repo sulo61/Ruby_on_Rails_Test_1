@@ -1,4 +1,4 @@
-<h1>User: details for <%= @showdate %></h1>
+<h1>Users: details for <%= @showdate %></h1>
 <br><br>
 <form method="GET" action="/stat/usrsMain">
 <%= submit_tag 'Back', :name => 'back', :class => 'btn btn-small' %>
@@ -16,6 +16,7 @@
 			<th>Email</th>
 			<th>Type</th>
 			<th>Fanpages/Admins</th>
+			<th>Clients</th>
 
 		</tr>
 	</thead>
@@ -34,6 +35,7 @@
 				<br>
 				<% end %>
 	  		</td>
+			<td><%= usr[6][1] %></td>
 
 	  
 	      </tr>

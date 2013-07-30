@@ -67,9 +67,15 @@
 	  <td>
 		<% usr[4][1].each do |key| %>
 			<a href=<%= key[0][1] %> target="_blank"><%= key[0][0] %></a>
+			<br>
 		<% end %>
 	  </td>
-	  
+	  <td>
+		<% usr[7][1].each do |key| %>
+			<%= key[0] %> 
+			<br>
+		<% end %>
+	  </td>
 
       </tr>
     <% end %>
