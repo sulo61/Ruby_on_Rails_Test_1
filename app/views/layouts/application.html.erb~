@@ -17,8 +17,10 @@
     <div class="container">
       
       <a class="brand" href="#">Dropsport Stat</a>
+	<%= link_to "Dropsport Stat", stat_panel_path, class "brand" %>
       <div class="nav-collapse">
         <ul class="nav">
+		<li class="divider-vertical"></li>
             <li><%= link_to "Activities", stat_panel_path %></li>
 		<li class="divider-vertical"></li>
             <li><%= link_to "Users", stat_usrs_path %></li>
@@ -26,6 +28,7 @@
         </ul>
 
 	  <ul class="nav pull-right">
+			    <li class="divider-vertical"></li>
                       <li><%= link_to "Log out", stat_logout_path %></li>
                       <li class="divider-vertical"></li>
                       

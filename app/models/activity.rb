@@ -19,6 +19,7 @@ class Activity
   field :created_at, type: DateTime
   field :repeat, type: String
   field :moc, type: String
+  field :state, type: String
   
   embeds_many :enrolled_users
 
@@ -101,7 +102,7 @@ class Activity
 			else
 				repeat = "true"
 			end
-			@showdate = (ami.created_at.to_s)[0,10]
+			
 			# -------------------------------		
 		
 			# wyciaganie danych Usera
@@ -135,7 +136,8 @@ class Activity
 				:repeat => repeat,
 				:email => email,
 				:type => type,
-				:fanPageName => fanPageName
+				:fanPageName => fanPageName,
+				:state => ami.state
 			})
 			activitiesArray.push(activity)
 			# -----------------------------------

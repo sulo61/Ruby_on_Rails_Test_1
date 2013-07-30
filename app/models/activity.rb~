@@ -19,6 +19,7 @@ class Activity
   field :created_at, type: DateTime
   field :repeat, type: String
   field :moc, type: String
+  field :state, type: String
   
   embeds_many :enrolled_users
 
@@ -73,7 +74,7 @@ class Activity
   end
 
   # funkcja generujaca szczegoly konkretnego dnia na podstawie wprowadzonej daty
-  def self.generateDetails(dateInput)
+  def self.generateDetails(dateInput, webAddress)
 		# generowanie poprawnej skladniowo daty dla wyciagniecie szczegolow konkretnego dnia 
 		dateInput = dateInput
 		year = (dateInput[0,4]).to_i
@@ -127,7 +128,7 @@ class Activity
 			# tworzenie tablicy z aktywnosciami dla widoku
 			activity = Array({
 				:time => (ami.created_at.to_s)[11,8],
-				:link => "https://my.dropsport.com/activities/"+ami._id+"",
+				:link => webAddress+"/activities/"+ami._id+"",
 				:discipline => ami.discipline,
 				:author_info => ami.author_info["name"],
 				:client => ami.client,
@@ -135,7 +136,8 @@ class Activity
 				:repeat => repeat,
 				:email => email,
 				:type => type,
-				:fanPageName => fanPageName
+				:fanPageName => fanPageName,
+				:state => ami.state
 			})
 			activitiesArray.push(activity)
 			# -----------------------------------

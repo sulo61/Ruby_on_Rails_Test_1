@@ -16,7 +16,7 @@ class User
 
   # wyszukanie wszystkich uzytkownikow
   def self.findAllUsrs()
-	return self
+	return self.limit(30).sort_by{"created_at"}.reverse
   end
 
   # wyszukiwanie uzytkownika bo jego nazwie
@@ -45,6 +45,10 @@ class User
 
 		fanadminArray = Array.new()
 		fanadmin = Array.new()
+		
+		
+		fanpagesArray = Array.new()
+		fanpages = Array.new()
 		# ---------------------------
 
 
@@ -53,7 +57,9 @@ class User
 			id = " - " 
 			email = " - "
 			type = " - " 
-			fanpages = " - "
+			fanpages = Array(nil)
+			fanpagesArray = Array(nil)
+			id = umi._id
 			if ( umi.name!=nil )
 				name = umi.name
 			end
@@ -67,10 +73,15 @@ class User
 					# wyszukiwanie fanpagow
 					if (umi.fanpage_ids!=nil)
 						fanpagesInput = umi.fanpage_ids
-						fanpages = ""
+						#fanpages = ""
+						fanpages.clear
 						fanpagesInput.each do |fi|
 							#fanpages = fi
-							fanpages += User.findById(fi).first.name+".\n "
+							#fanpages += User.findById(fi).first.name+".\n "
+							fanpages = Array({
+								User.findById(fi).first.name => webAddress+"/users/"+id
+							})
+							fanpagesArray.push(fanpages)
 						end
 					end
 				end
@@ -82,21 +93,30 @@ class User
 					#wyszukiwanie adminow
 					if (umi.admin_ids!=nil)
 						adminsInput = umi.admin_ids
-						fanpages = ""
+						#fanpages = ""
+						
 						adminsInput.each do |ai|
-							fanpages += User.findById(ai).first.name+".\n "
+							#fanpages += User.findById(ai).first.name+".\n "
+							fanpages = Array({ 
+								User.findById(ai).first.name => webAddress+"/users/"+id
+							})
+							fanpagesArray.push(fanpages)
 						end
 					end
 				end
 			end
-
+			#if ( fanpages==Array(nil) )
+			#	fanpages.to_s
+			#	fanpages = ""
+			#end
 			# tworzenie tablicy dla widoku
 			usr = Array({
 				:name => name,
 				:link => webAddress+"/users/"+umi._id+"",
 				:email => email,
 				:type => type,
-				:fanpages => fanpages
+				:fanpages => fanpagesArray,
+				:id => id
 
 			})
 			

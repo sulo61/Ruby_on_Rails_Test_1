@@ -51,9 +51,10 @@ class StatController < ApplicationController
 	if params[:back]
 		redirect_to :action => "panel"
 	end
-
+	date = params[:date].to_s
+	@showdate = date[0,10]
 	# udostepnianie widokowi tablicy aktywnosci	
-	@activityDetails = Activity.generateDetails(params[:date].to_s, $webAddress)
+	@activityDetails = Activity.generateDetails(date, $webAddress)
 	# ------------------------------------------
   end
 
