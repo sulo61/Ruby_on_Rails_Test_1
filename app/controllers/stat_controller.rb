@@ -6,7 +6,7 @@ class StatController < ApplicationController
 	
   def login
 	if session[:user_if]
-		redirect_to :action => "panel"
+		redirect_to :action => "mainActivity"
 	end
 
 	if params["login"]
@@ -14,7 +14,7 @@ class StatController < ApplicationController
 			password = Digest::SHA2.hexdigest(params[:pass])
 			if password == user.pass
 				session[:user_id] = user.id
-				redirect_to :action => "panel"
+				redirect_to :action => "activityMain"
 			end
 		end
 	end
@@ -30,7 +30,7 @@ class StatController < ApplicationController
 	end
   end
 
-  def panel
+  def activityMain
 	redirect_to :action => "login" if !session[:user_id]
 	now = DateTime.now
 
@@ -45,11 +45,11 @@ class StatController < ApplicationController
 
 
 
-  def details
+  def activityDetails
 	redirect_to :action => "login" if !session[:user_id]
 
 	if params[:back]
-		redirect_to :action => "panel"
+		redirect_to :action => "mainActivity"
 	end
 	date = params[:date].to_s
 	@showdate = date[0,10]
@@ -60,7 +60,7 @@ class StatController < ApplicationController
 
 
 
-  def usrs
+  def usrsMain
 	redirect_to :action => "login" if !session[:user_id]
 	# udostepnianie widokowi tablicy uzytkownikow
 	#@usrs = User.generateUsers(params[:find], params[:name], $webAddress)

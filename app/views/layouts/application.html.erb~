@@ -17,7 +17,7 @@
     <div class="container">
       
       <a class="brand" href="#">Dropsport Stat</a>
-	<%= link_to "Dropsport Stat", stat_panel_path, class "brand" %>
+
       <div class="nav-collapse">
         <ul class="nav">
 		<li class="divider-vertical"></li>

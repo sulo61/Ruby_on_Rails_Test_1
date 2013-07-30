@@ -10,6 +10,8 @@ DsTab7::Application.routes.draw do
 
   get "stat/usrs"
 
+  get "stat/logout"
+
   root :to => "stat#login"
 
   post "stat/login" => "stat#login"
