@@ -7,6 +7,7 @@ DsTab7::Application.routes.draw do
   get "stat/activityDetails"
 
   get "stat/usrsMain"
+  get "stat/usrsDetails"
 
   root :to => "stat#login"
 

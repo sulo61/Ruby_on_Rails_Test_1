@@ -15,9 +15,9 @@
     <tr>
       <th>Date</th>
       <th>Users</th>
-      <th>Fanpages</th>
-      
+      <th>Fanpages</th>      
 	<th>All</th>
+	<th>Action</th>
 
     </tr>
   </thead>
@@ -28,10 +28,14 @@
       <tr>
         <td><%= usr_date %></td>
 	  <td><%= usr["value"]["User"] %></td>
-	  <td><%= usr["value"]["Fanpage"] %></td>
-	  
+	  <td><%= usr["value"]["Fanpage"] %></td>	  
 	  <td><%= usr["value"]["all"] %></td>
-	  
+	  <td>
+		<%= form_tag("/stat/usrsDetails", method: "get") do %>
+		<%= hidden_field_tag(:date, usr_date ) %>
+		<%= submit_tag("Details", {:name => "", :class => 'btn btn-mini'}) %>
+		<% end %>
+	  </td>
 
       </tr>
     <% end %>
@@ -42,6 +46,7 @@
   <thead>
     <tr>
       <th>Name</th>
+	<th>Created at</th>
       <th>Link</th>
       <th>Email</th>
       <th>Type</th>
@@ -54,6 +59,7 @@
       
       <tr>
         <td><%= usr[0][1] %></td>
+        <td><%= (usr[6][1].to_s)[0,10] %></td>
 	  <td><a href=<%=usr[1][1]%> target="_blank">Link</a></td>
 	  <td><%= truncate(usr[2][1], :length => 35) %></td>
 	  <td><%= usr[3][1] %></td>
@@ -61,6 +67,7 @@
 	  <td>
 		<% usr[4][1].each do |key| %>
 			<a href=<%= key[0][1] %> target="_blank"><%= key[0][0] %></a>
+			<br>
 		<% end %>
 	  </td>
 	  

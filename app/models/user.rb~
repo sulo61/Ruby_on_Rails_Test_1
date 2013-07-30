@@ -57,6 +57,7 @@ class User
 			id = " - " 
 			email = " - "
 			type = " - " 
+			date = umi.created_at
 			fanpages = Array(nil)
 			fanpagesArray = Array(nil)
 			id = umi._id
@@ -98,9 +99,9 @@ class User
 						
 						adminsInput.each do |ai|
 							#fanpages += User.findById(ai).first.name+".\n "
-							id = User.findById(User.findById(ai).first._id)
+							u = User.findById(ai).first
 							fanpages = Array({ 
-								User.findById(ai).first.name => webAddress+"/users/"+id
+								u.name => webAddress+"/users/"+u.id
 							})
 							fanpagesArray.push(fanpages)
 						end
@@ -118,7 +119,8 @@ class User
 				:email => email,
 				:type => type,
 				:fanpages => fanpagesArray,
-				:id => id
+				:id => id,
+				:date => date
 
 			})
 			
@@ -171,6 +173,105 @@ class User
 	return self.map_reduce(map, reduce).out(inline: true).sort_by { "_id" }.reverse
 
   end
+
+  def self.generateDetails(dateInput, webAddress)
+		# generowanie poprawnej skladniowo daty dla wyciagniecie szczegolow konkretnego dnia 
+		dateInput = dateInput
+		year = (dateInput[0,4]).to_i
+		month = (dateInput[5,2]).to_i
+		day = (dateInput[8,2]).to_i
+	
+		date = DateTime.new(year,month,day)
+		# ---------------------------------
+
+		# pobranie tablicy aktywnosci
+		usrModelInput = User.showDay(date, date + 23.hours + 59.minutes + 59.seconds )
+		# -----------------------------
+
+		# tworzenie prototypow dla aktywnosci
+		usrsArray = Array.new()
+		usr = Array.new()
+		# ---------------------------
+
+
+		usrModelInput.each do |umi|
+
+		name = " - "
+			id = " - " 
+			email = " - "
+			type = " - " 
+		fanpages = Array(nil)
+			fanpagesArray = Array(nil)
+			id = umi._id
+			if ( umi.name!=nil )
+				name = umi.name
+			end
+			if ( umi._type!=nil )
+
+				#dla Usera					
+				if ( umi._type=="User" )
+					type = "User"
+					email = umi.email
+
+					# wyszukiwanie fanpagow
+					if (umi.fanpage_ids!=nil)
+						fanpagesInput = umi.fanpage_ids
+						#fanpages = ""
+						fanpages.clear
+						fanpagesInput.each do |fi|
+							#fanpages = fi
+							#fanpages += User.findById(fi).first.name+".\n "
+							u = User.findById(fi).first
+							fanpages = Array({
+								u.name => webAddress+"/users/"+u.id
+							})
+							fanpagesArray.push(fanpages)
+						end
+					end
+				end
+
+				# dla Fanpage
+				if ( umi._type=="Fanpage" )
+					type = "Fanpage"
+					
+					#wyszukiwanie adminow
+					if (umi.admin_ids!=nil)
+						adminsInput = umi.admin_ids
+						#fanpages = ""
+						
+						adminsInput.each do |ai|
+							#fanpages += User.findById(ai).first.name+".\n "
+							u = User.findById(ai).first
+							fanpages = Array({ 
+								u.name => webAddress+"/users/"+u.id
+							})
+							fanpagesArray.push(fanpages)
+						end
+					end
+				end
+			end
+					
+			# tworzenie tablicy z aktywnosciami dla widoku
+			usr = Array({
+				:name => umi.name,
+				:date => umi.created_at,
+				:link => webAddress+"/users/"+umi._id,
+				:email => umi.email,
+				:type => umi._type,
+				:fanpages => fanpagesArray
+			})
+			usrsArray.push(usr)
+			# -----------------------------------
+		end
+		return usrsArray
+  end
+
+
+  def self.showDay( dataOd=DateTime.new(2000,01,01), dataDo=DateTime.now   )
+	
+	return where(:created_at => { '$gt' => dataOd, '$lt' => dataDo } ).desc(:created_at)
+	
+  end 
 
 
 end

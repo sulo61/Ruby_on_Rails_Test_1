@@ -1,16 +1,12 @@
 DsTab7::Application.routes.draw do
 
   get "stat/login"
-
-  get "stat/panel"
-
-  get "stat/results"
-
-  get "stat/details"
-
-  get "stat/usrs"
-
   get "stat/logout"
+
+  get "stat/activityMain"
+  get "stat/activityDetails"
+
+  get "stat/usrsMain"
 
   root :to => "stat#login"
 
