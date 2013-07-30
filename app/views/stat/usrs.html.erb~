@@ -13,28 +13,20 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Link</th>
-      <th>Email</th>
-      <th>Type</th>
-	<th>Fanpages / Admins</th>
+      <th>Date</th>
+      <th>Users</th>
+      <th>Fanpages</th>
+      <th>Unknowns</th>
+	<th>All</th>
 
     </tr>
   </thead>
   <tbody>
     <% for usr in @usrs %>
-      
+      <% usr_date = truncate((usr["_id"]["data"]).to_s , :length => 10, :omission => '') %>
       <tr>
-        <td><%= usr[0][1] %></td>
-	  <td><a href=<%=usr[1][1]%> target="_blank">Link</a></td>
-	  <td><%= truncate(usr[2][1], :length => 35) %></td>
-	  <td><%= usr[3][1] %></td>
-	  
-	  <td>
-		<% usr[4][1].each do |key| %>
-			<a href=<%= key[0][1] %> target="_blank"><%= key[0][0] %></a>
-		<% end %>
-	  </td>
+        <td><%= usr_date %></td>
+	  <td><%= usr["value"]["User"] %></td>
 	  
 
       </tr>
