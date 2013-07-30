@@ -27,6 +27,9 @@
       <tr>
         <td><%= usr_date %></td>
 	  <td><%= usr["value"]["User"] %></td>
+	  <td><%= usr["value"]["Fanpage"] %></td>
+	  <td><%= usr["value"]["uknown"] %></td>
+	  <td><%= usr["value"]["all"] %></td>
 	  
 
       </tr>

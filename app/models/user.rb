@@ -138,13 +138,13 @@ class User
 			var type = this._type
 			switch(type){
 				case "User":
-					emit (key, { "User": 1, "Fanpage": 0, "all": 1, "unknown": 0} );
+					emit (key, { "User": 1, "Fanpage": 0, "all": 1} );
 					break;
 				case "Fanpage":
-					emit (key, { "User": 0, "Fanpage": 1, "all": 1, "unknown": 0} );
+					emit (key, { "User": 0, "Fanpage": 1, "all": 1} );
 					break;
 				default:
-					emit (key, { "User": 0, "Fanpage": 0, "all": 1, "unknown": 1} );
+					emit (key, { "User": 0, "Fanpage": 0, "all": 1} );
 				
 			}
 			
@@ -154,16 +154,15 @@ class User
 	reduce = %Q{
 	  function(key, values) {
 	    
-	    cUser = 0, cFanpage = 0, cUnknown = 0, cAll = 0;
+	    cUser = 0, cFanpage = 0, cAll = 0;
 	    
 	    values.forEach(function(v) {
 		cUser += v.User;
 		cFanpage += v.Fanpage;
-		cUnknown += v.unknown;
 		cAll += v.all;
 	    });
 
-	    return { "User": cUser, "Fanpage": cFanpage, "unknown": cUnknown, "all": cAll };
+	    return { "User": cUser, "Fanpage": cFanpage, "all": cAll };
 	  }
 	}
 

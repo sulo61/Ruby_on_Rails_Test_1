@@ -64,10 +64,12 @@ class StatController < ApplicationController
 	redirect_to :action => "login" if !session[:user_id]
 	# udostepnianie widokowi tablicy uzytkownikow
 	#@usrs = User.generateUsers(params[:find], params[:name], $webAddress)
-	if !params[:find]	
+	if !params[:find]
+		@showByDate = true
 		@usrs = User.showUsrsByDate()
 	end
 	if params[:find]
+		@showByDate = false
 		@usrs = User.generateUsers(params[:find], params[:name], $webAddress)
 	end
   end
