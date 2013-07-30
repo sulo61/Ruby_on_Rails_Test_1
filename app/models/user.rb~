@@ -16,7 +16,7 @@ class User
 
   # wyszukanie wszystkich uzytkownikow
   def self.findAllUsrs()
-	return self.limit(30).sort_by{"created_at"}.reverse
+	return self.desc(:created_at)
   end
 
   # wyszukiwanie uzytkownika bo jego nazwie
@@ -197,71 +197,71 @@ class User
 		usrModelInput.each do |umi|
 
 		name = " - "
-			id = " - " 
-			email = " - "
-			type = " - " 
+		id = " - " 
+		email = " - "
+		type = " - " 
 		fanpages = Array(nil)
-			fanpagesArray = Array(nil)
-			id = umi._id
-			if ( umi.name!=nil )
-				name = umi.name
-			end
-			if ( umi._type!=nil )
+		fanpagesArray = Array(nil)
+		id = umi._id
+		if ( umi.name!=nil )
+			name = umi.name
+		end
+		if ( umi._type!=nil )
 
-				#dla Usera					
-				if ( umi._type=="User" )
-					type = "User"
-					email = umi.email
+			#dla Usera					
+			if ( umi._type=="User" )
+				type = "User"
+				email = umi.email
 
-					# wyszukiwanie fanpagow
-					if (umi.fanpage_ids!=nil)
-						fanpagesInput = umi.fanpage_ids
-						#fanpages = ""
-						fanpages.clear
-						fanpagesInput.each do |fi|
-							#fanpages = fi
-							#fanpages += User.findById(fi).first.name+".\n "
-							u = User.findById(fi).first
-							fanpages = Array({
-								u.name => webAddress+"/users/"+u.id
-							})
-							fanpagesArray.push(fanpages)
-						end
-					end
-				end
-
-				# dla Fanpage
-				if ( umi._type=="Fanpage" )
-					type = "Fanpage"
-					
-					#wyszukiwanie adminow
-					if (umi.admin_ids!=nil)
-						adminsInput = umi.admin_ids
-						#fanpages = ""
-						
-						adminsInput.each do |ai|
-							#fanpages += User.findById(ai).first.name+".\n "
-							u = User.findById(ai).first
-							fanpages = Array({ 
-								u.name => webAddress+"/users/"+u.id
-							})
-							fanpagesArray.push(fanpages)
-						end
+				# wyszukiwanie fanpagow
+				if (umi.fanpage_ids!=nil)
+					fanpagesInput = umi.fanpage_ids
+					#fanpages = ""
+					fanpages.clear
+					fanpagesInput.each do |fi|
+						#fanpages = fi
+						#fanpages += User.findById(fi).first.name+".\n "
+						u = User.findById(fi).first
+						fanpages = Array({
+							u.name => webAddress+"/users/"+u.id
+						})
+						fanpagesArray.push(fanpages)
 					end
 				end
 			end
+
+			# dla Fanpage
+			if ( umi._type=="Fanpage" )
+				type = "Fanpage"
+				
+				#wyszukiwanie adminow
+				if (umi.admin_ids!=nil)
+					adminsInput = umi.admin_ids
+					#fanpages = ""
 					
-			# tworzenie tablicy z aktywnosciami dla widoku
-			usr = Array({
-				:name => umi.name,
-				:date => umi.created_at,
-				:link => webAddress+"/users/"+umi._id,
-				:email => umi.email,
-				:type => umi._type,
-				:fanpages => fanpagesArray
-			})
-			usrsArray.push(usr)
-			# -----------------------------------
+					adminsInput.each do |ai|
+						#fanpages += User.findById(ai).first.name+".\n "
+						u = User.findById(ai).first
+						fanpages = Array({ 
+							u.name => webAddress+"/users/"+u.id
+						})
+						fanpagesArray.push(fanpages)
+					end
+				end
+			end
+		end
+				
+		# tworzenie tablicy z aktywnosciami dla widoku
+		usr = Array({
+			:name => umi.name,
+			:date => umi.created_at,
+			:link => webAddress+"/users/"+umi._id,
+			:email => email,
+			:type => umi._type,
+			:fanpages => fanpagesArray
+		})
+		usrsArray.push(usr)
+		# -----------------------------------
 		end
 		return usrsArray
   end

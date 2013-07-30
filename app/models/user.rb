@@ -16,7 +16,7 @@ class User
 
   # wyszukanie wszystkich uzytkownikow
   def self.findAllUsrs()
-	return self.limit(30).sort_by{"created_at"}.reverse
+	return self.desc(:created_at).limit(30)
   end
 
   # wyszukiwanie uzytkownika bo jego nazwie
