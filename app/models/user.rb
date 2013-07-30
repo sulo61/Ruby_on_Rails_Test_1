@@ -127,4 +127,49 @@ class User
 	  return usrsArray
   end
 
+  #funkcja na strone glowna usrs, grupujaca usrs po dacie
+  def self.showUsrsByDate()
+	map = %Q{
+		function(){
+						
+			var date = (new Date(this.created_at)).toISOString();
+			var dataKey = (date.substring(0,4)+"-"+date.substring(5,7)+"-"+date.substring(8,10));
+			var key = {data: dataKey};
+			var type = this._type
+			switch(type){
+				case "User":
+					emit (key, { "User": 1, "Fanpage": 0, "all": 1, "unknown": 0} );
+					break;
+				case "Fanpage":
+					emit (key, { "User": 0, "Fanpage": 1, "all": 1, "unknown": 0} );
+					break;
+				default:
+					emit (key, { "User": 0, "Fanpage": 0, "all": 1, "unknown": 1} );
+				
+			}
+			
+		}
+	}
+	
+	reduce = %Q{
+	  function(key, values) {
+	    
+	    cUser = 0, cFanpage = 0, cUnknown = 0, cAll = 0;
+	    
+	    values.forEach(function(v) {
+		cUser += v.User;
+		cFanpage += v.Fanpage;
+		cUnknown += v.unknown;
+		cAll += v.all;
+	    });
+
+	    return { "User": cUser, "Fanpage": cFanpage, "unknown": cUnknown, "all": cAll };
+	  }
+	}
+
+	return self.map_reduce(map, reduce).out(inline: true).sort_by { "_id" }.reverse
+
+  end
+
+
 end

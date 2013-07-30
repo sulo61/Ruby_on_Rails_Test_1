@@ -51,9 +51,10 @@ class StatController < ApplicationController
 	if params[:back]
 		redirect_to :action => "panel"
 	end
-	@showdate = params[:date].to_s[0,10]
+	date = params[:date].to_s
+	@showdate = date[0,10]
 	# udostepnianie widokowi tablicy aktywnosci	
-	@activityDetails = Activity.generateDetails(params[:date].to_s, $webAddress)
+	@activityDetails = Activity.generateDetails(date, $webAddress)
 	# ------------------------------------------
   end
 
@@ -62,7 +63,8 @@ class StatController < ApplicationController
   def usrs
 	redirect_to :action => "login" if !session[:user_id]
 	# udostepnianie widokowi tablicy uzytkownikow
-	@usrs = User.generateUsers(params[:find], params[:name], $webAddress)
+	#@usrs = User.generateUsers(params[:find], params[:name], $webAddress)
+	@usrs = User.showUsrsByDate()
   end
 
 end
