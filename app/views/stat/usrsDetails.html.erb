@@ -24,23 +24,25 @@
 		<% @usrsDetails.each do |usr| %>
 		<tr>
         	
-			<td><%= (usr[1][1].to_s)[11,8] %></td>
+			<td><%= (usr[6][1].to_s)[10,9] %></td>
 			<td><%= usr[0][1] %></td>
-			<td><a href=<%=usr[2][1]%> target="_blank">Link</a></td>
+			<td><a href=<%=usr[1][1]%> target="_blank">Link</a></td>
+			<td><%= usr[2][1] %></td>
 			<td><%= usr[3][1] %></td>
-			<td><%= usr[4][1] %></td>
 			<td>
-				<% usr[5][1].each do |key| %>
-				<a href=<%= key[0][1] %> target="_blank"><%= key[0][0] %></a>
-				<br>
+				<% usr[4][1].each do |key| %>
+					<a href=<%= key[0][1] %> target="_blank"><%= key[0][0] %></a>
+					<br>
+				<% end %>
+	 		</td>
+			<td>
+				<% usr[7][1].each do |key| %>
+					<%= key[0] %> 
+					<br>
 				<% end %>
 	  		</td>
-			<td>
-				<% usr[6][1].each do |key| %>
-				<%= key[0] %> 
-			<br>
-		<% end %>
-	  </td>
+		
+	 
 
 	  
 	      </tr>

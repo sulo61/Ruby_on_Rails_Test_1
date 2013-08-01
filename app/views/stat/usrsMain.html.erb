@@ -5,7 +5,7 @@
 <%= text_field_tag 'name' %><br>
 <%= submit_tag 'Find', :name => 'find', :class => 'btn btn-normal' %>
 </form>
-<%= @usr %>
+<%= @lool %>
 <p>-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</p>
 
 <h1>Results</h1>
@@ -45,7 +45,7 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>Name</th>
+	<th>Name</th>
 	<th>Created at</th>
       <th>Link</th>
       <th>Email</th>
@@ -55,31 +55,29 @@
 
     </tr>
   </thead>
-  <tbody>
-    <% for usr in @usrs %>
-      
+  <tbody>     
       <tr>
-        <td><%= usr[0][1] %></td>
-        <td><%= (usr[6][1].to_s)[0,10] %></td>
-	  <td><a href=<%=usr[1][1]%> target="_blank">Link</a></td>
-	  <td><%= truncate(usr[2][1], :length => 35) %></td>
-	  <td><%= usr[3][1] %></td>
+        <td><%= @usrs[0][1] %></td>
+        <td><%= (@usrs[6][1].to_s)[0,10] %></td>
+	  <td><a href=<%=@usrs[1][1]%> target="_blank">Link</a></td>
+	  <td><%= truncate(@usrs[2][1], :length => 35) %></td>
+	  <td><%= @usrs[3][1] %></td>
 	  
 	  <td>
-		<% usr[4][1].each do |key| %>
+		<% @usrs[4][1].each do |key| %>
 			<a href=<%= key[0][1] %> target="_blank"><%= key[0][0] %></a>
 			<br>
 		<% end %>
 	  </td>
 	  <td>
-		<% usr[7][1].each do |key| %>
+		<% @usrs[7][1].each do |key| %>
 			<%= key[0] %> 
 			<br>
 		<% end %>
 	  </td>
 
       </tr>
-    <% end %>
+    
   </tbody>
 </table>
 

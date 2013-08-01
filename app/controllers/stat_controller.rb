@@ -2,7 +2,6 @@ class StatController < ApplicationController
 
   $daysBack = 30
   $webAddress = "https://my.dropsport.com"
-
 	
   def login
 	if session[:user_if]
@@ -35,11 +34,11 @@ class StatController < ApplicationController
 	now = DateTime.now
 
 	if !params[:last]
-		@activities = Activity.showResults(now-$daysBack, now)
+		@activities = Activity.countActivities(now-$daysBack, now)
 	end
 
 	if params[:last]			
-		@activities = Activity.showResults(now-params[:numberOfDays].to_i, now)
+		@activities = Activity.countActivities(now-params[:numberOfDays].to_i, now)
 	end
   end
 
@@ -54,7 +53,7 @@ class StatController < ApplicationController
 	date = params[:date].to_s
 	@showdate = date[0,10]
 	# udostepnianie widokowi tablicy aktywnosci	
-	@activityDetails = Activity.generateDetails(date, $webAddress)
+	@activityDetails = Activity.activitiesDetails(date, $webAddress)
 	# ------------------------------------------
   end
 
@@ -63,15 +62,16 @@ class StatController < ApplicationController
   def usrsMain
 	redirect_to :action => "login" if !session[:user_id]
 	# udostepnianie widokowi tablicy uzytkownikow
-	#@usrs = User.generateUsers(params[:find], params[:name], $webAddress)
 	if !params[:find]
 		@showByDate = true
 		@usrs = User.showUsrsByDate()
 	end
 	if params[:find]
 		@showByDate = false
-		@usrs = User.generateUsers(params[:find], params[:name], $webAddress)
+		@usrs = User.usrDetailsByName(params[:name], $webAddress)
+		
 	end
+	
   end
 
   def usrsDetails
@@ -83,14 +83,8 @@ class StatController < ApplicationController
 	date = params[:date].to_s
 	@showdate = date[0,10]
 	# udostepnianie widokowi tablicy aktywnosci	
-	@usrsDetails = User.generateDetails(date, $webAddress)
+	@usrsDetails = User.usrsDayDetails(date, $webAddress)
 	# ------------------------------------------
   end
-
-
-
-
-
-
 
 end

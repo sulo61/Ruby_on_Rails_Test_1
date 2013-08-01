@@ -1,17 +1,14 @@
 class EnrolledUser
-
   include Mongoid::Document
+
   field :oid, type: String
   embedded_in :activity
-
 end
 
 class Activity
-
   include Mongoid::Document
-  include Mongoid::Timestamps
+  include Mongoid::Timestamps 
 
- 
   field :author_id, type: String
   field :client, type: String
   field :description, type: String
@@ -22,10 +19,9 @@ class Activity
   field :state, type: String
   
   embeds_many :enrolled_users
-
   
-  #funkcja na strone glowna, grupujaca aktywnosci po dacie
-  def self.showResults(dataOd=DateTime.new(2000,01,01), dataDo=DateTime.now )
+  # activities, zliczanie klientow, grupowanie po dniach
+  def self.countActivities(dataOd=DateTime.new(2000,01,01), dataDo=DateTime.now )
 	map = %Q{
 		function(){
 						
@@ -45,18 +41,14 @@ class Activity
 					break;
 				case "unknown":
 					emit (key, { "web": 0, "Android": 0, "ios": 0, "unknown": 1, "all": 1} );
-					break;
-				
-			}
-			
+					break;				
+			}			
 		}
 	}
 	
 	reduce = %Q{
-	  function(key, values) {
-	    
-	    cWeb = 0, cAndroid = 0, cIos = 0, cUnknown = 0, cAll = 0;
-	    
+	  function(key, values) {	    
+	    cWeb = 0, cAndroid = 0, cIos = 0, cUnknown = 0, cAll = 0;	    
 	    values.forEach(function(v) {
 		cWeb += v.web;
 		cAndroid += v.Android;
@@ -64,95 +56,79 @@ class Activity
 		cUnknown += v.unknown;
 		cAll += v.all;
 	    });
-
 	    return { "web": cWeb, "Android": cAndroid, "ios": cIos, "unknown": cUnknown, "all": cAll };
 	  }
 	}
-
 	return self.where(:created_at => { '$gte' => dataOd, '$lte' => dataDo } ).map_reduce(map, reduce).out(inline: true).sort_by { "_id" }.reverse
-
   end
 
-  # funkcja generujaca szczegoly konkretnego dnia na podstawie wprowadzonej daty
-  def self.generateDetails(dateInput, webAddress)
-		# generowanie poprawnej skladniowo daty dla wyciagniecie szczegolow konkretnego dnia 
-		dateInput = dateInput
-		year = (dateInput[0,4]).to_i
-		month = (dateInput[5,2]).to_i
-		day = (dateInput[8,2]).to_i
+  # szczegoly activities dla konkretnego dnia
+  def self.activitiesDetails(dateInput, webAddress)
+	# generowanie poprawnej skladniowo daty dla wyciagniecie szczegolow konkretnego dnia 
+	dateInput = dateInput
+	year = (dateInput[0,4]).to_i
+	month = (dateInput[5,2]).to_i
+	day = (dateInput[8,2]).to_i
+
+	date = DateTime.new(year,month,day)
+	# ---------------------------------
+
+	# pobranie tablicy aktywnosci
+	activityModelInput = Activity.activityDayDetails(date, date + 23.hours + 59.minutes + 59.seconds )
+	# -----------------------------
+
+	# tworzenie prototypow tablic dla aktywnosci
+	activitiesArray = Array.new()
+	activity = Array.new()
+	# ---------------------------
+
+	activityModelInput.each do |ami|
 	
-		date = DateTime.new(year,month,day)
-		# ---------------------------------
-
-		# pobranie tablicy aktywnosci
-		activityModelInput = Activity.showDay(date, date + 23.hours + 59.minutes + 59.seconds )
-		# -----------------------------
-
-		# tworzenie prototypow dla aktywnosci
-		activitiesArray = Array.new()
-		activity = Array.new()
-		# ---------------------------
-
-
-		activityModelInput.each do |ami|
-		
-			# sprawdzanie danych aktywnosci
-			if (ami.repeat==nil)
-				repeat = "false"
-			else
-				repeat = "true"
-			end
-			
-			# -------------------------------		
-		
-			# wyciaganie danych Usera
-			id = ami.author_id.to_s
-			userModelInput = User.findById(id)
-			email = " - "
-			type = " - "
-			fanPageName = " - "
-		
-			userModelInput.each do |uam|
-				if ( uam._id.to_s == id )
-					if ( uam._type.to_s == "User" )				
-						type = "U"				
-						email = uam.email
-					else
-						type = "F"
-					
-					end
-				end
-			end
-			# --------------------------------
-		
-			# tworzenie tablicy z aktywnosciami dla widoku
-			activity = Array({
-				:time => (ami.created_at.to_s)[11,8],
-				:link => webAddress+"/activities/"+ami._id+"",
-				:discipline => ami.discipline,
-				:author_info => ami.author_info["name"],
-				:client => ami.client,
-				:enrolled => ami.enrolled_users.size-1,
-				:repeat => repeat,
-				:email => email,
-				:type => type,
-				:fanPageName => fanPageName,
-				:state => ami.state
-			})
-			activitiesArray.push(activity)
-			# -----------------------------------
+		# sprawdzanie danych aktywnosci
+		if (ami.repeat==nil)
+			repeat = "false"
+		else
+			repeat = "true"
 		end
-		return activitiesArray
+		
+		# wyciaganie danych Usera
+		id = ami.author_id.to_s
+		uam = User.findById(id)
+		email = " - "
+		type = " - "
+		fanPageName = " - "		
+	
+		if ( uam._id.to_s == id )
+			if ( uam._type.to_s == "User" )				
+				type = "U"				
+				email = uam.email
+			else
+				type = "F"			
+			end
+		end	
+		# tworzenie tablicy z aktywnosciami dla widoku
+		activity = Array({
+			:time => (ami.created_at.to_s)[11,8],
+			:link => webAddress+"/activities/"+ami._id+"",
+			:discipline => ami.discipline,
+			:author_info => ami.author_info["name"],
+			:client => ami.client,
+			:enrolled => ami.enrolled_users.size-1,
+			:repeat => repeat,
+			:email => email,
+			:type => type,
+			:fanPageName => fanPageName,
+			:state => ami.state
+		})
+		activitiesArray.push(activity)
+		# -----------------------------------
+	end
+	return activitiesArray
   end
 
 
-  def self.showDay( dataOd=DateTime.new(2000,01,01), dataDo=DateTime.now   )
-	
-	return where(:created_at => { '$gt' => dataOd, '$lt' => dataDo } ).desc(:created_at)
-	
+  def self.activityDayDetails( dataOd=DateTime.new(2000,01,01), dataDo=DateTime.now   )	
+	return where(:created_at => { '$gt' => dataOd, '$lt' => dataDo } ).desc(:created_at)	
   end 
-
-
-
 
 end
