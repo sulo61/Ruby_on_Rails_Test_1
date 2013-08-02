@@ -9,7 +9,7 @@ class User
 
   
   # wyszukiwanie uzytkownika po ID
-  def self.findUsrByNameById(id="")
+  def self.findUsrById(id="")
 	return find_by("_id" => id )
   end
 

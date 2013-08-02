@@ -129,7 +129,7 @@ class User
 			end
 		end
 		fanadminsInput.each do |fai|					
-			u = User.findUsrByNameById(fai)
+			u = User.findUsrById(fai)
 			fanadmins = Array({
 				u.name => webAddress+"/users/"+u.id
 			})
