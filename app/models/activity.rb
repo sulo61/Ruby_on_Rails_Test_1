@@ -93,7 +93,7 @@ class Activity
 		
 		# wyciaganie danych Usera
 		id = ami.author_id.to_s
-		uam = User.findById(id)
+		uam = User.findUsrById(id)
 		email = " - "
 		type = " - "
 		fanPageName = " - "		

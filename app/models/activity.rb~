@@ -74,14 +74,13 @@ class Activity
 	# ---------------------------------
 
 	# pobranie tablicy aktywnosci
-	activityModelInput = Activity.showDay(date, date + 23.hours + 59.minutes + 59.seconds )
+	activityModelInput = Activity.activityDayDetails(date, date + 23.hours + 59.minutes + 59.seconds )
 	# -----------------------------
 
-	# tworzenie prototypow dla aktywnosci
+	# tworzenie prototypow tablic dla aktywnosci
 	activitiesArray = Array.new()
 	activity = Array.new()
 	# ---------------------------
-
 
 	activityModelInput.each do |ami|
 	
@@ -128,7 +127,7 @@ class Activity
   end
 
 
-  def self.showDay( dataOd=DateTime.new(2000,01,01), dataDo=DateTime.now   )	
+  def self.activityDayDetails( dataOd=DateTime.new(2000,01,01), dataDo=DateTime.now   )	
 	return where(:created_at => { '$gt' => dataOd, '$lt' => dataDo } ).desc(:created_at)	
   end 
 

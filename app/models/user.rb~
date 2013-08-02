@@ -149,7 +149,6 @@ class User
 		:date => umi.created_at,
 
 	})	
-	
 	# wysylanie tablicy dla widoku	
 	return usr
   end
