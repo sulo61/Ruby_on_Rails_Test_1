@@ -1,4 +1,4 @@
-<h1>Activity: details for <%= @showdate %></h1>
+<h1>Activities: details for <%= @showdate %></h1>
 <br><br>
 <form method="GET" action="/stat/activityMain">
 <%= submit_tag 'Back', :name => 'back', :class => 'btn btn-small' %>
@@ -19,6 +19,7 @@
 			<th>Email</th>
 			<th>Type</th>
 			<th>State</th>
+			<th>Copy</th>
 
 		</tr>
 	</thead>
@@ -36,6 +37,7 @@
 			<td><%= truncate(activity[7][1], :length => 30) %></td>
 			<td><%= activity[8][1] %></td>
 			<td><%= activity[10][1] %></td>
+			<td><button type="button" id="copy-some-txt" class="btn btn-small">COPY</button></td>
 
 
 	  
