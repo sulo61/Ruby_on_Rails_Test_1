@@ -93,7 +93,7 @@ class Activity
 		
 		# wyciaganie danych Usera
 		id = ami.author_id.to_s
-		uam = User.findById(id)
+		uam = User.findUsrById(id)
 		email = " - "
 		type = " - "
 		fanPageName = " - "		
@@ -105,7 +105,14 @@ class Activity
 			else
 				type = "F"			
 			end
-		end	
+		end
+		lol = ""
+		enr_ids = ami.enrolled_ids
+		enr_ids.each_with_index do |ku, i|
+			if ( i>0 )
+				lol +=","+(User.findUsrById(ku).email).to_s
+			end
+		end
 		# tworzenie tablicy z aktywnosciami dla widoku
 		activity = Array({
 			:time => (ami.created_at.to_s)[11,8],
@@ -113,12 +120,13 @@ class Activity
 			:discipline => ami.discipline,
 			:author_info => ami.author_info["name"],
 			:client => ami.client,
-			:enrolled => ami.enrolled_users.size-1,
+			:enrolled => ami.enrolled_ids.size-1,
 			:repeat => repeat,
 			:email => email,
 			:type => type,
 			:fanPageName => fanPageName,
-			:state => ami.state
+			:state => ami.state,
+			:enrolledmail => lol
 		})
 		activitiesArray.push(activity)
 		# -----------------------------------

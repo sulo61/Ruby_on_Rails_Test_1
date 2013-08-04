@@ -138,4 +138,4 @@ DEPENDENCIES
   therubyracer
   twitter-bootstrap-rails
   uglifier (>= 1.0.3)
-  zclip-rails (= 0.0.2)
+  zclip-rails

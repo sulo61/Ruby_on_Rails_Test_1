@@ -12,3 +12,11 @@
  *= require_tree .
  */
 
+a:hover, a.hover {...}
+a:active, a.active {...}
+
+$('a.copy').zclip('show'); // enable zClip on the selected element
+
+$('a.copy').zclip('hide'); // hide zClip on the selected element
+
+$('a.copy').zclip('remove'); // remove zClip from the selected element

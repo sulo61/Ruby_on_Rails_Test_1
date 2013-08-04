@@ -9,16 +9,12 @@
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script type="text/javascript">
-		$('#copy-some-txt').zclip({
-   			 copy: "this is the text to copy",
-    			 beforeCopy: function() {
-      		 alert("I am going to copy some text to your clipboard");
-    			},
-	    		afterCopy: function() {
-				alert("done");
-	    		}
-		});
+  	<script>
+				  $(document).ready(function() {
+				    var clip = new ZeroClipboard($("#d_clip_button"))
+				  });
+
+				  
   </script>
 </head>
 <body>
@@ -50,7 +46,7 @@
 </div>
 <br><br><br>
 <div class="container">
-	<button type="button" id="copy-some-txt">example</button>
+
   <%= yield %>
 </div>
 
