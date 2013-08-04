@@ -106,12 +106,16 @@ class Activity
 				type = "F"			
 			end
 		end
-		lol = ""
+		enrolledemails = ""
 		enr_ids = ami.enrolled_ids
-		enr_ids.each_with_index do |ku, i|
+		enr_ids.each_with_index do |enr, i|
 			if ( i>0 )
-				lol +=","+(User.findUsrById(ku).email).to_s
+				enrolledemails +=(User.findUsrById(enr).email).to_s
+				if ( i!=enr_ids.size-1 )
+					enrolledemails +=", "
+				end
 			end
+			
 		end
 		# tworzenie tablicy z aktywnosciami dla widoku
 		activity = Array({
@@ -126,7 +130,7 @@ class Activity
 			:type => type,
 			:fanPageName => fanPageName,
 			:state => ami.state,
-			:enrolledmail => lol
+			:enrolledemails => enrolledemails.class.name
 		})
 		activitiesArray.push(activity)
 		# -----------------------------------
