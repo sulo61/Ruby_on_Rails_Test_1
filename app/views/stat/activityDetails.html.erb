@@ -6,6 +6,8 @@
 <%= @authorid %>
 <%= @logs %>
 <%= @rowne %>
+
+
 <table class="table table-striped">
 	<thead>
 		<tr>
@@ -37,18 +39,12 @@
 			<%= activity[5][1] %>
 			<% if (activity[5][1].to_i>0) %>
 				<div class=<%='demo-area-'+index.to_s%> style='float:right'>
-  					<button class='btn btn-mini' data-clipboard-target=<%='fe_text_'+stringIndex %> data-clipboard-text='Default clipboard text from attribute' id=<%='d_clip_button_'+stringIndex %> title='Click me to copy to clipboard.'>
+  					<button class='btn btn-mini' data-clipboard-target=<%='fe_text_'+stringIndex %> data-clipboard-text='Default clipboard text from attribute' id=<%='d_clip_button_'+stringIndex %> title='Adresy e-mail skopiowane do schowka.' copy-to-clip="true">
     						<b>Copy @'s</b>
   					</button> 
   					<textarea style='display:none!important;' id=<%='fe_text_'+stringIndex %> ><%= activity[11][1] %></textarea>
 				</div>
-				<script>
-				  $(document).ready(function() {
-				    var clip = new ZeroClipboard($("#<%='d_clip_button_'+stringIndex %>"))
-				  });
 
-				  
-  </script>
 			<% end %>
 			</td>
 			<td><%= activity[6][1] %></td>
@@ -63,3 +59,5 @@
  	</tbody>
 </table>
 
+
+<%= javascript_include_tag("copyenrmails") %>

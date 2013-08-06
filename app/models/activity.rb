@@ -19,6 +19,10 @@ class Activity
   field :state, type: String
   
   embeds_many :enrolled_users
+
+  def self.webAddress()
+	return "https://my.dropsport.com"
+  end  
   
   # activities, zliczanie klientow, grupowanie po dniach
   def self.countActivities(dataOd=DateTime.new(2000,01,01), dataDo=DateTime.now )
@@ -63,7 +67,7 @@ class Activity
   end
 
   # szczegoly activities dla konkretnego dnia
-  def self.activitiesDetails(dateInput, webAddress)
+  def self.activitiesDetails(dateInput)
 	# generowanie poprawnej skladniowo daty dla wyciagniecie szczegolow konkretnego dnia 
 	dateInput = dateInput
 	year = (dateInput[0,4]).to_i
@@ -97,17 +101,19 @@ class Activity
 		email = " - "
 		type = " - "
 		fanPageName = " - "		
-	
+		enrolledemails = ""	
 		if ( uam._id.to_s == id )
 			if ( uam._type.to_s == "User" )				
 				type = "U"				
 				email = uam.email
+				enrolledemails = email+", "
 			else
 				type = "F"			
 			end
 		end
-		enrolledemails = ""
+
 		enr_ids = ami.enrolled_ids
+		
 		enr_ids.each_with_index do |enr, i|
 			if ( i>0 )
 				enrolledemails +=(User.findUsrById(enr).email).to_s
@@ -120,7 +126,7 @@ class Activity
 		# tworzenie tablicy z aktywnosciami dla widoku
 		activity = Array({
 			:time => (ami.created_at.to_s)[11,8],
-			:link => webAddress+"/activities/"+ami._id+"",
+			:link => webAddress()+"/activities/"+ami._id+"",
 			:discipline => ami.discipline,
 			:author_info => ami.author_info["name"],
 			:client => ami.client,

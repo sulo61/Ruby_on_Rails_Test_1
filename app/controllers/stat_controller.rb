@@ -2,7 +2,7 @@ class StatController < ApplicationController
   before_filter :auth, :except => [ :login, :logout ]
 
   $daysBack = 30
-  $webAddress = "https://my.dropsport.com"
+  
 
   def auth
 	redirect_to :action => "login" if !session[:user_id]
@@ -56,7 +56,7 @@ class StatController < ApplicationController
 	date = params[:date].to_s
 	@showdate = date[0,10]
 	# udostepnianie widokowi tablicy aktywnosci	
-	@activityDetails = Activity.activitiesDetails(date, $webAddress)
+	@activityDetails = Activity.activitiesDetails(date)
 	# ------------------------------------------
   end
 
@@ -64,13 +64,14 @@ class StatController < ApplicationController
 
   def usrsMain
 	# udostepnianie widokowi tablicy uzytkownikow
+	
 	if !params[:find]
 		@showByDate = true
 		@usrs = User.showUsrsByDate()
 	end
 	if params[:find]
 		@showByDate = false
-		@usrs = User.usrDetailsByName(params[:name], $webAddress)
+		@usrs = User.usrDetailsByName(params[:name])
 		
 	end
 	

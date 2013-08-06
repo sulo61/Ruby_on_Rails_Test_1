@@ -7,7 +7,9 @@ class User
   field :fanpage_ids, type: Array
   field :admin_ids, type: Array
 
-  
+  def self.webAddress()
+	return "https://my.dropsport.com"
+  end  
   # wyszukiwanie uzytkownika po ID
   def self.findUsrById(id="")
 	return find_by("_id" => id )
@@ -15,13 +17,16 @@ class User
 
   # wyszukiwanie uzytkownika bo jego nazwie
   def self.findUsrByName(name)
-	return find_by("name" => name)
+	return where("name" => name)
   end
 
   # generowanie listy uzytkownikow
-  def self.usrDetailsByName(name, webAddress)
-	# pobranie uzytkownika
-	return User.genPerson(User.findUsrByName(name), webAddress)
+  def self.usrDetailsByName(name)
+	usrsArray = Array(nil)
+	User.findUsrByName(name).each do |usbn|
+		usrsArray.push(User.genPerson(usbn))
+	end
+	return usrsArray
   end
 
   #funkcja na strone glowna usrs, grupujaca usrs po dacie
@@ -59,7 +64,7 @@ class User
 	return self.map_reduce(map, reduce).out(inline: true).sort_by { "_id" }.reverse
   end
 
-  def self.usrsDayDetails(dateInput, webAddress)
+  def self.usrsDayDetails(dateInput)
 	# generowanie poprawnej skladniowo daty dla wyciagniecie szczegolow konkretnego dnia 
 	dateInput = dateInput
 	year = (dateInput[0,4]).to_i
@@ -75,7 +80,7 @@ class User
 	# ---------------------------
 
 	usrModelInput.each do |umi|
-		usr = User.genPerson(umi, webAddress)
+		usr = User.genPerson(umi)
 		usrsArray.push(usr)
 		# -----------------------------------
 	end
@@ -86,7 +91,7 @@ class User
 	return where(:created_at => { '$gt' => dataOd, '$lt' => dataDo } ).desc(:created_at)	
   end 
 
-  def self.genPerson(usr, webAddress)
+  def self.genPerson(usr)
 	# pobranie uzytkownika
 	umi = usr
 	# -----------------------------
@@ -131,7 +136,7 @@ class User
 		fanadminsInput.each do |fai|					
 			u = User.findUsrById(fai)
 			fanadmins = Array({
-				u.name => webAddress+"/users/"+u.id
+				u.name => webAddress()+"/users/"+u.id
 			})
 			fanadminArray.push(fanadmins)
 		end
@@ -139,7 +144,7 @@ class User
 	
 	usr = Array({
 		:name => name,
-		:link => webAddress+"/users/"+umi._id+"",
+		:link => webAddress()+"/users/"+umi._id+"",
 		:email => email,
 		:type => type,
 		:fanadmins => fanadminArray,

@@ -4,11 +4,13 @@ production:
       uri: <%= ENV['MONGOLAB_URI'] %>
       options:
         safe: true
+        raise_not_found_error: false
         skip_version_check: true
     writeable:
       uri: <%= ENV['MONGOLAB_URI_STAT'] %>
       options:
         safe: true
+        raise_not_found_error: false
         skip_version_check: true
 
 
@@ -20,6 +22,7 @@ development:
       hosts:
         - localhost:27017
       options:
+        raise_not_found_error: false
         consistency: :eventual
 
     writeable:
@@ -27,6 +30,7 @@ development:
       hosts:
         -  localhost:27017
       options:
+        raise_not_found_error: false
         consistency: strong
 
 
@@ -37,6 +41,7 @@ test:
       hosts:
         - localhost:27017
       options:
+        raise_not_found_error: false
         consistency: :eventual
         max_retries: 1
         retry_interval: 0
@@ -46,6 +51,7 @@ test:
       hosts:
         - localhost:27017
       options:
+        raise_not_found_error: false
         consistency: :strong
         max_retries: 1
         retry_interval: 0
