@@ -84,7 +84,7 @@ class StatController < ApplicationController
 	date = params[:date].to_s
 	@showdate = date[0,10]
 	# udostepnianie widokowi tablicy aktywnosci	
-	@usrsDetails = User.usrsDayDetails(date, $webAddress)
+	@usrsDetails = User.usrsDayDetails(date)
 	# ------------------------------------------
   end
 
