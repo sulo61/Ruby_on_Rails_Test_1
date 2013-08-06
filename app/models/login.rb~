@@ -1,9 +1,0 @@
-class Login
-  include Mongoid::Document
-  
-  field :login, type: String
-  
-  def self.login(login)
-	return find_by("login"=> login )
-  end
-end
