@@ -88,5 +88,4 @@ class StatController < ApplicationController
 	# ------------------------------------------
   end
 
-
 end
