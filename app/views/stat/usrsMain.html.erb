@@ -1,9 +1,9 @@
 <h1>Users</h1>
 
-<form method="GET" action="/stat/usrsMain">
+<form class="form-inline" method="GET" action="/stat/usrsMain">
 <label for="find">Name: </label>
-<%= text_field_tag 'name' %><br>
-<%= submit_tag 'Find', :name => 'find', :class => 'btn btn-normal' %>
+<%= text_field_tag 'name' %>
+<%= submit_tag 'Find', :name => 'find', :class => 'btn btn-default' %>
 </form>
 <%= @lool %>
 <p>-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</p>
@@ -47,9 +47,9 @@
     <tr>
 	<th>Name</th>
 	<th>Created at</th>
-      <th>Link</th>
-      <th>Email</th>
-      <th>Type</th>
+    <th>Link</th>
+    <th>Email</th>
+    <th>Type</th>
 	<th>Fanpages / Admins</th>
 	<th>Clients</th>
 
@@ -58,20 +58,20 @@
   <tbody>
 	<% for usr in @usrs %>
 		<tr>
-		  <td><%= usr[0][1] %></td>
-		  <td><%= (usr[6][1].to_s)[0,10] %></td>
-		  <td><a href=<%=usr[1][1]%> target="_blank">Link</a></td>
-		  <td><%= truncate(usr[2][1], :length => 35) %></td>
-		  <td><%= usr[3][1] %></td>
+		  <td><%= usr[:name] %></td>
+		  <td><%= (usr[:date].to_s)[0,10] %></td>
+		  <td><a href=<%=usr[:link]%> target="_blank">Link</a></td>
+		  <td><%= truncate(usr[:email], :length => 35) %></td>
+		  <td><%= usr[:type] %></td>
 		  
 		  <td>
-			<% usr[4][1].each do |key| %>
+			<% usr[:fanadmins].each do |key| %>
 				<a href=<%= key[0][1] %> target="_blank"><%= key[0][0] %></a>
 				<br>
 			<% end %>
 		  </td>
 		  <td>
-			<% usr[7][1].each do |key| %>
+			<% usr[:cla].each do |key| %>
 				<%= key[0] %> 
 				<br>
 			<% end %>

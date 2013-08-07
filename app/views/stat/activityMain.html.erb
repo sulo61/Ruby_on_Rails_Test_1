@@ -1,11 +1,11 @@
 <h1>Activities</h1>
 
 
-<form method="GET" action="/stat/activityMain">
+<form class="form-inline" method="GET" action="/stat/activityMain">
 <label for="last">Last: </label>
 <%= number_field_tag 'numberOfDays', 7, in: 1...366 %>
-<label for="days" > days</label><br><br>
-<%= submit_tag 'Show', :name => 'last', :class => 'btn btn-small' %>
+<label for="days" > days</label>
+<%= submit_tag 'Show', :name => 'last', :class => 'btn btn-default' %>
 </form>
 <%= @lol %>
 <p>-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</p>

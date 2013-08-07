@@ -1,0 +1,38 @@
+<h1>Event log</h1>
+
+<form class="form-inline" method="GET" action="/stat/eventlogMain">
+	<label for="last" >Last: </label>
+	<%= number_field_tag 'numberOfDays', 10, in: 1...366, :class => 'form-control'%>
+	<label for="days" > days</label>
+	<%= submit_tag 'Show', :name => 'last', :class => 'btn btn-small' %>
+</form>
+
+
+<p>-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</p>
+<h1>Results</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Data</th>
+      <th>Count</th>
+      <th>IDs</th>
+      <th>Type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for ubd in @usrsByDate %>
+
+      <tr>
+		  <td><%= ubd[:date] %></td>
+		  <td><%= ubd[:count] %></td>
+		  <td>
+			<% ubd[:id].each do |i| %>
+				<%= i %><br>
+			<% end %>
+		  </td>
+		  <td><%= ubd.class.name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

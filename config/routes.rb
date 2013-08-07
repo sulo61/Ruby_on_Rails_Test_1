@@ -9,6 +9,8 @@ DsTab7::Application.routes.draw do
   get "stat/usrsMain"
   get "stat/usrsDetails"
 
+  get "stat/eventlogMain"
+
   root :to => "stat#login"
 
   post "stat/login" => "stat#login"

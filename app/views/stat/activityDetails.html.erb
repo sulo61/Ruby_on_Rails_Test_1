@@ -1,6 +1,6 @@
 <h1>Activities: details for <%= @showdate %></h1>
 <br><br>
-<form method="GET" action="/stat/activityMain">
+<form class="form-inline" method="GET" action="/stat/activityMain">
 <%= submit_tag 'Back', :name => 'back', :class => 'btn btn-small' %>
 </form>
 <%= @authorid %>
@@ -30,27 +30,27 @@
 		<% stringIndex = index.to_s %>
 		<tr>
         
-			<td><%= activity[0][1] %></td>
-			<td><a href=<%=activity[1][1]%> target="_blank" >Link</a></td>
-			<td><%= activity[2][1] %></td>
-			<td><%= activity[3][1] %></td>
-			<td><%= activity[4][1] %></td>
+			<td><%= activity[:time] %></td>
+			<td><a href=<%=activity[:link]%> target="_blank" >Link</a></td>
+			<td><%= activity[:discipline] %></td>
+			<td><%= activity[:author_info] %></td>
+			<td><%= activity[:client] %></td>
 			<td>
-			<%= activity[5][1] %>
-			<% if (activity[5][1].to_i>0) %>
+			<%= activity[:enrolled] %>
+			<% if (activity[:enrolled].to_i>0) %>
 				<div class=<%='demo-area-'+index.to_s%> style='float:right'>
   					<button class='btn btn-mini' data-clipboard-target=<%='fe_text_'+stringIndex %> data-clipboard-text='Default clipboard text from attribute' id=<%='d_clip_button_'+stringIndex %> title='Adresy e-mail skopiowane do schowka.' copy-to-clip="true">
     						<b>Copy @'s</b>
   					</button> 
-  					<textarea style='display:none!important;' id=<%='fe_text_'+stringIndex %> ><%= activity[11][1] %></textarea>
+  					<textarea style='display:none!important;' id=<%='fe_text_'+stringIndex %> ><%= activity[:enrolledemails] %></textarea>
 				</div>
 
 			<% end %>
 			</td>
-			<td><%= activity[6][1] %></td>
-			<td><%= truncate(activity[7][1], :length => 30) %></td>
-			<td><%= activity[8][1] %></td>
-			<td><%= activity[10][1] %></td>
+			<td><%= activity[:repeat] %></td>
+			<td><%= truncate(activity[:email], :length => 30) %></td>
+			<td><%= activity[:type] %></td>
+			<td><%= activity[:state] %></td>
 			
 
 	  

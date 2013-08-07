@@ -6,6 +6,7 @@ class User
   field :_type, type: String
   field :fanpage_ids, type: Array
   field :admin_ids, type: Array
+  field :id, type: String
 
   def self.webAddress()
 	return "https://my.dropsport.com"
@@ -142,7 +143,7 @@ class User
 		end
 	end
 	
-	usr = Array({
+	usr = {
 		:name => name,
 		:link => webAddress()+"/users/"+umi._id+"",
 		:email => email,
@@ -153,9 +154,36 @@ class User
 		:cla => cla,
 		:date => umi.created_at,
 
-	})	
+	}
 	# wysylanie tablicy dla widoku	
 	return usr
   end
+
+ 
+  def self.countUsrsByDate(dataOd=DateTime.new(2000,01,01), dataDo=DateTime.now )
+	map = %Q{
+		function(){						
+			var date = (new Date(this.created_at)).toISOString();
+			var dataKey = (date.substring(0,4)+"-"+date.substring(5,7)+"-"+date.substring(8,10));
+			var key = {data: dataKey};
+			emit (key, { "Created": 1, "Id": this._id} );				
+						
+		}
+	}
+	
+	reduce = %Q{
+	  function(key, values) {	    
+	    cCreated = 0;
+	    idArray = new Array()
+	    values.forEach(function(v) {
+		cCreated += v.Created;
+		idArray.push(v.Id);
+	    });
+	    return { "Created": cCreated, "Id": idArray };
+	  }
+	}
+	return self.where(:created_at => { '$gte' => dataOd, '$lte' => dataDo } ).map_reduce(map, reduce).out(inline: true).sort_by { "_id" }.reverse.to_a
+  end
+
 
 end

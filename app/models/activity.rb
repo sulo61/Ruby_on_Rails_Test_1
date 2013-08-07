@@ -124,7 +124,7 @@ class Activity
 			
 		end
 		# tworzenie tablicy z aktywnosciami dla widoku
-		activity = Array({
+		activity = {
 			:time => (ami.created_at.to_s)[11,8],
 			:link => webAddress()+"/activities/"+ami._id+"",
 			:discipline => ami.discipline,
@@ -137,7 +137,7 @@ class Activity
 			:fanPageName => fanPageName,
 			:state => ami.state,
 			:enrolledemails => enrolledemails
-		})
+		}
 		activitiesArray.push(activity)
 		# -----------------------------------
 	end
