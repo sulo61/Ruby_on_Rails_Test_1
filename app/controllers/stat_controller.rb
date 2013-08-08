@@ -105,7 +105,8 @@ class StatController < ApplicationController
 	
 	dateFrom = params[:dateFrom].to_s
 	dateTo = params[:dateTo].to_s
-	
+	@df = dateFrom
+	@dt = dateTo
 
 	if ( dateFrom!="" && dateTo!="" )
 		@datesRange = dateFrom+" <-> "+dateTo+""
