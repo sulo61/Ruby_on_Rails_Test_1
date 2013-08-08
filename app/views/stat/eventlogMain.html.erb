@@ -1,4 +1,4 @@
-<h1>Event log</h1>
+<h2>Event log</h2>
 
 <form class="form-inline" method="GET" action="/stat/eventlogMain">
 	<label for="last" >Last: </label>
@@ -42,15 +42,14 @@
 
 <p>-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</p>
 <%= @log %>
-<h1>Results</h1>
+<h2>Results for <%= @datesRange %></h2>
 
 <table class="table table-striped">
   <thead>
     <tr>
       <th>Users created at</th>
       <th>Count users</th>
-      <th><center><%= @datesRange %></center></th>
-	  <th>User's events</th>
+      <th>User's events</th>
 	  <th>Active users</th>
 	</tr>
   </thead>
@@ -60,7 +59,7 @@
       <tr>
 		  <td><%= ubd[:date] %></td>
 		  <td><%= ubd[:count] %></td>
-		  <td><center>|</center></td>
+		  
 		  <td><%= ubd[:eventSum] %></td>
 		  <td><%= ubd[:activeUsrs] %></td>
       </tr>

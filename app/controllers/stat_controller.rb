@@ -108,11 +108,11 @@ class StatController < ApplicationController
 	
 
 	if ( dateFrom!="" && dateTo!="" )
-		@datesRange = dateFrom+" < - > "+dateTo+""
+		@datesRange = dateFrom+" <-> "+dateTo+""
 		dateTo = ((DateTime.new((dateTo[6,10]).to_i,(dateTo[3,2]).to_i,(dateTo[0,2]).to_i)) + 23.hours + 59.minutes + 59.seconds )
 		checkLastDays(dateFrom,dateTo)
 	else
-		@datesRange = "Ever"
+		@datesRange = "All time"
 		checkLastDays()
 	end
 	@usrsByDate = @@usrsByDate

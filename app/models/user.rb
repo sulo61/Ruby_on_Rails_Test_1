@@ -11,15 +11,6 @@ class User
   def self.webAddress()
 	return "https://my.dropsport.com"
   end  
-  # wyszukiwanie uzytkownika po ID
-  #def self.findUsrById(id="")
-	#return find_by("_id" => id )
-  #end
-
-  # wyszukiwanie uzytkownika bo jego nazwie
-  #def self.findUsrByName(name)
-	#return where("name" => name)
-  #end
 
   # generowanie listy uzytkownikow
   def self.usrDetailsByName(name)
