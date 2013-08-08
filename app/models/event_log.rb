@@ -27,14 +27,14 @@ class EventLog
 		usrArray = []
 
 		idArray.each do |ida|
-			usrArray.push(EventLog.where("client" => "web").first.to_a)
+			sum+=(EventLog.where("user_id" => Moped::BSON::ObjectId(ida)).count)
 		end
 
 		usr = { 
 			:date => u["_id"]["data"],
 			:count => u["value"]["Created"],
 			:id => idArray,
-			:sum => usrArray
+			:sum => sum
 		}	
 		usrs << usr	
 	end

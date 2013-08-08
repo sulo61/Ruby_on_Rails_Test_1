@@ -107,7 +107,7 @@ class StatController < ApplicationController
 	if ( params[:dateFrom].to_s!="" && params[:dateTo].to_s!="" )
 		@datesRange = params[:dateFrom].to_s+" < --- > "+params[:dateTo].to_s+""
 	else
-		@datesRange = ""
+		@datesRange = "Ever"
 	end
 
 
