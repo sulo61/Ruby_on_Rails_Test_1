@@ -6,25 +6,25 @@ class User
   field :_type, type: String
   field :fanpage_ids, type: Array
   field :admin_ids, type: Array
-  field :id, type: String
+  
 
   def self.webAddress()
 	return "https://my.dropsport.com"
   end  
   # wyszukiwanie uzytkownika po ID
-  def self.findUsrById(id="")
-	return find_by("_id" => id )
-  end
+  #def self.findUsrById(id="")
+	#return find_by("_id" => id )
+  #end
 
   # wyszukiwanie uzytkownika bo jego nazwie
-  def self.findUsrByName(name)
-	return where("name" => name)
-  end
+  #def self.findUsrByName(name)
+	#return where("name" => name)
+  #end
 
   # generowanie listy uzytkownikow
   def self.usrDetailsByName(name)
 	usrsArray = Array(nil)
-	User.findUsrByName(name).each do |usbn|
+	User.where("name" => name).each do |usbn|
 		usrsArray.push(User.genPerson(usbn))
 	end
 	return usrsArray
@@ -135,7 +135,7 @@ class User
 			end
 		end
 		fanadminsInput.each do |fai|					
-			u = User.findUsrById(fai)
+			u = User.find_by("_id" => fai )
 			fanadmins = Array({
 				u.name => webAddress()+"/users/"+u.id
 			})

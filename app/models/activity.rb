@@ -97,7 +97,7 @@ class Activity
 		
 		# wyciaganie danych Usera
 		id = ami.author_id.to_s
-		uam = User.findUsrById(id)
+		uam = User.find_by("id" => id)
 		email = " - "
 		type = " - "
 		fanPageName = " - "		
@@ -116,7 +116,7 @@ class Activity
 		
 		enr_ids.each_with_index do |enr, i|
 			if ( i>0 )
-				enrolledemails +=(User.findUsrById(enr).email).to_s
+				enrolledemails +=(User.find_by("id" => enr).email).to_s
 				if ( i!=enr_ids.size-1 )
 					enrolledemails +=", "
 				end
