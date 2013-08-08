@@ -69,7 +69,7 @@ class Activity
   # szczegoly activities dla konkretnego dnia
   def self.activitiesDetails(dateInput)
 	# generowanie poprawnej skladniowo daty dla wyciagniecie szczegolow konkretnego dnia 
-	dateInput = dateInput
+	
 	year = (dateInput[0,4]).to_i
 	month = (dateInput[5,2]).to_i
 	day = (dateInput[8,2]).to_i

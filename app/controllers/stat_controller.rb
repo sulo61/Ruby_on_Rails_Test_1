@@ -1,8 +1,8 @@
 class StatController < ApplicationController
   before_filter :auth, :except => [ :login, :logout ]
 
-  $daysBack = 30
-  
+  DAYS_BACK = 14
+  DT_NOW = DateTime.now
 
   def auth
 	redirect_to :action => "login" if !session[:user_id]
@@ -36,14 +36,14 @@ class StatController < ApplicationController
   end
 
   def activityMain
-	now = DateTime.now
+	
 
 	if !params[:last]
-		@activities = Activity.countActivities(now-$daysBack, now)
+		@activities = Activity.countActivities(DT_NOW-DAYS_BACK, DT_NOW)
 	end
 
 	if params[:last]			
-		@activities = Activity.countActivities(now-params[:numberOfDays].to_i, now)
+		@activities = Activity.countActivities(DT_NOW-params[:numberOfDays].to_i, DT_NOW)
 	end
   end
 
@@ -88,29 +88,34 @@ class StatController < ApplicationController
 	# ------------------------------------------
   end
 
-
-
-
-
-  def eventlogMain
-	now = DateTime.now
-	if !params[:last]		
-		usrsByDate = EventLog.countUsrsByDate(now-$daysBack, now)
-	end
-	if params[:last]		
-		usrsByDate = EventLog.countUsrsByDate(now-params[:numberOfDays].to_i, now)
-		
-	end
-	@usrsByDate = usrsByDate
-
+  def eventlogMain()
 	
-	if ( params[:dateFrom].to_s!="" && params[:dateTo].to_s!="" )
-		@datesRange = params[:dateFrom].to_s+" < --- > "+params[:dateTo].to_s+""
+	
+	def checkLastDays(df=DateTime.new(2013-07-30), dt=DT_NOW)
+		
+		if !params[:last]		
+			@@usrsByDate = EventLog.countUsrsByDate(DT_NOW-DAYS_BACK, DT_NOW, df, dt)
+			@last = DAYS_BACK
+		end
+		if params[:last]		
+			@@usrsByDate = EventLog.countUsrsByDate(DT_NOW-params[:numberOfDays].to_i, DT_NOW, df, dt)
+			@last = params[:numberOfDays].to_i
+		end
+	end
+	
+	dateFrom = params[:dateFrom].to_s
+	dateTo = params[:dateTo].to_s
+	
+
+	if ( dateFrom!="" && dateTo!="" )
+		@datesRange = dateFrom+" < - > "+dateTo+""
+		dateTo = ((DateTime.new((dateTo[6,10]).to_i,(dateTo[3,2]).to_i,(dateTo[0,2]).to_i)) + 23.hours + 59.minutes + 59.seconds )
+		checkLastDays(dateFrom,dateTo)
 	else
 		@datesRange = "Ever"
+		checkLastDays()
 	end
-
-
+	@usrsByDate = @@usrsByDate
 
   end
 

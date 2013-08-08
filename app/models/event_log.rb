@@ -8,14 +8,13 @@ class EventLog
   belongs_to :activity, inverse_of: nil
   field :client, type: String
 
-  def self.countUsrsByDate(dataOd=DateTime.new(2000,01,01), dataDo=DateTime.now )
-	eventLogUsrs = User.countUsrsByDate(dataOd, dataDo)
-	usrs = []
-
-	eventLogUsrs.each do |u|
+  def self.countUsrsByDate(usrDateFrom=DateTime.new(2000,01,01), usrDateTo=DateTime.new(2013-01-01), actDateFrom, actDateTo )
+	eventLogUsrs = User.countUsrsByDate(usrDateFrom, usrDateTo)
+	
+	eventLogUsrs.map do |u|
 		idArray = []
 		id = u["value"]["Id"]
-		if ( id.kind_of?(Array) )
+		if id.kind_of? Array
 			id.each do |i|
 				idArray.push(i)
 			end	
@@ -23,22 +22,23 @@ class EventLog
 			idArray.push(id)
 		end
 		idArray = idArray.flatten
-		sum = 0
-		usrArray = []
+		eventSum = 0
+		activeUsrs = 0
 
 		idArray.each do |ida|
-			sum+=(EventLog.where("user_id" => Moped::BSON::ObjectId(ida)).count)
+			tmp = (EventLog.where(:created_at => { '$gte' => actDateFrom, '$lte' => actDateTo } ).where("user_id" => Moped::BSON::ObjectId(ida)).count)
+			eventSum += tmp
+			activeUsrs += 1 if tmp>0
 		end
 
-		usr = { 
+		{ 
 			:date => u["_id"]["data"],
-			:count => u["value"]["Created"],
+			:count => (u["value"]["Created"]).to_i,
 			:id => idArray,
-			:sum => sum
-		}	
-		usrs << usr	
+			:eventSum => eventSum,
+			:activeUsrs => activeUsrs
+		}		
 	end
-	return usrs
   end
 
 end
