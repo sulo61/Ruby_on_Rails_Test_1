@@ -94,14 +94,24 @@ class StatController < ApplicationController
 
   def eventlogMain
 	now = DateTime.now
-	if !params[:last]
-		
-		@usrsByDate = EventLog.countUsrsByDate(now-$daysBack, now)
+	if !params[:last]		
+		usrsByDate = EventLog.countUsrsByDate(now-$daysBack, now)
 	end
-	if params[:last]
+	if params[:last]		
+		usrsByDate = EventLog.countUsrsByDate(now-params[:numberOfDays].to_i, now)
 		
-		@usrsByDate = EventLog.countUsrsByDate(now-params[:numberOfDays].to_i, now)
 	end
+	@usrsByDate = usrsByDate
+
+	
+	if ( params[:dateFrom].to_s!="" && params[:dateTo].to_s!="" )
+		@datesRange = params[:dateFrom].to_s+" < --- > "+params[:dateTo].to_s+""
+	else
+		@datesRange = ""
+	end
+
+
+
   end
 
 end

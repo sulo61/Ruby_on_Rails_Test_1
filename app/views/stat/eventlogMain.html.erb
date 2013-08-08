@@ -6,9 +6,42 @@
 	<label for="days" > days</label>
 	<%= submit_tag 'Show', :name => 'last', :class => 'btn btn-small' %>
 </form>
+<br><br>
 
+<form class="form-inline" method="GET" action="/stat/eventlogMain">
+<table class="table table-bordered">
+	<thread>
+		<tr>
+			<th><label for="od" >Od: </label></th>
+			<th><label for="od" >Do: </label></th>
+		</tr>
+	</thread>
+	<tbody>
+		<tr>
+			<td>
+				<div class="input-append date" id="dateFrom" data-date-format="dd-mm-yyyy">
+					<input class="span2" name="dateFrom" size="16" type="text" readonly><span class="add-on"><i class="icon-th"></i></span>
+				</div>
+				<script type="text/javascript">
+				  $('#dateFrom').datepicker();
+				</script>
+			</td>
+			<td>
+				<div class="input-append date" id="dateTo" data-date-format="dd-mm-yyyy">
+					<input class="span2" size="16" name="dateTo" type="text" readonly><span class="add-on"><i class="icon-th"></i></span>
+				</div>
+				<script type="text/javascript">
+				  $('#dateTo').datepicker();
+				</script>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<%= submit_tag 'Show', :name => 'getDate', :class => 'btn btn-small' %>
+</form>
 
 <p>-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</p>
+<%= @log %>
 <h1>Results</h1>
 
 <table class="table table-striped">
@@ -17,8 +50,8 @@
       <th>Data</th>
       <th>Count</th>
       <th>IDs</th>
-      <th>Type</th>
-    </tr>
+      <th><%= @datesRange %></th>
+	</tr>
   </thead>
   <tbody>
     <% for ubd in @usrsByDate %>
@@ -31,7 +64,7 @@
 				<%= i %><br>
 			<% end %>
 		  </td>
-		  <td><%= ubd.class.name %></td>
+		  <td><%= ubd[:sum] %></td>
       </tr>
     <% end %>
   </tbody>
