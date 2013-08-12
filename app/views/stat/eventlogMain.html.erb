@@ -1,4 +1,5 @@
 <h2>Event log</h2>
+<br>
 
 <form class="form-inline" method="GET" action="/stat/eventlogMain">
 	<label for="last" >Users created at last: </label>
@@ -42,22 +43,24 @@
 
 <p>-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</p>
 <%= @log %>
-<h2>Results for <%= @datesRange %></h2>
-
+<h2>Events: <%= @datesRange %></h2>
+<br>
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>Usrs created at</th>
-      <th>Count usrs</th>
+	  <th><center>Users:</center></th>
+      <th>Created at</th>
+      <th>All</th>
+	  <th>Active</th>
+	  <th>All / Act</th>
+
 	  <th><center>Events:</center></th>
       <th>Sum</th>
 	  <th>W</th>
 	  <th>A</th>
 	  <th>I</th>
 	  <th>U</th>
-	  <th></th>
-	  <th>Act usrs</th>
-	  <th>All / Act</th>
+
 
 	</tr>
   </thead>
@@ -65,17 +68,18 @@
     <% for ubd in @usrsByDate %>
 
       <tr>
+		  <td><center>|</center></td>
 		  <td><%= ubd[:date] %></td>
 		  <td><%= ubd[:count] %></td>
+		  <td><%= ubd[:activeUsrs] %></td>
+		  <td><%= ubd[:percentActiveUsrs] %></td>
 		  <td><center>|</cemter></td>
 		  <td><%= ubd[:eventSum] %></td>
 		  <td><%= ubd[:webEvent] %></td>
 		  <td><%= ubd[:androidEvent] %></td>
 		  <td><%= ubd[:iosEvent] %></td>
 		  <td><%= ubd[:unknownEvent] %></td>
-		  <td><center>|</cemter></td>
-		  <td><%= ubd[:activeUsrs] %></td>
-		  <td><%= ubd[:percentActiveUsrs] %></td>
+
       </tr>
     <% end %>
   </tbody>
