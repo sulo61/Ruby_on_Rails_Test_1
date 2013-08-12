@@ -1,7 +1,7 @@
 <h2>Event log</h2>
 
 <form class="form-inline" method="GET" action="/stat/eventlogMain">
-	<label for="last" >Last: </label>
+	<label for="last" >Users created at last: </label>
 	<%= number_field_tag 'numberOfDays', @last, in: 1...366, :class => 'form-control'%>
 	<label for="days" > days</label>
 	<%= submit_tag 'Show', :name => 'last', :class => 'btn btn-small' %>
@@ -47,10 +47,18 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>Users created at</th>
-      <th>Count users</th>
-      <th>User's events</th>
-	  <th>Active users</th>
+      <th>Usrs created at</th>
+      <th>Count usrs</th>
+	  <th><center>Events:</center></th>
+      <th>Sum</th>
+	  <th>W</th>
+	  <th>A</th>
+	  <th>I</th>
+	  <th>U</th>
+	  <th></th>
+	  <th>Act usrs</th>
+	  <th>All / Act</th>
+
 	</tr>
   </thead>
   <tbody>
@@ -59,9 +67,15 @@
       <tr>
 		  <td><%= ubd[:date] %></td>
 		  <td><%= ubd[:count] %></td>
-		  
+		  <td><center>|</cemter></td>
 		  <td><%= ubd[:eventSum] %></td>
+		  <td><%= ubd[:webEvent] %></td>
+		  <td><%= ubd[:androidEvent] %></td>
+		  <td><%= ubd[:iosEvent] %></td>
+		  <td><%= ubd[:unknownEvent] %></td>
+		  <td><center>|</cemter></td>
 		  <td><%= ubd[:activeUsrs] %></td>
+		  <td><%= ubd[:percentActiveUsrs] %></td>
       </tr>
     <% end %>
   </tbody>
