@@ -8,10 +8,11 @@ class EventLog
   belongs_to :activity, inverse_of: nil
   field :client, type: String
 
-  def self.countUsrsByDate(usrDateFrom=DateTime.new(2000,01,01), usrDateTo=DateTime.new(2013-01-01), actDateFrom, actDateTo )
+  def self.countUsrsByDate(usrDateFrom=DateTime.new(2013,06,01), usrDateTo=DateTime.now, actDateFrom=DateTime.new(2013,06,01), actDateTo=DateTime.now, xdays=0 )
 	eventLogUsrs = User.countUsrsByDate(usrDateFrom, usrDateTo)
-	
+
 	eventLogUsrs.map do |u|
+    udf = usrDateFrom + (xdays.to_i).days if (xdays > 0)
 		idArray = []
 		id = u["value"]["Id"]
 		if id.kind_of? Array
@@ -31,9 +32,11 @@ class EventLog
 		client = "-"
 
 		idArray.each do |ida|
-			events = (EventLog.where(:created_at => { '$gte' => actDateFrom, '$lte' => actDateTo } ).where("user_id" => Moped::BSON::ObjectId(ida)))
-			
-			
+      if ( xdays == 0 )
+			  events = (EventLog.where(:created_at => { '$gte' => actDateFrom, '$lte' => actDateTo } ).where("user_id" => Moped::BSON::ObjectId(ida)))
+      else
+        events = (EventLog.where(:created_at => { '$gte' => usrDateFrom, '$lte' => udf } ).where("user_id" => Moped::BSON::ObjectId(ida)))
+      end
 			eventsCount = events.size
 			eventSum += eventsCount
 			if ( eventsCount>0 )

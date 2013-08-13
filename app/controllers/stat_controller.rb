@@ -2,6 +2,7 @@ class StatController < ApplicationController
   before_filter :auth, :except => [ :login, :logout ]
 
   DAYS_BACK = 14
+  EVENT_DAYS_BACK = 7
   DT_NOW = DateTime.now
 
   def auth
@@ -88,36 +89,48 @@ class StatController < ApplicationController
 	# ------------------------------------------
   end
 
-  def eventlogMain()
-	
-	
-	def checkLastDays(df=DateTime.new(2013-07-30), dt=DT_NOW)
-		
-		if !params[:last]		
-			@@usrsByDate = EventLog.countUsrsByDate(DT_NOW-DAYS_BACK, DT_NOW, df, dt)
-			@last = DAYS_BACK
-		end
-		if params[:last]		
-			@@usrsByDate = EventLog.countUsrsByDate(DT_NOW-params[:numberOfDays].to_i, DT_NOW, df, dt)
-			@last = params[:numberOfDays].to_i
-		end
-	end
-	
-	dateFrom = params[:dateFrom].to_s
-	dateTo = params[:dateTo].to_s
-	@df = dateFrom
-	@dt = dateTo
 
-	if ( dateFrom!="" && dateTo!="" )
-		@datesRange = dateFrom+" <-> "+dateTo+""
-		dateTo = ((DateTime.new((dateTo[6,10]).to_i,(dateTo[3,2]).to_i,(dateTo[0,2]).to_i)) + 23.hours + 59.minutes + 59.seconds )
-		checkLastDays(dateFrom,dateTo)
-	else
-		@datesRange = "All"
-		checkLastDays()
-	end
-	@usrsByDate = @@usrsByDate
+  def eventlogMain()
+
+
+    def checkLastDays(df=DateTime.new(2013-07-30), dt=DT_NOW, xdays = 0)
+
+      if !params[:last]
+        @@usrsByDate = EventLog.countUsrsByDate(DT_NOW-EVENT_DAYS_BACK, DT_NOW, df, dt, xdays)
+        @last = EVENT_DAYS_BACK
+      end
+      if params[:last]
+        @@usrsByDate = EventLog.countUsrsByDate(DT_NOW-params[:numberOfDays].to_i, DT_NOW, df, dt, xdays)
+        @last = params[:numberOfDays].to_i
+      end
+    end
+
+    dateFrom = params[:dateFrom].to_s
+    dateTo = params[:dateTo].to_s
+    @df = dateFrom
+    @dt = dateTo
+    @xdays = params[:numberOfXDays]
+
+    if ( params[:getDate] && dateFrom!="" && dateTo!="" )
+      @datesRange = dateFrom+" <-> "+dateTo+""
+      dateTo = ((DateTime.new((dateTo[6,10]).to_i,(dateTo[3,2]).to_i,(dateTo[0,2]).to_i)) + 23.hours + 59.minutes + 59.seconds )
+      checkLastDays(dateFrom,dateTo)
+
+    elsif ( params[:getXDate] &&  @xdays!="" )
+      @datesRange = @xdays + " days after user create"
+      #@xdays = params[:numberOfXDays]
+      checkLastDays(nil,nil,@xdays.to_i)
+
+
+    else
+      @datesRange = "All"
+      @xdays = 2
+      checkLastDays()
+    end
+
+    @usrsByDate = @@usrsByDate
 
   end
+
 
 end
