@@ -7,38 +7,33 @@
 	<label for="days" > days</label>
 	<%= submit_tag 'Show', :name => 'last', :class => 'btn btn-small' %>
 </form>
-<br><br>
+<br>
 
 <form class="form-inline" method="GET" action="/stat/eventlogMainRange">
-<table class="table table-hover" style="width: 220px; float:left; margin:0px 50px 0px 50px;">
+  <label for="from" >From: </label>
+  <div class="input-append date" id="dateFrom" data-date-format="dd-mm-yyyy">
+    <input class="span2" name="dateFrom" size="16" value="<%= @adf %>" type="text" readonly><span class="add-on"><i class="icon-th"></i></span>
+  </div>
+  <script type="text/javascript">
+    $('#dateFrom').datepicker();
+  </script>
 
-    <tr><td><p>From: </p></td></tr>
-	<tr><td>
-            <div class="input-append date" id="dateFrom" data-date-format="dd-mm-yyyy">
-                <input class="span2" name="dateFrom" size="16" value="<%= @adf %>" type="text" readonly><span class="add-on"><i class="icon-th"></i></span>
-            </div>
-            <script type="text/javascript">
-              $('#dateFrom').datepicker();
-            </script>
-    </td></tr>
-    <tr><td><p>To: </p></td></tr>
-	<tr><td>
-            <div class="input-append date" id="dateTo" data-date-format="dd-mm-yyyy">
-                <input class="span2" size="16" name="dateTo" value="<%= @adt %>" type="text" readonly><span class="add-on"><i class="icon-th"></i></span>
-            </div>
-            <script type="text/javascript">
-              $('#dateTo').datepicker();
-            </script>
-    </td></tr>
-    <tr><td><%= submit_tag 'Find events', :name => 'getDate', :class => 'btn btn-small'%></td></tr>
-</table>
+  <label for="from" >To: </label>
+  <div class="input-append date" id="dateTo" data-date-format="dd-mm-yyyy">
+    <input class="span2" size="16" name="dateTo" value="<%= @adt %>" type="text" readonly><span class="add-on"><i class="icon-th"></i></span>
+  </div>
+  <script type="text/javascript">
+      $('#dateTo').datepicker();
+  </script>
+
+  <%= submit_tag 'Find events', :name => 'getDate', :class => 'btn btn-small'%>
 </form>
+
 <form class="form-inline" method="GET" action="/stat/eventlogMainXday">
-<table class="table table-hover" style="width: 220px; margin:0px 50px 0px 50px;">
-  <tr><td><%= number_field_tag 'numberOfXDays', @xdays, in: 1...366, :class => 'form-control'%></td></tr>
-  <tr><td>days after created user</td></tr>
-  <tr><td><%= submit_tag 'Find events', :name => 'getXDate', :class => 'btn btn-small'%></td></tr>
-</table>
+
+  <%= number_field_tag 'numberOfXDays', @xdays, in: 1...366, :class => 'form-control'%>
+  <label for="from" > days after created user </label>
+  <%= submit_tag 'Find events', :name => 'getXDate', :class => 'btn btn-small'%>
 </form>
 <div style="clear:both"></div>
 <p>-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</p>

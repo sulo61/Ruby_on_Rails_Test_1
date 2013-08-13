@@ -133,7 +133,7 @@ class StatController < ApplicationController
         @xdays = @@EL_XDAY
         @adf = @@EL_DF
         @adt = @@EL_DT
-        @datesRange = @xdays+" days after user created"
+        @datesRange = @xdays+" days after created user"
         render "eventlogMain"
     end
 
