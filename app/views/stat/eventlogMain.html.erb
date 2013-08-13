@@ -49,6 +49,10 @@
 	  <th>Active</th>
 	  <th>All / Act</th>
 
+      <th><center>Bookmarks:</center></th>
+      <th>All</th>
+      <th>Act Usrs</th>
+
 	  <th><center>Events:</center></th>
       <th>Sum</th>
 	  <th>W</th>
@@ -68,6 +72,9 @@
 		  <td><%= ubd[:count] %></td>
 		  <td><%= ubd[:activeUsrs] %></td>
 		  <td><%= ubd[:percentActiveUsrs] %></td>
+          <td><center>|</cemter></td>
+          <td><%= ubd[:bookmarkSum] %></td>
+          <td><%= ubd[:activeBook] %></td>
 		  <td><center>|</cemter></td>
 		  <td><%= ubd[:eventSum] %></td>
 		  <td><%= ubd[:webEvent] %></td>

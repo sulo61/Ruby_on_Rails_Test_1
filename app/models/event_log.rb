@@ -37,7 +37,9 @@ class EventLog
       end
       idArray = idArray.flatten
       eventSum = 0
+      bookmarksSum = 0
       activeUsrs = 0
+      activeBook = 0
       aEvent = 0
       wEvent = 0
       iEvent = 0
@@ -47,12 +49,19 @@ class EventLog
       idArray.each do |ida|
         if ( xdays.to_i > 0)
           events = (EventLog.where(:created_at => { '$gte' => udf, '$lte' => udt } ).where("user_id" => Moped::BSON::ObjectId(ida)))
+          bookmarks = (Bookmark.where(:created_at => { '$gte' => udf, '$lte' => udt } ).where("user_id" => Moped::BSON::ObjectId(ida)))
         else
           events = (EventLog.where(:created_at => { '$gte' => actDateFrom, '$lte' => actDateTo } ).where("user_id" => Moped::BSON::ObjectId(ida)))
+          bookmarks = (Bookmark.where(:created_at => { '$gte' => actDateFrom, '$lte' => actDateTo } ).where("user_id" => Moped::BSON::ObjectId(ida)))
         end
 
         eventsCount = events.size
+        bookmarksCount = bookmarks.size
+
+        bookmarksSum += bookmarksCount
         eventSum += eventsCount
+
+        activeBook+= 1 if (bookmarksCount>0)
         if ( eventsCount>0 )
           activeUsrs += 1
           events.each do |fc|
@@ -87,7 +96,9 @@ class EventLog
         :iosEvent => iEvent,
         :unknownEvent => uEvent,
         :activeUsrs => activeUsrs,
-        :percentActiveUsrs => percentActiveUsrs
+        :percentActiveUsrs => percentActiveUsrs,
+        :bookmarkSum =>  bookmarksSum,
+        :activeBook =>  activeBook
 
 
       }
