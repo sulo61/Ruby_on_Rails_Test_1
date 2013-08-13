@@ -6,12 +6,9 @@
       <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/stat/panel.html.erb" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/stat/results.html.erb" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/stat/usrs.html.erb" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/log/development.log" afterPath="$PROJECT_DIR$/log/development.log" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/event_log.rb" afterPath="$PROJECT_DIR$/app/models/event_log.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/stat/eventlogMain.html.erb" afterPath="$PROJECT_DIR$/app/views/stat/eventlogMain.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/routes.rb" afterPath="$PROJECT_DIR$/config/routes.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/stat_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/stat_controller.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ds_tab_7.iws" />
@@ -20,8 +17,8 @@
     <file path="/a.rxml" changelist="1e3ae673-c461-4aba-935e-101657c0736d" time="1376319612163" ignored="false" />
     <file path="/a.coffee" changelist="1e3ae673-c461-4aba-935e-101657c0736d" time="1376319614178" ignored="false" />
     <file path="/stat_controller.rb" changelist="1e3ae673-c461-4aba-935e-101657c0736d" time="1376398707045" ignored="false" />
-    <file path="/eventlogMain.html.erb" changelist="1e3ae673-c461-4aba-935e-101657c0736d" time="1376395178365" ignored="false" />
-    <file path="/event_log.rb" changelist="1e3ae673-c461-4aba-935e-101657c0736d" time="1376398096457" ignored="false" />
+    <file path="/eventlogMain.html.erb" changelist="1e3ae673-c461-4aba-935e-101657c0736d" time="1376400131956" ignored="false" />
+    <file path="/event_log.rb" changelist="1e3ae673-c461-4aba-935e-101657c0736d" time="1376401055852" ignored="false" />
     <file path="/routes.rb" changelist="1e3ae673-c461-4aba-935e-101657c0736d" time="1376395199885" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -47,10 +44,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="stat_controller.rb" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="stat_controller.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/stat_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="135" column="54" selection-start="3799" selection-end="3799" vertical-scroll-proportion="1.6896552">
+            <state line="69" column="17" selection-start="1795" selection-end="1795" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -65,10 +62,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="event_log.rb" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="event_log.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/models/event_log.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="41" selection-start="510" selection-end="510" vertical-scroll-proportion="0.0">
+            <state line="89" column="45" selection-start="2424" selection-end="2424" vertical-scroll-proportion="0.58549225">
               <folding />
             </state>
           </provider>
@@ -77,7 +74,7 @@
       <file leaf-file-name="eventlogMain.html.erb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/stat/eventlogMain.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="45" column="27" selection-start="2185" selection-end="2196" vertical-scroll-proportion="-18.75">
+            <state line="62" column="0" selection-start="2500" selection-end="2500" vertical-scroll-proportion="-4.375">
               <folding />
             </state>
           </provider>
@@ -106,17 +103,18 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/views/stat/eventlogMain.html.erb" />
         <option value="$PROJECT_DIR$/config/routes.rb" />
-        <option value="$PROJECT_DIR$/app/models/event_log.rb" />
         <option value="$PROJECT_DIR$/app/controllers/stat_controller.rb" />
+        <option value="$PROJECT_DIR$/app/views/stat/eventlogMain.html.erb" />
+        <option value="$PROJECT_DIR$/app/models/event_log.rb" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="24" />
-    <option name="width" value="1366" />
-    <option name="height" value="744" />
+    <option name="x" value="48" />
+    <option name="y" value="109" />
+    <option name="width" value="1301" />
+    <option name="height" value="714" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -486,14 +484,14 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="24" width="1366" height="744" extended-state="6" />
+    <frame x="48" y="109" width="1301" height="714" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14166667" sideWeight="0.6785714" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14900398" sideWeight="0.6785714" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -614,23 +612,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/event_log.rb">
+    <entry file="file://$PROJECT_DIR$/app/controllers/stat_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="41" selection-start="510" selection-end="510" vertical-scroll-proportion="0.0">
+        <state line="69" column="17" selection-start="1795" selection-end="1795" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/stat/eventlogMain.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="45" column="27" selection-start="2185" selection-end="2196" vertical-scroll-proportion="-18.75">
+        <state line="62" column="0" selection-start="2500" selection-end="2500" vertical-scroll-proportion="-4.375">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/stat_controller.rb">
+    <entry file="file://$PROJECT_DIR$/app/models/event_log.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="135" column="54" selection-start="3799" selection-end="3799" vertical-scroll-proportion="1.6896552">
+        <state line="89" column="45" selection-start="2424" selection-end="2424" vertical-scroll-proportion="0.58549225">
           <folding />
         </state>
       </provider>

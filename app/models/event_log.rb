@@ -12,7 +12,20 @@ class EventLog
 	eventLogUsrs = User.countUsrsByDate(usrDateFrom, usrDateTo)
 
 	eventLogUsrs.map do |u|
-    udf = usrDateFrom + (xdays.to_i).days
+    #udf = u["_id"]["data"] + (xdays.to_i).days
+    if ( xdays.to_i > 0 )
+      udf = DateTime.new(
+          ((u["_id"]["data"]).to_s[0,4]).to_i,
+          ((u["_id"]["data"]).to_s[5,2]).to_i,
+          ((u["_id"]["data"]).to_s[8,2]).to_i
+      )
+      udt = DateTime.new(
+          ((u["_id"]["data"]).to_s[0,4]).to_i,
+          ((u["_id"]["data"]).to_s[5,2]).to_i,
+          ((u["_id"]["data"]).to_s[8,2]).to_i
+      ) + (xdays.to_i).days + 23.hours + 59.minutes + 59.seconds
+    end
+    #DateTime.new( (u["_id"]["data"]).to_s  )
 		idArray = []
 		id = u["value"]["Id"]
 		if id.kind_of? Array
@@ -32,10 +45,11 @@ class EventLog
 		client = "-"
 
 		idArray.each do |ida|
-      if ( xdays == 0 )
+      if ( xdays.to_i == 0 )
 			  events = (EventLog.where(:created_at => { '$gte' => actDateFrom, '$lte' => actDateTo } ).where("user_id" => Moped::BSON::ObjectId(ida)))
-      else
-        events = (EventLog.where(:created_at => { '$gte' => usrDateFrom, '$lte' => udf } ).where("user_id" => Moped::BSON::ObjectId(ida)))
+      end
+      if ( xdays.to_i > 0)
+        events = (EventLog.where(:created_at => { '$gte' => udf, '$lte' => udt } ).where("user_id" => Moped::BSON::ObjectId(ida)))
       end
 			eventsCount = events.size
 			eventSum += eventsCount
@@ -63,7 +77,7 @@ class EventLog
 		end
 		count = (u["value"]["Created"]).to_i
 		percentActiveUsrs = (((activeUsrs.to_f / count.to_f) * 100 ).to_s )[0,5]+" %"
-		{ 
+    {
 			:date => u["_id"]["data"],
 			:count =>  count,
 			:id => idArray,
@@ -74,6 +88,8 @@ class EventLog
 			:unknownEvent => uEvent,
 			:activeUsrs => activeUsrs,
 			:percentActiveUsrs => percentActiveUsrs
+
+
 		}		
 	end
   end
