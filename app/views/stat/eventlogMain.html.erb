@@ -9,7 +9,7 @@
 </form>
 <br><br>
 
-<form class="form-inline" method="GET" action="/stat/eventlogMain">
+<form class="form-inline" method="GET" action="/stat/eventlogMainRange">
 <table class="table table-hover" style="width: 220px; float:left; margin:0px 50px 0px 50px;">
 
     <tr><td><p>From: </p></td></tr>
@@ -33,7 +33,7 @@
     <tr><td><%= submit_tag 'Find events', :name => 'getDate', :class => 'btn btn-small'%></td></tr>
 </table>
 </form>
-<form class="form-inline" method="GET" action="/stat/eventlogMain">
+<form class="form-inline" method="GET" action="/stat/eventlogMainXday">
 <table class="table table-hover" style="width: 220px; margin:0px 50px 0px 50px;">
   <tr><td><%= number_field_tag 'numberOfXDays', @xdays, in: 1...366, :class => 'form-control'%></td></tr>
   <tr><td>days after created user</td></tr>

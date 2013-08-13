@@ -8,11 +8,11 @@ class EventLog
   belongs_to :activity, inverse_of: nil
   field :client, type: String
 
-  def self.countUsrsByDate(usrDateFrom=DateTime.new(2013,06,01), usrDateTo=DateTime.now, actDateFrom=DateTime.new(2013,06,01), actDateTo=DateTime.now, xdays=0 )
+  def self.countUsrsByDate(usrDateFrom=DateTime.new(2013,07,21), usrDateTo=DateTime.now, actDateFrom=DateTime.new(2013,07,25), actDateTo=DateTime.now, xdays=0 )
 	eventLogUsrs = User.countUsrsByDate(usrDateFrom, usrDateTo)
 
 	eventLogUsrs.map do |u|
-    udf = usrDateFrom + (xdays.to_i).days if (xdays > 0)
+    udf = usrDateFrom + (xdays.to_i).days
 		idArray = []
 		id = u["value"]["Id"]
 		if id.kind_of? Array
