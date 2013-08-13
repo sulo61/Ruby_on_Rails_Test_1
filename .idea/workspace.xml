@@ -8,8 +8,6 @@
       <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/stat/usrs.html.erb" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/log/development.log" afterPath="$PROJECT_DIR$/log/development.log" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/event_log.rb" afterPath="$PROJECT_DIR$/app/models/event_log.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/stat/eventlogMain.html.erb" afterPath="$PROJECT_DIR$/app/views/stat/eventlogMain.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/stat_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/stat_controller.rb" />
     </list>
     <ignored path="ds_tab_7.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -18,7 +16,7 @@
     <file path="/a.coffee" changelist="1e3ae673-c461-4aba-935e-101657c0736d" time="1376319614178" ignored="false" />
     <file path="/stat_controller.rb" changelist="1e3ae673-c461-4aba-935e-101657c0736d" time="1376402908220" ignored="false" />
     <file path="/eventlogMain.html.erb" changelist="1e3ae673-c461-4aba-935e-101657c0736d" time="1376402960055" ignored="false" />
-    <file path="/event_log.rb" changelist="1e3ae673-c461-4aba-935e-101657c0736d" time="1376401055852" ignored="false" />
+    <file path="/event_log.rb" changelist="1e3ae673-c461-4aba-935e-101657c0736d" time="1376403476919" ignored="false" />
     <file path="/routes.rb" changelist="1e3ae673-c461-4aba-935e-101657c0736d" time="1376395199885" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -47,7 +45,7 @@
       <file leaf-file-name="stat_controller.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/stat_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="135" column="54" selection-start="3799" selection-end="3799" vertical-scroll-proportion="0.0">
+            <state line="125" column="44" selection-start="3530" selection-end="3530" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -62,19 +60,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="event_log.rb" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="event_log.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/models/event_log.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="66" column="32" selection-start="2123" selection-end="2123" vertical-scroll-proportion="0.0">
+            <state line="49" column="12" selection-start="1576" selection-end="1576" vertical-scroll-proportion="0.8374384">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="eventlogMain.html.erb" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="eventlogMain.html.erb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/stat/eventlogMain.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="4" selection-start="346" selection-end="346" vertical-scroll-proportion="0.23076923">
+            <state line="9" column="4" selection-start="346" selection-end="346" vertical-scroll-proportion="-5.625">
               <folding />
             </state>
           </provider>
@@ -104,9 +102,9 @@
     <option name="changedFiles">
       <list>
         <option value="$PROJECT_DIR$/config/routes.rb" />
-        <option value="$PROJECT_DIR$/app/models/event_log.rb" />
         <option value="$PROJECT_DIR$/app/controllers/stat_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/stat/eventlogMain.html.erb" />
+        <option value="$PROJECT_DIR$/app/models/event_log.rb" />
       </list>
     </option>
   </component>
@@ -611,23 +609,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/event_log.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="66" column="32" selection-start="2123" selection-end="2123" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/stat_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="135" column="54" selection-start="3799" selection-end="3799" vertical-scroll-proportion="0.0">
+        <state line="125" column="44" selection-start="3530" selection-end="3530" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/stat/eventlogMain.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="4" selection-start="346" selection-end="346" vertical-scroll-proportion="0.23076923">
+        <state line="9" column="4" selection-start="346" selection-end="346" vertical-scroll-proportion="-5.625">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/event_log.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="49" column="12" selection-start="1576" selection-end="1576" vertical-scroll-proportion="0.8374384">
           <folding />
         </state>
       </provider>

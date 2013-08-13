@@ -45,12 +45,12 @@ class EventLog
       client = "-"
 
       idArray.each do |ida|
-        if ( xdays.to_i == 0 )
-          events = (EventLog.where(:created_at => { '$gte' => actDateFrom, '$lte' => actDateTo } ).where("user_id" => Moped::BSON::ObjectId(ida)))
-        end
         if ( xdays.to_i > 0)
           events = (EventLog.where(:created_at => { '$gte' => udf, '$lte' => udt } ).where("user_id" => Moped::BSON::ObjectId(ida)))
+        else
+          events = (EventLog.where(:created_at => { '$gte' => actDateFrom, '$lte' => actDateTo } ).where("user_id" => Moped::BSON::ObjectId(ida)))
         end
+
         eventsCount = events.size
         eventSum += eventsCount
         if ( eventsCount>0 )
