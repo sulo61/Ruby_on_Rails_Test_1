@@ -93,25 +93,12 @@ class Activity
 
   def self.activitiesDetails(dateInput)
     date = DateTime.new((dateInput[0,4]).to_i, (dateInput[5,2]).to_i,(dateInput[8,2]).to_i)
-    # ---------------------------------
 
-    # pobranie tablicy aktywnosci
-    activityModelInput = Activity.activityDayDetails(date, date + 23.hours + 59.minutes + 59.seconds )
-    # -----------------------------
-
-    # tworzenie prototypow tablic dla aktywnosci
     activitiesArray = Array.new()
     activity = Array.new()
     # ---------------------------
 
-    activityModelInput.each do |ami|
-
-      # sprawdzanie danych aktywnosci
-      if (ami.repeat==nil)
-        repeat = "false"
-      else
-        repeat = "true"
-      end
+    Activity.activityDayDetails(date, date + 23.hours + 59.minutes + 59.seconds ).map do |ami|
 
       # wyciaganie danych Usera
       id = ami.author_id.to_s
@@ -120,15 +107,16 @@ class Activity
       type = " - "
       fanPageName = " - "
       enrolledemails = ""
-      if ( uam._id.to_s == id )
-        if ( uam._type.to_s == "User" )
-          type = "U"
-          email = uam.email
-          enrolledemails = email+", "
-        else
-          type = "F"
-        end
+
+
+      if ( uam._type.to_s == "User" )
+        type = "U"
+        email = uam.email
+        enrolledemails = email+", "
+      else
+        type = "F"
       end
+
 
       enr_ids = ami.enrolled_ids
 
@@ -142,25 +130,21 @@ class Activity
 
       end
       # tworzenie tablicy z aktywnosciami dla widoku
-      activity = {
+      {
         :time => (ami.created_at.to_s)[11,8],
         :link => webAddress()+"/activities/"+ami._id+"",
         :discipline => ami.discipline,
         :author_info => ami.author_info["name"],
         :client => ami.client,
         :enrolled => ami.enrolled_ids.size-1,
-        :repeat => repeat,
+        :repeat => ami.repeat.nil?,
         :email => email,
         :type => type,
         :fanPageName => fanPageName,
         :state => ami.state,
         :enrolledemails => enrolledemails
       }
-      activitiesArray.push(activity)
-      # -----------------------------------
     end
-
-    return activitiesArray
   end
 
 
