@@ -10,7 +10,7 @@ class TimeSpec
       Time.zone.now
     end
    
-    @from = if hash.has_key? :to
+    @from = if hash.has_key? :from
      whatever_to_dt hash[:from]
     else
       Time.zone.now
@@ -101,12 +101,12 @@ class TimeSpec
   
 private
   def dt_to_t(dt)  
-    dt.in_time_zone
+    dt.utc
   end
   def whatever_to_dt(dt)
     case dt                           
-    when DateTime then dt.in_time_zone
-    when Time then dt
+    when DateTime then dt.utc.in_time_zone
+    when Time then dt.utc.in_time_zone
     when String then Time.zone.parse dt
     else dt
     end

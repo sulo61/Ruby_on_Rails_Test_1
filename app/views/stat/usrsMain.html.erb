@@ -1,85 +1,83 @@
 <h2>Users</h2>
 
 <form class="form-inline" method="GET" action="/stat/usrsMain">
-<label for="find">Name: </label>
-<%= text_field_tag 'name' %>
-<%= submit_tag 'Find', :name => 'find', :class => 'btn btn-default' %>
+    <label for="find">Name: </label>
+    <%= text_field_tag 'name' %>
+    <%= submit_tag 'Find', :name => 'find', :class => 'btn btn-default' %>
 </form>
-<%= @lool %>
+
 <p>-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</p>
 
 <h2>Results</h2>
 <% if @showByDate %>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Date</th>
-      <th>Users</th>
-      <th>Fanpages</th>      
-	<th>All</th>
-	<th>Action</th>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Users</th>
+                <th>Fanpages</th>
+                <th>All</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for usr in @usrs %>
 
-    </tr>
-  </thead>
-  <tbody>
-    <% for usr in @usrs %>
-	
-      <% usr_date = truncate((usr["_id"]["data"]).to_s , :length => 10, :omission => '') %>
-      <tr>
-        <td><%= usr_date %></td>
-	  <td><%= usr["value"]["User"] %></td>
-	  <td><%= usr["value"]["Fanpage"] %></td>	  
-	  <td><%= usr["value"]["all"] %></td>
-	  <td>
-		<%= form_tag("/stat/usrsDetails", method: "get") do %>
-		<%= hidden_field_tag(:date, usr_date ) %>
-		<%= submit_tag("Details", {:name => "", :class => 'btn btn-mini'}) %>
-		<% end %>
-	  </td>
+                <% usr_date = truncate((usr["_id"]["data"]).to_s , :length => 10, :omission => '') %>
+                <tr>
+                    <td><%= usr_date %></td>
+                    <td><%= usr["value"]["User"] %></td>
+                    <td><%= usr["value"]["Fanpage"] %></td>
+                    <td><%= usr["value"]["all"] %></td>
+                    <td>
+                    <%= form_tag("/stat/usrsDetails", method: "get") do %>
+                        <%= hidden_field_tag(:date, usr_date ) %>
+                        <%= submit_tag("Details", {:name => "", :class => 'btn btn-mini'}) %>
+                    <% end %>
+                    </td>
 
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
 <% else %>
-<table class="table table-striped">
-  <thead>
-    <tr>
-	<th>Name</th>
-	<th>Created at</th>
-    <th>Link</th>
-    <th>Email</th>
-    <th>Type</th>
-	<th>Fanpages / Admins</th>
-	<th>Clients</th>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Created at</th>
+                <th>Link</th>
+                <th>Email</th>
+                <th>Type</th>
+                <th>Fanpages / Admins</th>
+                <th>Clients</th>
 
-    </tr>
-  </thead>
-  <tbody>
-	<% for usr in @usrs %>
-		<tr>
-		  <td><%= usr[:name] %></td>
-		  <td><%= (usr[:date].to_s)[0,10] %></td>
-		  <td><a href=<%=usr[:link]%> target="_blank">Link</a></td>
-		  <td><%= truncate(usr[:email], :length => 35) %></td>
-		  <td><%= usr[:type] %></td>
-		  
-		  <td>
-			<% usr[:fanadmins].each do |key| %>
-				<a href=<%= key[0][1] %> target="_blank"><%= key[0][0] %></a>
-				<br>
-			<% end %>
-		  </td>
-		  <td>
-			<% usr[:cla].each do |key| %>
-				<%= key[0] %> 
-				<br>
-			<% end %>
-		  </td>
-		</tr>    
-	<% end %>
-  </tbody>
-</table>
+            </tr>
+        </thead>
+        <tbody>
+            <% for usr in @usrs %>
+                <tr>
+                    <td><%= usr[:name] %></td>
+                    <td><%= (usr[:date].to_s)[0,10] %></td>
+                    <td><a href=<%=usr[:link]%> target="_blank">Link</a></td>
+                    <td><%= truncate(usr[:email], :length => 35) %></td>
+                    <td><%= usr[:type] %></td>
+                    <td>
+                    <% usr[:fanadmins].each do |admin| %>
+                        <a href=<%= admin.link %> target="_blank"><%= admin.name %></a>
+                        <br>
+                    <% end %>
+                    </td>
+                    <td>
+                    <% usr[:cla].each do |key| %>
+                        <%= key[0] %>
+                        <br>
+                    <% end %>
+                    </td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
 
 <% end %>
 

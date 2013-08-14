@@ -62,11 +62,11 @@ class StatController < ApplicationController
 
         if !params[:find]
           @showByDate = true
-          @usrs = User.showUsrsByDate()
+          @usrs = BaseUser.showUsrsByDate
         end
         if params[:find]
           @showByDate = false
-          @usrs = User.usrDetailsByName(params[:name])
+          @usrs = BaseUser.usrDetailsByName(params[:name])
 
         end
 
@@ -79,7 +79,7 @@ class StatController < ApplicationController
         date = params[:date].to_s
         @showdate = date[0,10]
         # udostepnianie widokowi tablicy aktywnosci
-        @usrsDetails = User.usrsDayDetails(date)
+        @usrsDetails = BaseUser.usrsDayDetails(date)
         # ------------------------------------------
     end
 

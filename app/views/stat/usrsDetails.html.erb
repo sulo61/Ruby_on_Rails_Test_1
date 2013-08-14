@@ -1,50 +1,48 @@
 <h2>Users: details for <%= @showdate %></h2>
 <br><br>
+
 <form class="form-inline" method="GET" action="/stat/usrsMain">
-<%= submit_tag 'Back', :name => 'back', :class => 'btn btn-small' %>
+    <%= submit_tag 'Back', :name => 'back', :class => 'btn btn-small' %>
 </form>
 
 <table class="table table-striped">
-	<thead>
-		<tr>
-			
-			<th>Time</th>
-			<th>Name</th>
-			<th>Link</th>
-			<th>Email</th>
-			<th>Type</th>
-			<th>Fanpages/Admins</th>
-			<th>Clients</th>
+    <thead>
+        <tr>
 
-		</tr>
-	</thead>
-  	<tbody>
-		<% @usrsDetails.each do |usr| %>
-		<tr>
-        	
-			<td><%= (usr[:date].to_s)[10,9] %></td>
-			<td><%= usr[:name] %></td>
-			<td><a href=<%=usr[:link]%> target="_blank">Link</a></td>
-			<td><%= usr[:email] %></td>
-			<td><%= usr[:type] %></td>
-			<td>
-				<% usr[:fanadmins].each do |key| %>
-					<a href=<%= key[0][1] %> target="_blank"><%= key[0][0] %></a>
-					<br>
-				<% end %>
-	 		</td>
-			<td>
-				<% usr[:cla].each do |key| %>
-					<%= key[0] %> 
-					<br>
-				<% end %>
-	  		</td>
-		
-	 
+            <th>Time</th>
+            <th>Name</th>
+            <th>Link</th>
+            <th>Email</th>
+            <th>Type</th>
+            <th>Fanpages/Admins</th>
+            <th>Clients</th>
 
-	  
-	      </tr>
-		<% end %>
- 	</tbody>
+        </tr>
+    </thead>
+    <tbody>
+        <% @usrsDetails.each do |usr| %>
+            <tr>
+
+                <td><%= (usr[:date].to_s)[10,9] %></td>
+                <td><%= usr[:name] %></td>
+                <td><a href=<%=usr[:link]%> target="_blank">Link</a></td>
+                <td><%= usr[:email] %></td>
+                <td><%= usr[:type] %></td>
+                <td>
+                <% usr[:fanadmins].each do |admin| %>
+                    <a href=<%= admin.link %> target="_blank"><%= admin.name %></a>
+                    <br>
+                <% end %>
+                </td>
+                <td>
+                <% usr[:cla].each do |key| %>
+                    <%= key[0] %>
+                    <br>
+                <% end %>
+                </td>
+
+            </tr>
+        <% end %>
+    </tbody>
 </table>
 
