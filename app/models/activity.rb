@@ -45,7 +45,7 @@ class Activity
 
 
   def self.webAddress()
-	  return "https://my.dropsport.com"
+    return "https://my.dropsport.com"
   end
 
   # activities, zliczanie klientow, grupowanie po dniach
@@ -131,25 +131,25 @@ class Activity
       end
       # tworzenie tablicy z aktywnosciami dla widoku
       {
-        :time => (ami.created_at.to_s)[11,8],
-        :link => webAddress()+"/activities/"+ami._id+"",
-        :discipline => ami.discipline,
-        :author_info => ami.author_info["name"],
-        :client => ami.client,
-        :enrolled => ami.enrolled_ids.size-1,
-        :repeat => ami.repeat.nil?,
-        :email => email,
-        :type => type,
-        :fanPageName => fanPageName,
-        :state => ami.state,
-        :enrolledemails => enrolledemails
+          :time => (ami.created_at.to_s)[11,8],
+          :link => webAddress()+"/activities/"+ami._id+"",
+          :discipline => ami.discipline,
+          :author_info => ami.author_info["name"],
+          :client => ami.client,
+          :enrolled => ami.enrolled_ids.size-1,
+          :repeat => ami.repeat.nil?,
+          :email => email,
+          :type => type,
+          :fanPageName => fanPageName,
+          :state => ami.state,
+          :enrolledemails => enrolledemails
       }
     end
   end
 
 
   def self.activityDayDetails( dataOd=DateTime.new(2000,01,01), dataDo=DateTime.now   )
-	  return where(:created_at => { '$gt' => dataOd, '$lt' => dataDo } ).desc(:created_at)
+    return where(:created_at => { '$gt' => dataOd, '$lt' => dataDo } ).desc(:created_at)
   end
 
 end
