@@ -14,38 +14,35 @@
 </head>
 <body>
 
-<div class="navbar navbar-fixed-top" >
-  <div class="navbar-inner">
-    <div class="container">
-
-      <a class="brand" href="#">Dropsport Stat</a>
-
-
-        <ul class="nav" >
-		<li class="divider-vertical"></li>
-            <li><%= link_to "Activities", stat_activityMain_path %></li>
-		<li class="divider-vertical"></li>
-            <li><%= link_to "Users", stat_usrsMain_path %></li>
-		<li class="divider-vertical"></li>
-		<li><%= link_to "Event log", stat_eventlogMain_path %></li>
-		<li class="divider-vertical"></li>
-        </ul>
-
-	  <ul class="nav pull-right">
-			    <li class="divider-vertical"></li>
-                      <li><%= link_to "Log out", stat_logout_path %></li>
-                      <li class="divider-vertical"></li>
-
-        </ul>
-
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a data-toggle="collapse" data-target=".nav-collapse" class="btn btn-navbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="#">Dropsport Panel</a>
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li class="divider-vertical"></li>
+              <li><%= link_to "Activities", stat_activityMain_path %></li>
+              <li class="divider-vertical"></li>
+              <li><%= link_to "Users", stat_usrsMain_path %></li>
+              <li class="divider-vertical"></li>
+              <li><%= link_to "Event log", stat_eventlogMain_path %></li>
+              <li class="divider-vertical"></li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
-<br><br><br>
-<div class="container">
 
-  <%= yield %>
-</div>
+    <br><br><br>
+
+    <div class="container">
+      <%= yield %>
+    </div>
 
 </body>
 </html>
