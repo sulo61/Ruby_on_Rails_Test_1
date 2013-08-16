@@ -86,10 +86,11 @@ class StatController < ApplicationController
 
     @@EL_LAST = EVENT_DAYS_BACK
     @@EL_XDAY = EVENT_DAYS_BACK
+    @@EL_XYDAYSX =  EVENT_DAYS_BACK
+    @@EL_XYDAYSY =  EVENT_DAYS_BACK
     tmp_date_now = Date.new(DT_NOW.year, DT_NOW.month, DT_NOW.day)
     @@EL_DT = (tmp_date_now.to_s)[8,2]+"-"+(tmp_date_now.to_s)[5,2]+"-"+(tmp_date_now.to_s)[0,4]
     @@EL_DF = ((tmp_date_now-@@EL_XDAY.days).to_s)[8,2]+"-"+((tmp_date_now-@@EL_XDAY.days).to_s)[5,2]+"-"+((tmp_date_now-@@EL_XDAY.days).to_s)[0,4]
-
 
     def eventlogMain
         @@EL_LAST = params[:numberOfDays].to_i if ( params[:numberOfDays]!="" && params[:last] )
@@ -100,6 +101,8 @@ class StatController < ApplicationController
         @xdays = @@EL_XDAY
         @adf = @@EL_DF
         @adt = @@EL_DT
+        @startAfterX =  @@EL_XYDAYSX
+        @startAfterY =  @@EL_XYDAYSY
         @datesRange = "All"
     end
 
@@ -116,7 +119,9 @@ class StatController < ApplicationController
         @xdays = @@EL_XDAY
         @adf = @@EL_DF
         @adt = @@EL_DT
-        @datesRange = @adf+" <-> "+@adt
+        @startAfterX =  @@EL_XYDAYSX
+        @startAfterY =  @@EL_XYDAYSY
+        @datesRange = "between: "+@adf+" and: "+@adt
         render "eventlogMain"
     end
 
@@ -133,8 +138,29 @@ class StatController < ApplicationController
         @xdays = @@EL_XDAY
         @adf = @@EL_DF
         @adt = @@EL_DT
-        @datesRange = @xdays+" days after created user"
+        @startAfterX =  @@EL_XYDAYSX
+        @startAfterY =  @@EL_XYDAYSY
+        @datesRange = "between: User creation date, and: "+@xdays+" days after the creation of user"
         render "eventlogMain"
+    end
+
+
+    def eventlogMainXYdays
+      if ( params[:startAfterX]!="" && params[:startAfterY]!="" )
+        @@EL_XYDAYSX = params[:startAfterX]
+        @@EL_XYDAYSY = params[:startAfterY]
+      end
+
+      @usrsByDate = EventLog.countUsrsByDate(DT_NOW-@@EL_LAST.days, DT_NOW, nil, nil, @@EL_XYDAYSX, @@EL_XYDAYSY )
+
+      @last = @@EL_LAST
+      @xdays = @@EL_XDAY
+      @adf = @@EL_DF
+      @adt = @@EL_DT
+      @startAfterX =  @@EL_XYDAYSX
+      @startAfterY =  @@EL_XYDAYSY
+      @datesRange = "between: "+@startAfterX+" days after the creation of user, and: "+@startAfterY+" days forward"
+      render "eventlogMain"
     end
 
 

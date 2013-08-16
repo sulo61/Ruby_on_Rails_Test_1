@@ -12,6 +12,7 @@ DsTab7::Application.routes.draw do
   get "stat/eventlogMain"
   get "stat/eventlogMainRange"
   get "stat/eventlogMainXday"
+  get "stat/eventlogMainXYdays"
 
   root :to => "stat#login"
 

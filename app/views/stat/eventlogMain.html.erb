@@ -1,87 +1,106 @@
 <h2>Event log</h2>
 <br>
+<table class="table table-condensed" >
+  <tr>
+    <td>
+        <form class="form-inline" method="GET" action="/stat/eventlogMain">
+            <label for="last" >Users created at last: </label>
+            <%= number_field_tag 'numberOfDays', @last, in: 1...366, :class => 'form-control'%>
+            <label for="days" > days</label>
+    </td>
+    <td>
+            <%= submit_tag 'Find users', :name => 'last', :class => 'btn btn-small btn-primary' %>
+        </form>
+    </td>
+  </tr>
+  <tr>
+    <td>
+        <form class="form-inline" method="GET" action="/stat/eventlogMainRange">
+          <label for="from" >Events between: </label>
+          <div class="input-append date" id="dateFrom" data-date-format="dd-mm-yyyy">
+            <input class="span2" name="dateFrom" size="16" value="<%= @adf %>" type="text" readonly><span class="add-on"><i class="icon-th"></i></span>
+          </div>
+          <script type="text/javascript">
+            $('#dateFrom').datepicker();
+          </script>
 
-<form class="form-inline" method="GET" action="/stat/eventlogMain">
-	<label for="last" >Users created at last: </label>
-	<%= number_field_tag 'numberOfDays', @last, in: 1...366, :class => 'form-control'%>
-	<label for="days" > days</label>
-	<%= submit_tag 'Show', :name => 'last', :class => 'btn btn-small' %>
-</form>
-<br>
-
-<form class="form-inline" method="GET" action="/stat/eventlogMainRange">
-  <label for="from" >From: </label>
-  <div class="input-append date" id="dateFrom" data-date-format="dd-mm-yyyy">
-    <input class="span2" name="dateFrom" size="16" value="<%= @adf %>" type="text" readonly><span class="add-on"><i class="icon-th"></i></span>
-  </div>
-  <script type="text/javascript">
-    $('#dateFrom').datepicker();
-  </script>
-
-  <label for="from" >To: </label>
-  <div class="input-append date" id="dateTo" data-date-format="dd-mm-yyyy">
-    <input class="span2" size="16" name="dateTo" value="<%= @adt %>" type="text" readonly><span class="add-on"><i class="icon-th"></i></span>
-  </div>
-  <script type="text/javascript">
-      $('#dateTo').datepicker();
-  </script>
-
-  <%= submit_tag 'Find events', :name => 'getDate', :class => 'btn btn-small'%>
-</form>
-
-<form class="form-inline" method="GET" action="/stat/eventlogMainXday">
-
-  <%= number_field_tag 'numberOfXDays', @xdays, in: 1...366, :class => 'form-control'%>
-  <label for="from" > days after created user </label>
-  <%= submit_tag 'Find events', :name => 'getXDate', :class => 'btn btn-small'%>
-</form>
+          <label for="from" > and: </label>
+          <div class="input-append date" id="dateTo" data-date-format="dd-mm-yyyy">
+            <input class="span2" size="16" name="dateTo" value="<%= @adt %>" type="text" readonly><span class="add-on"><i class="icon-th"></i></span>
+          </div>
+          <script type="text/javascript">
+              $('#dateTo').datepicker();
+          </script>
+    </td>
+    <td>
+          <%= submit_tag 'Find events', :name => 'getDate', :class => 'btn btn-small'%>
+        </form>
+    </td>
+  </tr>
+  <tr>
+    <td>
+        <form class="form-inline" method="GET" action="/stat/eventlogMainXday">
+          <label for="from" >Events between: <b>User creation date</b>, and: </label>
+          <%= number_field_tag 'numberOfXDays', @xdays, in: 1...366, :class => 'form-control'%>
+          <label for="from" > days after the creation of user </label>
+    </td>
+    <td>
+          <%= submit_tag 'Find events', :name => 'getXDate', :class => 'btn btn-small'%>
+        </form>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <form class="form-inline" method="GET" action="/stat/eventlogMainXYdays">
+        <label>Events between: </label>
+        <%= number_field_tag 'startAfterX', @startAfterX, in: 1...366, :class => 'form-control'%>
+        <label for="from" > days after the creation of user, and: </label>
+        <%= number_field_tag 'startAfterY', @startAfterY, in: 1...366, :class => 'form-control'%>
+        <label for="from" > days forward </label>
+    </td>
+    <td>
+      <%= submit_tag 'Find events', :name => 'xDaysAfterY', :class => 'btn btn-small'%>
+      </form>
+    </td>
+  </tr>
+</table>
 <div style="clear:both"></div>
 <hr />
-<h2>Events: <%= @datesRange %></h2>
+<h2>Events <%= @datesRange %></h2>
 <br>
-<table class="table table-striped">
-  <thead>
-    <tr>
-	  <th><center>Users:</center></th>
-      <th>Created at</th>
-      <th>All</th>
-	  <th>Active</th>
-	  <th>All / Act</th>
+<table class="table table-condensed">
 
-      <th><center>Bookmarks:</center></th>
-      <th>All</th>
-      <th>Act Usrs</th>
-
-	  <th><center>Events:</center></th>
-      <th>Sum</th>
-	  <th>W</th>
-	  <th>A</th>
-	  <th>I</th>
-	  <th>U</th>
-
-
-	</tr>
-  </thead>
-  <tbody>
     <% for ubd in @usrsByDate %>
 
       <tr>
-		  <td><center>|</center></td>
-		  <td><%= ubd[:date] %></td>
-		  <td><%= ubd[:count] %></td>
-		  <td><%= ubd[:activeUsrs] %></td>
-		  <td><%= ubd[:percentActiveUsrs] %></td>
-          <td><center>|</cemter></td>
-          <td><%= ubd[:bookmarkSum] %></td>
-          <td><%= ubd[:activeBook] %></td>
-		  <td><center>|</cemter></td>
-		  <td><%= ubd[:eventSum] %></td>
-		  <td><%= ubd[:webEvent] %></td>
-		  <td><%= ubd[:androidEvent] %></td>
-		  <td><%= ubd[:iosEvent] %></td>
-		  <td><%= ubd[:unknownEvent] %></td>
-
+        <td rowspan="2"><%= ubd[:date] %></td>
+        <td><b>Users:</b></td>
+        <td>Count: <%= ubd[:count] %></td>
+        <td>Active: <%= ubd[:activeUsrs] %></td>
+        <td>=> <%= ubd[:percentActiveUsrs] %></td>
+        <td><b>Actions:</b></td>
+        <td>Commented: <%= ubd[:commented] %></td>
+        <td>Enrolled: <%= ubd[:enrolled] %></td>
+        <td>Liked: <%= ubd[:liked] %></td>
+        <td></td>
       </tr>
+      <tr>
+        <td><b>Clients:</b></td>
+        <td>Sum: <%= ubd[:eventSum] %></td>
+        <td>Web: <%= ubd[:webEvent] %></td>
+        <td>Android: <%= ubd[:androidEvent] %></td>
+        <td>iOS: <%= ubd[:iosEvent] %></td>
+        <td>Unknown: <%= ubd[:unknownEvent] %></td>
+        <td><b>Bookmarks:</b></td>
+        <td>Sum: <%= ubd[:bookmarkSum] %></td>
+        <td>Active users: <%= ubd[:activeBook] %></td>
+      </tr>
+      <tr class="success">
+        <% for i in 0..9 %>
+            <td></td>
+        <% end  %>
+      </tr>
+
     <% end %>
-  </tbody>
+
 </table>
