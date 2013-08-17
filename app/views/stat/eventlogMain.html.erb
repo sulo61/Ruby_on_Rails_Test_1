@@ -68,39 +68,60 @@
 <hr />
 <h2>Events <%= @datesRange %></h2>
 <br>
-<table class="table table-condensed">
+<table class="table table-bordered">
+  <thead>
 
+  <tr>
+      <td colspan="4" style="border-right:solid; border-left:solid;"><center><b>User</b></center></td>
+      <td colspan="3" style="border-right:solid;"><center><b>Actions</b></center></td>
+      <td colspan="5" style="border-right:solid;"><center><b>Clients</b></center></td>
+      <td colspan="2" style="border-right:solid;"><center><b>Bookmarks</b></center></td>
+    </tr>
+
+    <tr>
+      <td style="border-left:solid;">Date</td>
+      <td>Count</td>
+      <td>Active</td>
+      <td style="border-right:solid;">Percent</td>
+
+      <td>Commented</td>
+      <td>Enrolled</td>
+      <td style="border-right:solid;">Liked</td>
+
+      <td>Sum</td>
+      <td>Web</td>
+      <td>Android</td>
+      <td>iOS</td>
+      <td style="border-right:solid;">Unknown</td>
+
+      <td>Sum</td>
+      <td style="border-right:solid;">Active usrs</td>
+
+
+    </tr>
+  </thead>
+  <tbody>
     <% for ubd in @usrsByDate %>
+        <tr>
+            <td style="border-left:solid;"><%= ubd[:date] %></td>
+            <td><%= ubd[:count] %></td>
+            <td><%= ubd[:activeUsrs] %></td>
+            <td style="border-right:solid;"><%= ubd[:percentActiveUsrs] %></td>
 
-      <tr>
-        <td rowspan="2"><%= ubd[:date] %></td>
-        <td><b>Users:</b></td>
-        <td>Count: <%= ubd[:count] %></td>
-        <td>Active: <%= ubd[:activeUsrs] %></td>
-        <td>=> <%= ubd[:percentActiveUsrs] %></td>
-        <td><b>Actions:</b></td>
-        <td>Commented: <%= ubd[:commented] %></td>
-        <td>Enrolled: <%= ubd[:enrolled] %></td>
-        <td>Liked: <%= ubd[:liked] %></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><b>Clients:</b></td>
-        <td>Sum: <%= ubd[:eventSum] %></td>
-        <td>Web: <%= ubd[:webEvent] %></td>
-        <td>Android: <%= ubd[:androidEvent] %></td>
-        <td>iOS: <%= ubd[:iosEvent] %></td>
-        <td>Unknown: <%= ubd[:unknownEvent] %></td>
-        <td><b>Bookmarks:</b></td>
-        <td>Sum: <%= ubd[:bookmarkSum] %></td>
-        <td>Active users: <%= ubd[:activeBook] %></td>
-      </tr>
-      <tr class="success">
-        <% for i in 0..9 %>
-            <td></td>
-        <% end  %>
-      </tr>
+            <td><%= ubd[:commented] %></td>
+            <td><%= ubd[:enrolled] %></td>
+            <td style="border-right:solid;"><%= ubd[:liked] %></td>
 
+            <td><%= ubd[:eventSum] %></td>
+            <td><%= ubd[:webEvent] %></td>
+            <td><%= ubd[:androidEvent] %></td>
+            <td><%= ubd[:iosEvent] %></td>
+            <td style="border-right:solid;"><%= ubd[:unknownEvent] %></td>
+
+            <td><%= ubd[:bookmarkSum] %></td>
+            <td style="border-right:solid;"><%= ubd[:activeBook] %></td>
+
+        </tr>
     <% end %>
-
+  </tbody>
 </table>
