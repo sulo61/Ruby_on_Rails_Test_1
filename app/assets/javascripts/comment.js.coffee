@@ -1,4 +1,6 @@
 $( ->
+
+
   $(document).find('button[com_add="true"]').click( ->
     i = $(this).attr("val")
     $.ajax({
@@ -15,9 +17,9 @@ $( ->
 
 # OK
   $(document).find('button[com_show="true"]').click( ->
-    el = $('td.comment_'+$(this).attr("val") + ' > div')
-    edit = $('td.comment_'+$(this).attr("val") + ' > button[com_edit="true"]')
-    del = $('td.comment_'+$(this).attr("val") + ' > button[com_del="true"]')
+    el = $('td.comment_'+$(this).attr("val") + ' * div.comment')
+    edit = $('td.comment_'+$(this).attr("val") + ' * button[com_edit="true"]')
+    del = $('td.comment_'+$(this).attr("val") + ' * button[com_del="true"]')
     if el.is(':visible')
       el.hide()
       edit.hide()
@@ -82,7 +84,8 @@ $( ->
       error: (XMLHttpRequest, textStatus, errorThrown) ->
         alert("wyjebalo mnie "+textStatus+" "+errorThrown+" "+XMLHttpRequest)
       success: (data) ->
-        alert "usunieto"
+        $('td.comment_'+ i + ' .add-button-span').show()
+        $('td.comment_'+ i + ' .manage-comment-span').hide()
     })
   )
 #

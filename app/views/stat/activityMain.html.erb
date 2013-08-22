@@ -43,10 +43,16 @@
           <% end %>
         </td>
         <td class="comment_<%=index%>">
-          <% c = activity[:comment].to_s %>
-          <% if c!="" %>
+          <%
+             c = activity[:comment].to_s
+             comment_visible = c!=""
+          %>
+          <span class='add-button-span' style="<%= comment_visible ? 'display: none' : ''%>">
+            <button class='btn btn-mini', com_add="true", remote="true", val="<%=index%>">Add</button>
+          </span>
 
-              <div style="display: none"><%= c %></div>
+          <span class='manage-comment-span' style="<%= !comment_visible ? 'display: none' : ''%>">
+              <div class="comment" style="display: none"><%= c %></div>
               <button class='btn btn-mini' com_show="true" remote="true" val="<%=index%>" ">Show</button>
               <button style="display: none" class='btn btn-mini' com_edit="true" remote="true" index="<%=index%>" date="<%=activity_date%>" com="<%= c %>">Edit</button>
               <button style="display: none" class='btn btn-mini' com_del="true" remote="true" index="<%=index%>" date="<%=activity_date%>">Del</button>
@@ -68,13 +74,7 @@
                   </div><!-- /.modal-content -->
                 </div><!-- /.modal-dialog -->
               </div><!-- /.modal -->
-
-        <% else %>
-
-              <button class='btn btn-mini', com_add="true", remote="true", val="<%=index%>">Add</button>
-
-
-          <% end %>
+          </span>
 
         </td>
 
