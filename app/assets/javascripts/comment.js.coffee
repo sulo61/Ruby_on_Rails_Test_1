@@ -24,13 +24,9 @@ $( ->
     c = $(this).attr("com")
     d = $(this).attr("date")
     modal = $('td.comment_'+i+'').find('#myModal_'+i)
-    title = modal.find('.modal-title')
-    text = modal.find('#textarea')
-    modal.on('show.bs.modal', ->
-      title.html d
-      text.val c
-
-    ).modal('toggle')
+    title = modal.find('.modal-title').html d
+    text = modal.find('#textarea').text c
+    modal.modal('toggle')
   )
 #
 
@@ -53,6 +49,8 @@ $( ->
       success: (data) ->
         el.html data.to_send
         modal.modal('hide')
+        text.val data.to_send
+
     })
   )
 #
