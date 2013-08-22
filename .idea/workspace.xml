@@ -4,17 +4,18 @@
     <list default="true" id="1e3ae673-c461-4aba-935e-101657c0736d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/stat/activityMain.html.erb" afterPath="$PROJECT_DIR$/app/views/stat/activityMain.html.erb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/comment.js.coffee" afterPath="$PROJECT_DIR$/app/assets/javascripts/comment.js.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/routes.rb" afterPath="$PROJECT_DIR$/config/routes.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/stat_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/stat_controller.rb" />
     </list>
     <ignored path="ds_tab_7.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/Dummy.txt" changelist="1e3ae673-c461-4aba-935e-101657c0736d" time="1377165698245" ignored="false" />
     <file path="/a.rxml" changelist="1e3ae673-c461-4aba-935e-101657c0736d" time="1376319612163" ignored="false" />
     <file path="/a.coffee" changelist="1e3ae673-c461-4aba-935e-101657c0736d" time="1376319614178" ignored="false" />
-    <file path="/stat_controller.rb" changelist="1e3ae673-c461-4aba-935e-101657c0736d" time="1377175471247" ignored="false" />
+    <file path="/stat_controller.rb" changelist="1e3ae673-c461-4aba-935e-101657c0736d" time="1377181251370" ignored="false" />
     <file path="/eventlogMain.html.erb" changelist="1e3ae673-c461-4aba-935e-101657c0736d" time="1376775552632" ignored="false" />
     <file path="/event_log.rb" changelist="1e3ae673-c461-4aba-935e-101657c0736d" time="1376688031677" ignored="false" />
-    <file path="/routes.rb" changelist="1e3ae673-c461-4aba-935e-101657c0736d" time="1377173706075" ignored="false" />
+    <file path="/routes.rb" changelist="1e3ae673-c461-4aba-935e-101657c0736d" time="1377180641619" ignored="false" />
     <file path="/bookmark.rb" changelist="1e3ae673-c461-4aba-935e-101657c0736d" time="1376404774135" ignored="false" />
     <file path="/application.html.erb" changelist="1e3ae673-c461-4aba-935e-101657c0736d" time="1376995187975" ignored="false" />
     <file path="/usrsDetails.html.erb" changelist="1e3ae673-c461-4aba-935e-101657c0736d" time="1376483293481" ignored="false" />
@@ -24,10 +25,10 @@
     <file path="/base_user.rb" changelist="1e3ae673-c461-4aba-935e-101657c0736d" time="1376483103772" ignored="false" />
     <file path="/activity.rb" changelist="1e3ae673-c461-4aba-935e-101657c0736d" time="1376999419369" ignored="false" />
     <file path="/.gitignore" changelist="1e3ae673-c461-4aba-935e-101657c0736d" time="1376488753568" ignored="false" />
-    <file path="/activityMain.html.erb" changelist="1e3ae673-c461-4aba-935e-101657c0736d" time="1377179708452" ignored="false" />
+    <file path="/activityMain.html.erb" changelist="1e3ae673-c461-4aba-935e-101657c0736d" time="1377180570678" ignored="false" />
     <file path="/comment.rb" changelist="1e3ae673-c461-4aba-935e-101657c0736d" time="1376997450405" ignored="false" />
     <file path="/ajaxTest.html.erb" changelist="1e3ae673-c461-4aba-935e-101657c0736d" time="1377004654740" ignored="false" />
-    <file path="/comment.js.coffee" changelist="1e3ae673-c461-4aba-935e-101657c0736d" time="1377179811124" ignored="false" />
+    <file path="/comment.js.coffee" changelist="1e3ae673-c461-4aba-935e-101657c0736d" time="1377180963341" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,16 +56,7 @@
       <file leaf-file-name="stat_controller.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/stat_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="195" column="19" selection-start="5804" selection-end="5804" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="activity.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/models/activity.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="29" selection-start="129" selection-end="156" vertical-scroll-proportion="0.0">
+            <state line="206" column="41" selection-start="6003" selection-end="6003" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -73,7 +65,7 @@
       <file leaf-file-name="comment.js.coffee" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/assets/javascripts/comment.js.coffee">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="87" column="32" selection-start="2391" selection-end="2391" vertical-scroll-proportion="0.76816076">
+            <state line="96" column="30" selection-start="2563" selection-end="2563" vertical-scroll-proportion="0.55641425">
               <folding />
             </state>
           </provider>
@@ -82,7 +74,7 @@
       <file leaf-file-name="routes.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/config/routes.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="23" selection-start="351" selection-end="351" vertical-scroll-proportion="0.0">
+            <state line="23" column="48" selection-start="495" selection-end="507" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -91,7 +83,7 @@
       <file leaf-file-name="activityMain.html.erb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/stat/activityMain.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="57" column="72" selection-start="2131" selection-end="2131" vertical-scroll-proportion="-8.541667">
+            <state line="71" column="25" selection-start="2729" selection-end="2729" vertical-scroll-proportion="-7.9166665">
               <folding>
                 <element signature="n#style#0;n#span#0;n#td#7;n#tr#0;n#tbody#0;n#table#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#span#1;n#td#7;n#tr#0;n#tbody#0;n#table#0;n#!!top" expanded="true" />
@@ -99,15 +91,6 @@
                 <element signature="n#style#0;n#button#1;n#span#1;n#td#7;n#tr#0;n#tbody#0;n#table#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#button#2;n#span#1;n#td#7;n#tr#0;n#tbody#0;n#table#0;n#!!top" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="comment.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/models/comment.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="17" selection-start="171" selection-end="171" vertical-scroll-proportion="0.0">
-              <folding />
             </state>
           </provider>
         </entry>
@@ -155,10 +138,10 @@
         <option value="$PROJECT_DIR$/app/models/activity.rb" />
         <option value="$PROJECT_DIR$/app/views/stat/ajaxTest.html.erb" />
         <option value="$PROJECT_DIR$/app/views/layouts/application.html.erb" />
-        <option value="$PROJECT_DIR$/config/routes.rb" />
         <option value="$PROJECT_DIR$/app/models/comment.rb" />
-        <option value="$PROJECT_DIR$/app/controllers/stat_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/stat/activityMain.html.erb" />
+        <option value="$PROJECT_DIR$/config/routes.rb" />
+        <option value="$PROJECT_DIR$/app/controllers/stat_controller.rb" />
         <option value="$PROJECT_DIR$/app/assets/javascripts/comment.js.coffee" />
       </list>
     </option>
@@ -790,37 +773,10 @@
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/routes.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="23" selection-start="351" selection-end="351" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/models/activity.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="5" column="29" selection-start="129" selection-end="156" vertical-scroll-proportion="0.0">
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/stat_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="195" column="19" selection-start="5804" selection-end="5804" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/stat/activityMain.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="57" column="72" selection-start="2131" selection-end="2131" vertical-scroll-proportion="-8.541667">
-          <folding>
-            <element signature="n#style#0;n#span#0;n#td#7;n#tr#0;n#tbody#0;n#table#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#1;n#td#7;n#tr#0;n#tbody#0;n#table#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#span#1;n#td#7;n#tr#0;n#tbody#0;n#table#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#button#1;n#span#1;n#td#7;n#tr#0;n#tbody#0;n#table#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#button#2;n#span#1;n#td#7;n#tr#0;n#tbody#0;n#table#0;n#!!top" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -831,9 +787,36 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/config/routes.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="48" selection-start="495" selection-end="507" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/stat_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="206" column="41" selection-start="6003" selection-end="6003" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/stat/activityMain.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="71" column="25" selection-start="2729" selection-end="2729" vertical-scroll-proportion="-7.9166665">
+          <folding>
+            <element signature="n#style#0;n#span#0;n#td#7;n#tr#0;n#tbody#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#1;n#td#7;n#tr#0;n#tbody#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#span#1;n#td#7;n#tr#0;n#tbody#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#1;n#span#1;n#td#7;n#tr#0;n#tbody#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#2;n#span#1;n#td#7;n#tr#0;n#tbody#0;n#table#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/assets/javascripts/comment.js.coffee">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="87" column="32" selection-start="2391" selection-end="2391" vertical-scroll-proportion="0.76816076">
+        <state line="96" column="30" selection-start="2563" selection-end="2563" vertical-scroll-proportion="0.55641425">
           <folding />
         </state>
       </provider>

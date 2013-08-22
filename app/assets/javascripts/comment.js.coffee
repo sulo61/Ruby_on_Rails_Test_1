@@ -1,20 +1,5 @@
 $( ->
 
-
-  $(document).find('button[com_add="true"]').click( ->
-    i = $(this).attr("val")
-    $.ajax({
-      url: "com_add"
-      type: "POST"
-      data: { d: {
-        index: i }}
-      error: (XMLHttpRequest, textStatus, errorThrown) ->
-        alert("wyjebalo mnie "+textStatus+" "+errorThrown+" "+XMLHttpRequest)
-      success: (data) ->
-        $('td.comment_'+data.index+'').replaceWith(data.to_send)
-    })
-  )
-
 # OK
   $(document).find('button[com_show="true"]').click( ->
     el = $('td.comment_'+$(this).attr("val") + ' * div.comment')
@@ -32,6 +17,7 @@ $( ->
       $(this).html 'Hide'
   )
 #
+
 # OK
   $(document).find('button[com_edit="true"]').click( ->
     i = $(this).attr("index")
@@ -47,13 +33,14 @@ $( ->
     ).modal('toggle')
   )
 #
+
 # OK
   $(document).find('button[com_edit_save="true"]').click( ->
     i = $(this).attr("index")
     modal = $('td.comment_'+i+'').find('#myModal_'+i)
     title = modal.find('.modal-title').text()
     text = modal.find('#textarea').val()
-    el = $('td.comment_'+i+ ' > div')
+    el = $('td.comment_'+i+ ' * div.comment')
     $.ajax({
       url: "com_edit_save"
       type: "PUT"
@@ -70,7 +57,7 @@ $( ->
   )
 #
 
-  # OK
+# OK
   $(document).find('button[com_del="true"]').click( ->
     i = $(this).attr("index")
     d = $(this).attr("date")
@@ -86,6 +73,42 @@ $( ->
       success: (data) ->
         $('td.comment_'+ i + ' .add-button-span').show()
         $('td.comment_'+ i + ' .manage-comment-span').hide()
+    })
+  )
+#
+
+# OK
+  $(document).find('button[com_add="true"]').click( ->
+    i = $(this).attr("index")
+    d = $(this).attr("date")
+    modal = $('td.comment_'+i+'').find('#myAddModal_'+i)
+    title = modal.find('.modal-title')
+    title.text(d)
+    modal.modal('toggle')
+  )
+#
+
+# OK
+  $(document).find('button[com_add_save="true"]').click( ->
+    i = $(this).attr("index")
+    modal = $('td.comment_'+i+'').find('#myAddModal_'+i)
+    title = modal.find('.modal-title').text()
+    text = modal.find('#textarea').val()
+    el = $('td.comment_'+i+ ' * div.comment')
+    $.ajax({
+      url: "com_add_save"
+      type: "POST"
+      data: { d: {
+        date: title
+        com: text
+      }}
+      error: (XMLHttpRequest, textStatus, errorThrown) ->
+        alert("wyjebalo mnie "+textStatus+" "+errorThrown+" "+XMLHttpRequest)
+      success: (data) ->
+        el.html data.to_send
+        $('td.comment_'+ i + ' .add-button-span').hide()
+        $('td.comment_'+ i + ' .manage-comment-span').show()
+        modal.modal('hide')
     })
   )
 #

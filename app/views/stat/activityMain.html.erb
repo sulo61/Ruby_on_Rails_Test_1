@@ -48,7 +48,24 @@
              comment_visible = c!=""
           %>
           <span class='add-button-span' style="<%= comment_visible ? 'display: none' : ''%>">
-            <button class='btn btn-mini', com_add="true", remote="true", val="<%=index%>">Add</button>
+            <button class='btn btn-mini' com_add="true" remote="true" index="<%=index%>" date="<%=activity_date%>">Add</button>
+            <div class="modal fade" id="myAddModal_<%=index%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+
+                    <h4 class="modal-title"></h4>
+                  </div>
+                  <div class="modal-body">
+                    <textarea class="field span5" id="textarea" rows="6"></textarea>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" com_add_save="true" index="<%=index%>" date="<%=activity_date%>" com="<%= c %>">Save changes</button>
+                  </div>
+                </div><!-- /.modal-content -->
+              </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
           </span>
 
           <span class='manage-comment-span' style="<%= !comment_visible ? 'display: none' : ''%>">

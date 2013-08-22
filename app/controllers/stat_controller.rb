@@ -201,35 +201,18 @@ class StatController < ApplicationController
       end
     end
 
-    #def com_show
-    #  d = params['d'][:index]
-    #  c = params['d'][:com]
-    #  to_send = "<td class=\"comment_"+d+"\">"+c+"</td>"
-    #  respond_to do |format|
-    #    format.json  { render :json => { :to_send => to_send, :index => d }}
-    #
-    #  end
-    #end
-    #
-    #def com_hide
-    #  d = params['d'][:index]
-    #  c = params['d'][:com]
-    #
-    #  to_send = "<td class=\"comment_"+d+"\"><button class=\"btn btn-mini\", com_show=\"true\", remote=\"true\", val=\""+d+"\", com=\""+c+"\" >Show</button></td>"
-    #  respond_to do |format|
-    #    format.json  { render :json => { :to_send => to_send, :index => d }}
-    #
-    #  end
-    #end
+     def com_add_save
 
-    def del
+       d = params['d'][:date]
+       c = params['d'][:com].to_s
 
-      respond_to do |format|
-        # format.html { redirect_to(posts_url) }
-        format.json  { render :json => {  :lol => "om nom nom" }}
-      end
-    end
+       Comment.create( date: DateTime.new((d[0,4]).to_i, (d[5,2]).to_i, (d[8,2]).to_i), text: c)
 
+       respond_to do |format|
+         format.json  { render :json => { :to_send => c }}
+
+       end
+     end
 
 
 end

@@ -17,11 +17,11 @@ DsTab7::Application.routes.draw do
   root :to => "stat#login"
 
   post "stat/login" => "stat#login"
-  post "stat/com_add" => "stat#com_add"
+
 
   put "stat/com_edit_save" => "stat#com_edit_save"
   delete "stat/com_del" => "stat#com_del"
-
+  post "stat/com_add_save" => "stat#com_add_save"
 
 
   # The priority is based upon order of creation:
