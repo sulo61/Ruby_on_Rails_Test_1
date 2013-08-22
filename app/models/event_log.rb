@@ -122,6 +122,8 @@ class EventLog
       end
       count = (u["value"]["Created"]).to_i
       percentActiveUsrs = (((activeUsrs.to_f / count.to_f) * 100 ).to_s )[0,5]+" %"
+      d = u["_id"]["data"]
+      comment = Comment.where("date" => DateTime.new((d[0,4]).to_i, (d[5,2]).to_i, (d[8,2]).to_i)).map  { |m| m.text }
       {
         :date => u["_id"]["data"],
         :count =>  count,
@@ -137,7 +139,8 @@ class EventLog
         :activeBook =>  activeBook,
         :enrolled => eAction,
         :commented => cAction,
-        :liked => lAction
+        :liked => lAction,
+        :comment => comment[0]
 
       }
     end
