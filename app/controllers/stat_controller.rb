@@ -37,12 +37,15 @@ class StatController < ApplicationController
     end
 
     def activityMain
+
         if !params[:last]
           @activities = Activity.countActivities(DT_NOW-DAYS_BACK, DT_NOW)
+          @nod = DAYS_BACK
         end
 
         if params[:last]
           @activities = Activity.countActivities(DT_NOW-params[:numberOfDays].to_i, DT_NOW)
+          @nod = params[:numberOfDays].to_i
         end
     end
 
@@ -162,6 +165,45 @@ class StatController < ApplicationController
       @datesRange = "between: "+@startAfterX+" days after the creation of user, and: "+@startAfterY+" days forward"
       render "eventlogMain"
     end
+
+    def com_add
+      d = params['d'][:index]
+      to_send = "<td class=\"comment_"+d+"\"><textarea class=\"form-control\" rows=\"3\" cols=\"3\" val=\""+d+"\"></textarea><br><button class=\"btn btn-mini\", com_save=\"true\", remote=\"true\", val=\""+d+"\">Save</button></td>"
+      respond_to do |format|
+        format.json  { render :json => { :to_send => to_send, :index => d }}
+
+      end
+    end
+
+    #def com_show
+    #  d = params['d'][:index]
+    #  c = params['d'][:com]
+    #  to_send = "<td class=\"comment_"+d+"\">"+c+"</td>"
+    #  respond_to do |format|
+    #    format.json  { render :json => { :to_send => to_send, :index => d }}
+    #
+    #  end
+    #end
+    #
+    #def com_hide
+    #  d = params['d'][:index]
+    #  c = params['d'][:com]
+    #
+    #  to_send = "<td class=\"comment_"+d+"\"><button class=\"btn btn-mini\", com_show=\"true\", remote=\"true\", val=\""+d+"\", com=\""+c+"\" >Show</button></td>"
+    #  respond_to do |format|
+    #    format.json  { render :json => { :to_send => to_send, :index => d }}
+    #
+    #  end
+    #end
+
+    def del
+
+      respond_to do |format|
+        # format.html { redirect_to(posts_url) }
+        format.json  { render :json => {  :lol => "om nom nom" }}
+      end
+    end
+
 
 
 end

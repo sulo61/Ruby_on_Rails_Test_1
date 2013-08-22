@@ -17,6 +17,12 @@ DsTab7::Application.routes.draw do
   root :to => "stat#login"
 
   post "stat/login" => "stat#login"
+  post "stat/com_add" => "stat#com_add"
+  post "stat/com_del" => "stat#com_del"
+  #post "stat/com_show" => "stat#com_show"
+  #post "stat/com_hide" => "stat#com_hide"
+
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -87,7 +87,23 @@ class Activity
         return { "web": cWeb, "Android": cAndroid, "ios": cIos, "unknown": cUnknown, "all": cAll };
       }
     }
-    return self.where(:created_at => { '$gte' => dataOd, '$lte' => dataDo } ).map_reduce(map, reduce).out(inline: true).sort_by { "_id" }.reverse
+    where(:created_at => { '$gte' => dataOd, '$lte' => dataDo } ).map_reduce(map, reduce).out(inline: true).sort_by { "_id" }.reverse.map do |m|
+      d = m["_id"]["data"]
+      comment = Comment.where("date" => DateTime.new((d[0,4]).to_i, (d[5,2]).to_i, (d[8,2]).to_i)).map  { |m| m.text }
+
+
+      {
+          :date => m["_id"]["data"],
+          :all => m["value"]["all"],
+          :web => m["value"]["web"],
+          :android => m["value"]["Android"],
+          :ios => m["value"]["ios"],
+          :unknown => m["value"]["unknown"],
+          :comment => comment[0]
+
+      }
+    end
+
   end
 
 

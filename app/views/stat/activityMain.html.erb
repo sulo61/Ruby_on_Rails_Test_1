@@ -3,13 +3,13 @@
 
 <form class="form-inline" method="GET" action="/stat/activityMain">
 <label for="last">Last: </label>
-<%= number_field_tag 'numberOfDays', 7, in: 1...366 %>
+<%= number_field_tag 'numberOfDays', @nod, in: 1...366 %>
 <label for="days" > days</label>
 <%= submit_tag 'Show', :name => 'last', :class => 'btn btn-default' %>
 </form>
 
 <hr />
-
+<%= @log %>
 <h2>Results</h2>
 
 <table class="table table-striped">
@@ -19,32 +19,46 @@
       <th>All</th>
       <th>Web</th>
       <th>Android</th>
-	<th>iOS</th>
-	<th>Unknown</th>
-	<th>Action</th>
+      <th>iOS</th>
+      <th>Unknown</th>
+      <th>Action</th>
+      <th>Ajax test</th>
     </tr>
   </thead>
   <tbody>
-    <% for activity in @activities %>
-      <% activity_date = truncate((activity["_id"]["data"]).to_s , :length => 10, :omission => '') %>
+  <% @activities.each_with_index do |activity, index|  %>
+      <% activity_date = truncate((activity[:date]).to_s , :length => 10, :omission => '') %>
       <tr>
         <td><%= activity_date %></td>
-	  <td><%= activity["value"]["all"] %></td>
-	  <td><%= activity["value"]["web"] %></td>
-	  <td><%= activity["value"]["Android"] %></td>
-	  <td><%= activity["value"]["ios"] %></td>
-	  <td><%= activity["value"]["unknown"] %></td>
-	  <td>
-		<%= form_tag("/stat/activityDetails", method: "get") do %>
-		<%= hidden_field_tag(:date, activity_date ) %>
-		<%= submit_tag("Details", {:name => "", :class => 'btn btn-mini'}) %>
-		<% end %>
-	  </td>
+        <td><%= activity[:all] %></td>
+        <td><%= activity[:web] %></td>
+        <td><%= activity[:android] %></td>
+        <td><%= activity[:ios] %></td>
+        <td><%= activity[:unknown] %></td>
+        <td>
+          <%= form_tag("/stat/activityDetails", method: "get") do %>
+              <%= hidden_field_tag(:date, activity_date ) %>
+              <%= submit_tag("Details", {:name => "", :class => 'btn btn-mini'}) %>
+          <% end %>
+        </td>
+        <td class="comment_<%=index%>">
+          <% c = activity[:comment].to_s %>
+          <% if c!="" %>
+              <button class='btn btn-mini' com_show="true" remote="true" val="<%=index%>" com="<%= c %>">Show</button>
+              <span style="display: none"><%= c %></span>
+
+          <% else %>
+
+              <button class='btn btn-mini', com_add="true", remote="true", val="<%=index%>">Add</button>
+
+
+          <% end %>
+
+        </td>
 
       </tr>
-    <% end %>
+  <% end %>
   </tbody>
 </table>
-
 
 
