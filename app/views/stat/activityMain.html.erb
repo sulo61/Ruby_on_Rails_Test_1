@@ -23,7 +23,7 @@
       <th>iOS</th>
       <th>Unknown</th>
       <th>Action</th>
-      <th>Ajax test</th>
+      <th>Comment</th>
     </tr>
   </thead>
   <tbody>
@@ -49,6 +49,7 @@
           %>
           <span class='add-button-span' style="<%= comment_visible ? 'display: none' : ''%>">
             <button class='btn btn-mini' com_add="true" remote="true" index="<%=index%>" date="<%=activity_date%>">Add</button>
+
             <div class="modal fade" id="myAddModal_<%=index%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">

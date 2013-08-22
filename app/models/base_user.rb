@@ -62,7 +62,18 @@ class BaseUser
     return { "User": cUser, "Fanpage": cFanpage, "all": cAll };
     }
     }
-    map_reduce(map, reduce).out(inline: true).sort_by { "_id" }.reverse
+    map_reduce(map, reduce).out(inline: true).sort_by { "_id" }.reverse.map do |m|
+      d = m["_id"]["data"]
+      comment = Comment.where("date" => DateTime.new((d[0,4]).to_i, (d[5,2]).to_i, (d[8,2]).to_i)).map  { |m| m.text }
+      {
+          :date => m["_id"]["data"],
+          :user => m["value"]["User"],
+          :fanpage => m["value"]["Fanpage"],
+          :all => m["value"]["all"],
+          :comment => comment[0]
+
+      }
+    end
   end
 
   def self.usrsDayDetails(dateInput)

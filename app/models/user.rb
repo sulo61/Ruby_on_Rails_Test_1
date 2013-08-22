@@ -52,7 +52,7 @@ class User < BaseUser
     return { "Created": cCreated, "Id": idArray };
     }
     }
-    return self.where(:created_at => { '$gte' => dataOd, '$lte' => dataDo } ).map_reduce(map, reduce).out(inline: true).sort_by { "_id" }.reverse.to_a
+    where(:created_at => { '$gte' => dataOd, '$lte' => dataDo } ).map_reduce(map, reduce).out(inline: true).sort_by { "_id" }.reverse.to_a
   end
 
 end 
