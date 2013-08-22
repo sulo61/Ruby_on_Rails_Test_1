@@ -175,6 +175,32 @@ class StatController < ApplicationController
       end
     end
 
+    def com_edit_save
+
+      c = params['d'][:com]
+      d = params['d'][:date].to_s
+      Comment.where("date" => DateTime.new((d[0,4]).to_i, (d[5,2]).to_i, (d[8,2]).to_i)).update_all("text" => c.to_s)
+
+      respond_to do |format|
+        format.json  { render :json => { :to_send => c }}
+
+      end
+    end
+
+    def com_del
+
+      d = params['d'][:date]
+      i = params['d'][:index]
+
+      to_del = Comment.where("date" => DateTime.new((d[0,4]).to_i, (d[5,2]).to_i, (d[8,2]).to_i))
+      to_del.delete
+
+      respond_to do |format|
+        format.json  { render :json => { :to_send => "gut" }}
+
+      end
+    end
+
     #def com_show
     #  d = params['d'][:index]
     #  c = params['d'][:com]

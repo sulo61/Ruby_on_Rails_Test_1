@@ -18,9 +18,9 @@ DsTab7::Application.routes.draw do
 
   post "stat/login" => "stat#login"
   post "stat/com_add" => "stat#com_add"
-  post "stat/com_del" => "stat#com_del"
-  #post "stat/com_show" => "stat#com_show"
-  #post "stat/com_hide" => "stat#com_hide"
+
+  put "stat/com_edit_save" => "stat#com_edit_save"
+  delete "stat/com_del" => "stat#com_del"
 
 
 

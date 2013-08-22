@@ -1,6 +1,7 @@
 class Comment
 
   include Mongoid::Document
+  include Mongoid::Timestamps
 
   attr_accessible :text, :date
 

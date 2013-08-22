@@ -12,6 +12,7 @@
 <%= @log %>
 <h2>Results</h2>
 
+
 <table class="table table-striped">
   <thead>
     <tr>
@@ -44,10 +45,31 @@
         <td class="comment_<%=index%>">
           <% c = activity[:comment].to_s %>
           <% if c!="" %>
-              <button class='btn btn-mini' com_show="true" remote="true" val="<%=index%>" com="<%= c %>">Show</button>
-              <span style="display: none"><%= c %></span>
 
-          <% else %>
+              <div style="display: none"><%= c %></div>
+              <button class='btn btn-mini' com_show="true" remote="true" val="<%=index%>" ">Show</button>
+              <button style="display: none" class='btn btn-mini' com_edit="true" remote="true" index="<%=index%>" date="<%=activity_date%>" com="<%= c %>">Edit</button>
+              <button style="display: none" class='btn btn-mini' com_del="true" remote="true" index="<%=index%>" date="<%=activity_date%>">Del</button>
+
+              <div class="modal fade" id="myModal_<%=index%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+
+                      <h4 class="modal-title"></h4>
+                    </div>
+                    <div class="modal-body">
+                      <textarea class="field span5" id="textarea" rows="6"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary" com_edit_save="true" index="<%=index%>" date="<%=activity_date%>" com="<%= c %>">Save changes</button>
+                    </div>
+                  </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+              </div><!-- /.modal -->
+
+        <% else %>
 
               <button class='btn btn-mini', com_add="true", remote="true", val="<%=index%>">Add</button>
 
